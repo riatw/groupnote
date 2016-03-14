@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="ja" class="no-js"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>GROUP NOTE beta</title>
+	<meta name="viewport" content="width=1024">
+
+	<link rel="stylesheet" href="common/css/base.css">
+
+	<script type="text/javascript" src="common/js/main.min.js"></script>
+</head>
+
+<body class="index" ng-app="mynote">
+	<noscript>JavascriptがOFFのため正しく表示されない可能性があります。</noscript>
+
+	<!-- [ WRAP ] -->
+	<div id="wrap">
+		<div id="l-header" ng-controller="loginController" ng-init="init()">
+			<h1 class="header-logo">
+				<a class="navbar-brand" href="#">Group Note</a>
+			</h1>
+
+			<div class="header-search">
+				<form ng-controller="searchNoteController" ng-show="currentUser">
+					<div class="form-group">
+						<input type="text" placeholder="フィルタ" class="form-control" ng-model="q" ng-keyup="search()">
+					</div>
+				</form>
+			</div>
+
+			<div class="header-login">
+				<ul ng-show="currentUser">
+					<li ng-controller="addNoteModalController"><a ng-click="open()">ノートを書く</a></li>
+					<li><a ng-click="logOut()">ログアウト</a></li>
+				</ul>
+			</div>
+
+			<div class="header-logout">
+				<form ng-hide="currentUser">
+					<ul>
+						<li>
+							<input type="text" placeholder="ユーザーID" class="form-control" ng-model="username">
+						</li>
+						<li>
+							<input type="password" placeholder="パスワード" class="form-control" ng-model="password">
+						</li>
+						<li>
+							<button type="submit" class="btn btn-success" ng-click="logIn()">ログイン</button>
+						</li>
+					</ul>
+				</form>
+			</div>
+		</div>
+		<div id="l-content">
+			<div id="l-viewcol">
+				<div class="viewcol-tag" ng-controller="tagListController">
+					<div class="content-tag">
+						<div class="tag-inner">
+							<div class="tag-info">
+								<p class="info-title">タグ</p>
+							</div>
+							<div class="tag-body">
+								<div class="mod-box-scroll scroll-no-border">
+									<div class="mod-icon-spinner" ng-show="loadTagSp"></div>
+									<ul class="mod-list-line mab0 tag">
+										<li ng-class="{'active':currentTagId==='all'}"><a href="#/tag/all">すべてのノート</a></li>
+										<li ng-repeat="tag in taglist" ng-class="{'active':currentTagId===tag.id}"><a href="#/tag/{{tag.id}}">#{{tag.name}}</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="viewcol-list" ng-controller="noteListController">
+					<div class="mod-box-scroll">
+						<div class="mod-icon-spinner note-spinner" ng-show="spinnerView"></div>
+						<div class="mod-icon-empty note" ng-show="noteIsEmpty">
+							<p class="empty-txt">該当するノートがありません</p>
+						</div>
+
+						<ul class="mod-list-line mab0 note">
+							<li ng-repeat="item in feeds | filter: currentSearchKeyword" ng-class="{'is-show':!spinnerView, 'active':currentNoteId==item.id}">
+								<a ng-href="#/tag/{{currentTagId}}/note/{{item.id}}">
+									<h4 class="list-group-item-heading" style="margin-top: 5px;">{{item.title}}</h4>
+									<p class="list-group-item-text"><span class="text-author">{{item.author.displayName}}</span>が<span class="text-date">{{item.date | date:'yyyy-MM-dd'}}</span>に投稿しました</p>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="viewcol-detail" ng-controller="noteDetailController">
+					<div class="content-note">
+						<div class="note-inner" ng-show="isNoteDetailLoaded">
+							<div class="note-info">
+								<h1 class="info-title">{{detailTitle}}</h1>
+								<ul class="info-btngroup">
+									<li ng-controller="addNoteModalController" ng-click="open(item)"><button class="m-button-small mar10">編集</button></li>
+
+									<li class="dropdown" dropdown>
+										<button class="m-button-small dropdown-toggle" dropdown-toggle>目次 <span class="caret"></button>
+
+										<div class="dropdown-menu dropdown-menu dropdown-menu-right">
+
+											<ul id="line-nav" du-scroll-container="scroll-container">
+												<li ng-repeat="line in outline">
+													<a href="#{{line.id}}" du-smooth-scroll du-scrollspy="line.id">{{line.text}}</a>
+
+													<ul>
+														<li ng-repeat="line2 in line.child">
+															<a href="#{{line2.id}}" du-smooth-scroll du-scrollspy="line.id">{{line2.text}}</a>
+														</li>
+													</ul>
+												</li>
+											</ul>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<div class="note-body">
+								<div class="mod-box-scroll scroll-no-border" style="position: relative;" id="scroll-container">
+									<div class="mod-box-wysiwyg" ng-show="isNoteDetailLoaded">
+										<div class="wysiwyg-base">
+											<div class="base-body" marked="detailBody"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- [ WRAP ] -->
+</body>
+</html>

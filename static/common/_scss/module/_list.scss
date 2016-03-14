@@ -1,0 +1,124 @@
+@charset "UTF-8";
+
+/*
+	module:　mod-list-inline
+	- 横並びリスト
+-----------------------------------------------------------------*/
+.mod-list-inline {
+	letter-spacing: -.40em;
+
+	li {
+		@include inline-block;
+		margin-right: 20px;
+		vertical-align: top;
+		letter-spacing: normal;
+
+		&.lastChild {
+			margin-right: 0 !important;
+		}
+	}
+}
+
+.mod-list-line {
+	padding: 0;
+	list-style: none;
+
+	&.note,
+	&.tag {
+		> li {
+			a {
+				@include transition-property(padding-left);
+				@include transition-duration(0.2s);
+
+				&:hover {
+					@include transition-property(padding-left);
+					@include transition-duration(0.2s);
+				}
+			}
+
+			&.active {
+				a {
+					@include transition-property(padding-left);
+					@include transition-duration(0.2s);
+					font-weight: bold;
+				}
+			}
+		}
+	}
+
+	> li {
+		background: #fff;
+		border-bottom: 1px solid #d5d5d5;
+
+		&:first-child {
+			border-top: 0;
+		}
+
+		&.active {
+			position: relative;
+			background: #eee;
+
+			// &:after {
+			// 	position: absolute;
+			// 	top: 50%;
+			// 	left: 0;
+			// 	content: '';
+			// 	width: 0;
+			// 	height: 0;
+			// 	margin-top: -4px;
+			// 	border-top: 8px solid transparent;
+			// 	border-bottom: 8px solid transparent;
+			// 	border-left: 8px solid #fff;
+			// }
+		}
+
+		a {
+			display: block;
+			padding: 10px 15px;
+			color: #333;
+			cursor: pointer;
+			@include transition-property(background);
+			@include transition-duration(0.2s);
+
+			&:hover {
+				background: #eee;
+				text-decoration: none;
+				@include transition-property(background);
+				@include transition-duration(0.2s);
+			}
+
+			.list-group-item-heading {
+				font-size: fz(14,16);
+				line-height: 1.35;
+			}
+
+			.list-group-item-text {
+				font-size: fz(14,12);
+				color: #999;
+
+				.text-author {
+					margin-right: 0.5em;
+					font-weight: bold;
+				}
+				.text-date {
+					margin: 0 0.5em;
+				}
+			}
+
+			.list-group-item-edit {
+				font-size: fz(14,12);
+				color: #666;
+				margin: 0;
+				text-align: right;
+			}
+		}
+	}
+}
+
+.m-list-btngroup {
+	margin-top: 30px;
+
+	li {
+		display: inline-block;
+	}
+}

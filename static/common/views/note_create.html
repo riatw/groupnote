@@ -1,0 +1,39 @@
+<div class="content-inner">
+	<div class="modal-header">
+		<p class="modal-title">ノート</p>
+		<button type="button" class="btn-close" ng-click="cancel()"></button>
+	</div>
+
+	<div class="modal-body">
+		<div class="body-main">
+			<form class="m-box-form">
+				<div class="form-group">
+					<label for="exampleInputEmail1">タイトル</label>
+					<input type="text" class="form-control" ng-model="form.title" placeholder="ノートのタイトルを入力します">
+				</div>
+				<div class="form-group">
+					<label for="exampleInputPassword1">本文</label>
+					<textarea class="form-control" rows="10" ng-model="form.body"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputEmail1">タグ</label>
+					<input type="text" class="form-control" ng-model="form.tags" placeholder="ノートのタグをカンマ区切りで入力します">
+				</div>
+				<div class="form-group">
+					<label for="exampleInputEmail1">公開ステータス</label>
+					<select class="form-control" ng-model="form.status" ng-options="repoName.key as repoName.label for repoName in [{ key: 'Draft', label: '非公開'}, { key: 'Publish', label: '公開' }]"></select>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputEmail1">投稿フォーマット</label>
+					<select class="form-control" ng-model="form.format" ng-options="repoName.key as repoName.label for repoName in [{ key: 'markdown', label: 'Markdown'}, { key: '__default__', label: '改行を変換' }]"></select>
+				</div>
+
+				<ul class="m-list-btngroup">
+					<button class="m-button-common common-save" ng-click="ok()">保存</button>
+					<button class="m-button-common common-delete" ng-click="delete()">削除</button>
+					<button class="m-button-common common-cancel" ng-click="cancel()">キャンセル</button>
+				</ul>
+			</form>
+		</div>
+	</div>
+</div>

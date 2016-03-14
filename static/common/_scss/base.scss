@@ -1,0 +1,378 @@
+@charset "UTF-8";
+
+@import "core";
+
+//リセット
+@import "core/normalize";
+@import "core/minimum_reset";
+
+//単機能スタイル
+@import "core/helper";
+
+//モジュール
+@import "module/box";
+@import "module/form";
+@import "module/icon";
+@import "module/list";
+@import "module/table";
+@import "module/text";
+@import "module/button";
+
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+
+/*----------------------- support browser ------------------------
+	Internet Explorer 8　↑
+	Firefox　Latest
+	Google Crome　Latest
+*/
+
+/*---------------------------- layout ----------------------------*/
+
+@font-face {
+	font-family: 'tallto';
+	src:url('../fonts/tallto.eot?ucv0aa');
+	src:url('../fonts/tallto.eot?#iefixucv0aa') format('embedded-opentype'),
+		url('../fonts/tallto.woff?ucv0aa') format('woff'),
+		url('../fonts/tallto.ttf?ucv0aa') format('truetype'),
+		url('../fonts/tallto.svg?ucv0aa#tallto') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.icon {
+	font-family: 'tallto';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-setting:before {
+	content: "\e601";
+}
+.icon-list:before {
+	content: "\e609";
+}
+.icon-thumb:before {
+	content: "\e608";
+}
+.icon-close:before {
+	content: "\e600";
+}
+.icon-handle:before {
+	content: "\e602";
+}
+.icon-arrow:before {
+	content: "\e603";
+}
+.icon-decrement:before {
+	content: "\e604";
+}
+.icon-increment:before {
+	content: "\e605";
+}
+.icon-add:before {
+	content: "\e606";
+}
+.icon-menu:before {
+	content: "\e607";
+}
+.icon-spinner:before {
+	content: "\e601";
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html{
+	color: $defaultTxtColor;
+	background: $defaultBgColor;
+}
+
+body {
+	@include font-family(meiryo, Verdana);
+	font-size: $defaultTxtSize;
+	//-webkit-user-select: none;
+	line-height: 1.7;
+}
+
+a {
+	outline: 0;
+
+	&:link {
+		color: $defaultLinkColor;
+		text-decoration: none;
+	}
+
+	&:visited {
+		color: $defaultLinkVisitedColor;
+		text-decoration: none;
+	}
+
+	&:hover, &:active {
+		color: $defaultLinkHoverColor;
+		text-decoration: underline;
+	}
+}
+
+button {
+	outline: 0;
+}
+
+#wrap {
+
+}
+
+#l-header {
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: flex;
+	width: 100%;
+	height: 50px;
+	background: #f08300;
+	align-items: center;
+	justify-content: flex-end;
+
+	.header-logo {
+		width: 15%;
+		font-size: fz(14,20);
+		font-family: Lato;
+		letter-spacing: 3px;
+		margin: 0;
+		margin-right: auto;
+		padding: 0 20px;
+		color: #fff;
+
+		a {
+			display: block;
+			width: 100%;
+			color: inherit;
+		}
+	}
+
+	.header-search {
+		margin: 0;
+		margin-right: auto;
+		width: 20%;
+
+		input {
+			padding: 8px;
+			width: 100%;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+		}
+	}
+
+	.header-login {
+		display: flex;
+		align-items: center;
+		height: 100%;
+
+		ul {
+			display: flex;
+
+			li {
+				a {
+					display: block;
+					padding: 0 15px;
+					color: #fff;
+					line-height: 50px;
+					text-decoration: none;
+					transition-property: background;
+					transition-duration: 0.2s;
+
+					&:hover {
+						background: orange;
+					}
+				}
+			}
+		}
+	}
+
+	.header-logout {
+		display: flex;
+		align-items: center;
+		height: 100%;
+
+		ul {
+			display: flex;
+
+			li {
+				padding: 0 5px;
+			}
+		}
+	}
+}
+
+#gNav {
+
+}
+
+#l-viewcol {
+	display: flex;
+	height: 100%;
+	padding-top: 50px;
+
+	.viewcol-tag {
+		width: 20%;
+	}
+
+	.viewcol-list {
+		width: 30%;
+	}
+
+	.viewcol-detail {
+		width: 50%;
+	}
+}
+
+#l-content {
+	//padding-top: 50px;
+
+	.content-tag {
+		position: relative;
+		height: 100%;
+		background: #666;
+
+		.tag-inner {
+			.tag-info {
+				position: relative;
+				padding: 0 0 0 10px;
+				background: #ddd;
+				color: #333;
+				border-bottom: 1px solid #d5d5d5;
+				@include min-height(36px);
+				z-index: 1;
+
+				> .info-title {
+					line-height: 36px;
+					margin: 0;
+					padding: 0;
+					font-size: fz(14,12);
+				}
+			}
+
+			.tag-body {
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				padding-top: 36px;
+				height: 100%;
+				font-size: fz(14,12);
+				overflow: auto;
+			}
+		}
+	}
+	.content-list {
+		background: #f5f5f5;
+	}
+	.content-note {
+		position: relative;
+		height: 100%;
+		background: #f5f5f5;
+		border-left: 1px solid #d5d5d5;
+
+		.note-inner {
+			.note-info {
+				position: relative;
+				padding: 0 10px;
+				background: #f5f5f5;
+				color: #333;
+				border-bottom: 1px solid #d5d5d5;
+				@include min-height(44px);
+				z-index: 1;
+
+				.info-title {
+					font-size: fz(14,16);
+					font-weight: bold;
+					margin: 0;
+					padding: 0 210px 0 0;
+					line-height: 44px;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
+
+				.info-btngroup {
+					position: absolute;
+					top: 7px;
+					right: 10px;
+					margin: 0;
+					padding: 0;
+					list-style: none;
+					text-align: right;
+
+					> li {
+						display: inline-block;
+						cursor: pointer;
+
+						> .dropdown-menu {
+							background: rgba(255,255,255,0.9);
+							padding: 15px 0;
+							font-size: fz(14,12);
+							text-align: left;
+							@include min-width(320px);
+							height: 500px;
+							overflow-y: scroll;
+							-webkit-overflow-scrolling: touch;
+
+							ul {
+								padding: 0 12px;
+								list-style: none;
+
+								> li {
+									line-height: 1.5;
+
+									&:last-child {
+										padding-bottom: 0;
+									}
+
+									a {
+										display: block;
+										color: #333;
+										margin: 6px 0;
+										padding: 0 0 0 8px;
+										border-left: 3px solid transparent;
+
+										&.active {
+											font-weight: bold;
+											border-left: 3px solid #264ba3;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+
+			.note-body {
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				padding-top: 45px;
+				height: 100%;
+				overflow: auto;
+			}
+
+			.dropdown-menu {
+				display: none;
+			}
+		}
+	}
+}
+
+#footer {
+
+}
