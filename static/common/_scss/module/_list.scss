@@ -27,20 +27,19 @@
 	&.tag {
 		> li {
 			a {
-				@include transition-property(padding-left);
+				@include transition-property(all);
 				@include transition-duration(0.2s);
 
 				&:hover {
-					@include transition-property(padding-left);
+					@include transition-property(all);
 					@include transition-duration(0.2s);
 				}
 			}
 
 			&.active {
 				a {
-					@include transition-property(padding-left);
+					@include transition-property(all);
 					@include transition-duration(0.2s);
-					font-weight: bold;
 				}
 			}
 		}

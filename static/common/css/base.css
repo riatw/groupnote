@@ -1,5 +1,5 @@
 
-@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:300,400,700);
 
 @charset 'UTF-8';
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
@@ -2418,17 +2418,16 @@ html, body, #wrap, #l-content, #l-viewcol, .viewcol-tag, .viewcol-list, .viewcol
 	list-style : none;
 }
 .mod-list-line.note > li a, .mod-list-line.tag > li a {
-	transition-property : padding-left;
+	transition-property : all;
 	transition-duration : 0.2s;
 }
 .mod-list-line.note > li a:hover, .mod-list-line.tag > li a:hover {
-	transition-property : padding-left;
+	transition-property : all;
 	transition-duration : 0.2s;
 }
 .mod-list-line.note > li.active a, .mod-list-line.tag > li.active a {
-	transition-property : padding-left;
+	transition-property : all;
 	transition-duration : 0.2s;
-	font-weight : bold;
 }
 .mod-list-line > li {
 	background : #fff;
@@ -2629,7 +2628,7 @@ html, body, #wrap, #l-content, #l-viewcol, .viewcol-tag, .viewcol-list, .viewcol
 }
 
 html {
-	color : #000;
+	color : #333;
 	background : #fff;
 }
 
@@ -2677,19 +2676,20 @@ button {
 	        justify-content : flex-end;
 }
 #l-header .header-logo {
-	width : 15%;
-	font-size : 142%;
-	font-family : Lato;
-	letter-spacing : 3px;
+	width : 8em;
+	font-size : 185%;
+	font-family : Ubuntu;
 	margin : 0;
-	margin-right : auto;
 	padding : 0 20px;
 	color : #fff;
+	font-weight : 300;
+	letter-spacing : 2px;
 }
 #l-header .header-logo a {
 	display : block;
 	width : 100%;
 	color : inherit;
+	text-decoration : none;
 }
 #l-header .header-search {
 	margin : 0;
@@ -2724,6 +2724,7 @@ button {
 	text-decoration : none;
 	transition-property : background;
 	transition-duration : 0.2s;
+	cursor : pointer;
 }
 #l-header .header-login ul li a:hover {
 	background : orange;
@@ -2741,20 +2742,22 @@ button {
 	display : -webkit-flex;
 	display : -ms-flexbox;
 	display :         flex;
+	margin-right : 10px;
 }
 #l-header .header-logout ul li {
 	margin : 0 0 0 10px;
 }
 #l-header .header-logout ul li button {
 	display : block;
-	padding : 2px;
+	padding : 5px 10px;
 	color : #fff;
+	border : none;
+	border-radius : 5px;
+	background : #fff;
+	color : inherit;
 	text-decoration : none;
 	transition-property : background;
 	transition-duration : 0.2s;
-}
-#l-header .header-logout ul li button:hover {
-	background : orange;
 }
 #l-header .header-logout input {
 	padding : 8px;
