@@ -207,8 +207,28 @@ button {
 			display: flex;
 
 			li {
-				padding: 0 5px;
+				margin: 0 0 0 10px;
+
+				button {
+					display: block;
+					padding: 2px;
+					color: #fff;
+					text-decoration: none;
+					transition-property: background;
+					transition-duration: 0.2s;
+
+					&:hover {
+						background: orange;
+					}
+				}
 			}
+		}
+
+		input {
+			padding: 8px;
+			width: 100%;
+			border: 1px solid #ccc;
+			border-radius: 5px;
 		}
 	}
 }

@@ -2743,7 +2743,24 @@ button {
 	display :         flex;
 }
 #l-header .header-logout ul li {
-	padding : 0 5px;
+	margin : 0 0 0 10px;
+}
+#l-header .header-logout ul li button {
+	display : block;
+	padding : 2px;
+	color : #fff;
+	text-decoration : none;
+	transition-property : background;
+	transition-duration : 0.2s;
+}
+#l-header .header-logout ul li button:hover {
+	background : orange;
+}
+#l-header .header-logout input {
+	padding : 8px;
+	width : 100%;
+	border : 1px solid #ccc;
+	border-radius : 5px;
 }
 
 #l-viewcol {
