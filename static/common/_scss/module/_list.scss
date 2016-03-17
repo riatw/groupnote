@@ -49,6 +49,17 @@
 		background: #fff;
 		border-bottom: 1px solid #d5d5d5;
 
+		.line-tag {
+			display: block;
+			width: 4.5em;
+			margin-bottom: 3px;
+			padding: 2px;
+			background: #aaa;
+			color: #fff;
+			font-size: fz(14,10);
+			text-align: center;
+		}
+
 		&:first-child {
 			border-top: 0;
 		}

@@ -20,8 +20,8 @@
 					<input type="text" class="form-control" ng-model="form.tags" placeholder="ノートのタグをカンマ区切りで入力します">
 				</div>
 				<div class="form-group">
-					<label for="exampleInputEmail1">公開ステータス</label>
-					<select class="form-control" ng-model="form.status" ng-options="repoName.key as repoName.label for repoName in [{ key: 'Draft', label: '非公開'}, { key: 'Publish', label: '公開' }]"></select>
+					<label for="exampleInputEmail1">文章の状態</label>
+					<select class="form-control" ng-model="form.status" ng-options="repoName.key as repoName.label for repoName in [{ key: 'Draft', label: 'Draft（下書き・意見募集）'}, { key: 'Publish', label: 'Publish（完成・公開）' }]"></select>
 				</div>
 				<div class="form-group">
 					<label for="exampleInputEmail1">投稿フォーマット</label>

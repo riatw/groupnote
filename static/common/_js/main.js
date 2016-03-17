@@ -194,7 +194,10 @@ angular.module('mynote').service('dataAPI', function(stateObject, $http, $locati
 
 // Markdown Render
 angular.module('mynote').config(['markedProvider', function(markedProvider) {
-	markedProvider.setOptions({gfm: true});
+	markedProvider.setOptions({
+		gfm: true,
+		breaks: true
+	});
 }]);
 
 //Router
