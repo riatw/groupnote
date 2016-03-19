@@ -1,24 +1,5 @@
 @charset "UTF-8";
 
-/*
-	module:　mod-list-inline
-	- 横並びリスト
------------------------------------------------------------------*/
-.mod-list-inline {
-	letter-spacing: -.40em;
-
-	li {
-		@include inline-block;
-		margin-right: 20px;
-		vertical-align: top;
-		letter-spacing: normal;
-
-		&.lastChild {
-			margin-right: 0 !important;
-		}
-	}
-}
-
 .mod-list-line {
 	padding: 0;
 	list-style: none;
@@ -67,19 +48,6 @@
 		&.active {
 			position: relative;
 			background: #eee;
-
-			// &:after {
-			// 	position: absolute;
-			// 	top: 50%;
-			// 	left: 0;
-			// 	content: '';
-			// 	width: 0;
-			// 	height: 0;
-			// 	margin-top: -4px;
-			// 	border-top: 8px solid transparent;
-			// 	border-bottom: 8px solid transparent;
-			// 	border-left: 8px solid #fff;
-			// }
 		}
 
 		a {

@@ -2097,103 +2097,10 @@ img {
 	width : 100%;
 }
 
-/*
-## 固定幅・中央揃えのボックス
-	<div class="mod-box-fixed">example</div>
-*/
-.mod-box-fixed {
-	width : 960px;
-	margin : 0 auto;
-}
-
-/*
-	module:　mod-opacityHover
-	- ホバー時に下の画像を透過させる
------------------------------------------------------------------*/
-.mod-box-opacity {
-	letter-spacing : -0.40em;
-}
-.mod-box-opacity > li {
-	display : inline-block;
-	letter-spacing : normal;
-}
-.mod-box-opacity:hover img {
-	letter-spacing : -0.40em;
-}
-.mod-box-opacity:hover img > li {
-	display : inline-block;
-	letter-spacing : normal;
-}
-
-/*
-## コンテンツの区切りを表す基本ボックス
-	<div class="mod-section">example</div>
-*/
-.mod-box-section {
-	margin-top : 60px;
-	padding-bottom : 0;
-}
-.mod-box-section .mod-box-section {
-	margin-top : 40px;
-}
-
-/*
-	module:box-imgTxt
-	- 画像とテキストの横並び
-*/
-.mod-box-imgTxt1 {
-	letter-spacing : -0.40em;
-}
-.mod-box-imgTxt1 > li {
-	display : inline-block;
-	letter-spacing : normal;
-}
-.mod-box-imgTxt1 .imgBox {
-	float : left;
-	margin-right : 20px;
-}
-.mod-box-imgTxt1 .textBox {
-	overflow : hidden;
-}
-
-.mod-box-imgTxt2 {
-	letter-spacing : -0.40em;
-}
-.mod-box-imgTxt2 > li {
-	display : inline-block;
-	letter-spacing : normal;
-}
-.mod-box-imgTxt2 .imgBox {
-	float : right;
-	margin-left : 20px;
-}
-.mod-box-imgTxt2 .txtBox {
-	overflow : hidden;
-}
-
-/*
-	module:　mod-box-padding
------------------------------------------------------------------*/
-.mod-box-padding {
-	padding : 20px;
-}
-
-html, body, #wrap, #l-content, #l-viewcol, .viewcol-tag, .viewcol-list, .viewcol-detail {
-	height : 100%;
-}
-
 .mod-box-scroll {
 	height : 100%;
 	overflow : auto;
 	-webkit-overflow-scrolling : touch;
-	border-left : 1px solid #d5d5d5;
-}
-.mod-box-scroll.scroll-no-border {
-	border-left : 0;
-}
-
-.mod-box-tags {
-	font-size : 85%;
 }
 
 .mod-box-wysiwyg .wysiwyg-base {
@@ -2206,97 +2113,25 @@ html, body, #wrap, #l-content, #l-viewcol, .viewcol-tag, .viewcol-list, .viewcol
 	padding : 24px;
 	border : 1px solid #d5d5d5;
 }
-.mod-box-wysiwyg .wysiwyg-base .base-body h1 {
-	font-size : 200%;
-	line-height : 1.35;
-	margin : 30px 0 10px 0;
-	padding : 10px 0 0 0;
-}
-.mod-box-wysiwyg .wysiwyg-base .base-body h2 {
-	margin : 40px -24px 20px -24px;
-	padding : 0 24px 8px 24px;
-	border-bottom : 1px solid #d5d5d5;
-	font-size : 128%;
-	line-height : 1.35;
-	font-weight : bold;
-}
-.mod-box-wysiwyg .wysiwyg-base .base-body h3 {
-	margin : 28px 0 12px 0;
-	padding : 0 0 8px 0;
-	border-bottom : 1px solid #d5d5d5;
-	font-size : 100%;
-	line-height : 1.35;
-	font-weight : bold;
-}
-.mod-box-wysiwyg .wysiwyg-base .base-body h4 {
-	font-size : 100%;
-	font-weight : bold;
-	line-height : 1.35;
-	margin : 28px 0 8px 0;
-}
-.mod-box-wysiwyg .wysiwyg-base .base-body p {
-	line-height : 1.75;
-}
-.mod-box-wysiwyg .wysiwyg-base .base-body ul > li {
-	padding : 4px 0;
-	line-height : 1.5;
-}
-.mod-box-wysiwyg .wysiwyg-base .base-body pre {
-	padding : 12px;
-	border-radius : 0;
-	border : 1px solid #d5d5d5;
-}
-.mod-box-wysiwyg .wysiwyg-base .base-body table {
-	width : 100%;
-	vertical-align : middle;
-}
-.mod-box-wysiwyg .wysiwyg-base .base-body table caption {
-	font-weight : bold;
-	padding-bottom : 5px;
-}
-.mod-box-wysiwyg .wysiwyg-base .base-body table thead th {
-	padding : 8px 10px;
-	border : 1px solid #ccc;
-	background : #999;
-	color : #fff;
-	font-weight : bold;
-	line-height : 1.4;
-	text-align : center;
-	vertical-align : middle;
-}
-.mod-box-wysiwyg .wysiwyg-base .base-body table tbody th, .mod-box-wysiwyg .wysiwyg-base .base-body table tbody td {
-	padding : 10px;
-	border : 1px solid #ccc;
-	vertical-align : middle;
-	line-height : 1.4;
-}
-.mod-box-wysiwyg .wysiwyg-base .base-body table tbody th {
-	width : 20%;
-	background : #eee;
-	font-weight : bold;
-	text-align : left;
-	vertical-align : middle;
-}
-.mod-box-wysiwyg .wysiwyg-base .base-body table tbody th span.indis {
-	font-size : 85%;
-	vertical-align : middle;
-	margin-left : 10px;
-	color : #ed8835;
-}
-.mod-box-wysiwyg .wysiwyg-base .base-body table tbody td {
-	vertical-align : middle;
-}
-.mod-box-wysiwyg .wysiwyg-base .base-body blockquote {
-	font-size : 100%;
-}
 
-/*
-	module:　mod-icon-arrow
-	- アイコン付きテキストリンク
------------------------------------------------------------------*/
-.mod-icon-arrow {
-	padding-left : 8px;
-	background : url('../images/i_arrow_right.gif') no-repeat left center;
+.m-box-editnote {
+	display : -webkit-flex;
+	display : -ms-flexbox;
+	display :         flex;
+	-webkit-justify-content : space-between;
+	-ms-flex-pack : justify;
+	        justify-content : space-between;
+}
+.m-box-editnote .editnote-left {
+	width : 49%;
+}
+.m-box-editnote .editnote-right {
+	width : 49%;
+}
+.m-box-editnote .editnote-right .mod-box-scroll {
+	height : 535px;
+	overflow-y : auto;
+	border : 1px solid #d5d5d5;
 }
 
 /*
@@ -2392,27 +2227,6 @@ html, body, #wrap, #l-content, #l-viewcol, .viewcol-tag, .viewcol-list, .viewcol
 	font-size : 85%;
 }
 
-/*
-	module:　mod-list-inline
-	- 横並びリスト
------------------------------------------------------------------*/
-.mod-list-inline {
-	letter-spacing : -0.40em;
-}
-.mod-list-inline li {
-	letter-spacing : -0.40em;
-	margin-right : 20px;
-	vertical-align : top;
-	letter-spacing : normal;
-}
-.mod-list-inline li > li {
-	display : inline-block;
-	letter-spacing : normal;
-}
-.mod-list-inline li.lastChild {
-	margin-right : 0 !important;
-}
-
 .mod-list-line {
 	padding : 0;
 	list-style : none;
@@ -2493,74 +2307,19 @@ html, body, #wrap, #l-content, #l-viewcol, .viewcol-tag, .viewcol-list, .viewcol
 	display : inline-block;
 }
 
-/*
-	module:　mod-table-common
-	- テーブルの基本スタイル
------------------------------------------------------------------*/
-.mod-table-common {
-	width : 100%;
-	vertical-align : middle;
-}
-.mod-table-common caption {
-	font-weight : bold;
-	padding-bottom : 5px;
-}
-.mod-table-common thead th {
-	padding : 10px;
-	border : 1px solid #ccc;
-	background : #ffc99d;
-	font-size : 114%;
-	font-weight : bold;
-	line-height : 1.4;
-	text-align : center;
-	vertical-align : middle;
-}
-.mod-table-common thead th:first-child {
-	background : #eebc93;
-}
-.mod-table-common tbody th, .mod-table-common tbody td {
-	padding : 10px;
-	border : 1px solid #ccc;
-	vertical-align : middle;
-	line-height : 1.4;
-}
-.mod-table-common tbody th {
-	width : 20%;
-	background : #eee;
-	font-size : 114%;
-	font-weight : bold;
-	text-align : left;
-	vertical-align : middle;
-}
-.mod-table-common tbody th span.indis {
-	font-size : 85%;
-	vertical-align : middle;
-	margin-left : 10px;
-	color : #ed8835;
-}
-.mod-table-common tbody td {
-	vertical-align : middle;
-}
-
-/*
-	module:　mod-txt-ttlx
-	- 見出し
------------------------------------------------------------------*/
 .m-button-common {
-	padding : 15px 25px;
-	background : #eee;
+	margin : 0 0 0 10px;
+	padding : 15px 20px;
 	border : none;
+	border-radius : 3px;
+	background : #eee;
+}
+.m-button-common:first-child {
+	margin-left : 0;
 }
 .m-button-common.common-save {
-	background : orange;
-}
-
-.m-button-small {
-	padding : 4px 15px;
-	background : #fff;
-	border : 1px solid #ccc;
-	border-radius : 3px;
-	font-size : 85%;
+	background : #f08300;
+	color : #fff;
 }
 
 /*----------------------- support browser ------------------------
@@ -2665,8 +2424,8 @@ a:hover, a:active {
 	text-decoration : underline;
 }
 
-button {
-	outline : 0;
+html, body, #wrap, #l-content, #l-viewcol, .viewcol-tag, .viewcol-list, .viewcol-detail {
+	height : 100%;
 }
 
 #l-header {
@@ -2685,6 +2444,13 @@ button {
 	-webkit-justify-content : flex-end;
 	-ms-flex-pack : end;
 	        justify-content : flex-end;
+}
+#l-header.header-compact {
+	display : block;
+	text-align : center;
+}
+#l-header.header-compact .header-logo {
+	width : auto;
 }
 #l-header .header-logo {
 	width : 8em;
@@ -2740,37 +2506,56 @@ button {
 #l-header .header-login ul li a:hover {
 	background : orange;
 }
-#l-header .header-logout {
-	display : -webkit-flex;
-	display : -ms-flexbox;
-	display :         flex;
-	-webkit-align-items : center;
-	-ms-flex-align : center;
-	        align-items : center;
+
+#l-guide {
 	height : 100%;
+	padding-top : 50px;
 }
-#l-header .header-logout ul {
+#l-guide .guide-inner {
 	display : -webkit-flex;
 	display : -ms-flexbox;
 	display :         flex;
-	margin-right : 10px;
+	-webkit-justify-content : space-between;
+	-ms-flex-pack : justify;
+	        justify-content : space-between;
+	width : 960px;
+	margin : 0 auto;
+	padding-top : 40px;
 }
-#l-header .header-logout ul li {
-	margin : 0 0 0 10px;
+#l-guide .guide-left {
+	width : 60%;
 }
-#l-header .header-logout ul li button {
+#l-guide .guide-right {
+	width : 35%;
+}
+#l-guide .guide-login {
+	padding : 30px;
+	background : #eee;
+}
+#l-guide .guide-login .login-title {
+	margin-bottom : 10px;
+	font-size : 114%;
+	font-weight : bold;
+}
+#l-guide .guide-login ul li {
+	margin : 10px 0 0 0;
+}
+#l-guide .guide-login ul li:first-child {
+	margin-top : 0;
+}
+#l-guide .guide-login ul li button {
 	display : block;
-	padding : 5px 10px;
-	color : #fff;
+	padding : 10px 20px;
+	color : #fff !important;
 	border : none;
 	border-radius : 3px;
-	background : #fff;
+	background : #f08300;
 	color : inherit;
 	text-decoration : none;
 	transition-property : background;
 	transition-duration : 0.2s;
 }
-#l-header .header-logout input {
+#l-guide .guide-login ul li input {
 	padding : 8px;
 	width : 100%;
 	border : 1px solid #ccc;
@@ -2789,6 +2574,7 @@ button {
 }
 #l-viewcol .viewcol-list {
 	width : 30%;
+	border-left : 1px solid #d5d5d5;
 }
 #l-viewcol .viewcol-detail {
 	width : 50%;
@@ -2801,8 +2587,8 @@ button {
 }
 #l-content .content-tag .tag-inner .tag-info {
 	position : relative;
-	padding : 0 0 0 10px;
-	background : #ddd;
+	padding : 0 0 0 15px;
+	background : #f5f5f5;
 	color : #333;
 	border-bottom : 1px solid #d5d5d5;
 	min-height : 36px;
@@ -2815,6 +2601,7 @@ button {
 	margin : 0;
 	padding : 0;
 	font-size : 85%;
+	font-weight : bold;
 }
 #l-content .content-tag .tag-inner .tag-body {
 	position : absolute;
@@ -2825,10 +2612,6 @@ button {
 	height : 100%;
 	font-size : 85%;
 	overflow : auto;
-}
-
-#l-content .content-list {
-	background : #f5f5f5;
 }
 
 #l-content .content-note {
@@ -2844,8 +2627,6 @@ button {
 	color : #333;
 	border-bottom : 1px solid #d5d5d5;
 	min-height : 44px;
-	height : auto !important;
-	height : 44px;
 	z-index : 1;
 }
 #l-content .content-note .note-inner .note-info .info-title {
@@ -2870,39 +2651,78 @@ button {
 #l-content .content-note .note-inner .note-info .info-btngroup > li {
 	display : inline-block;
 	cursor : pointer;
+	margin-left : 10px;
 }
-#l-content .content-note .note-inner .note-info .info-btngroup > li > .dropdown-menu {
-	background : rgba(255, 255, 255, 0.9);
-	padding : 15px 0;
+#l-content .content-note .note-inner .note-info .info-btngroup > li:first-child {
+	margin-left : 0;
+}
+#l-content .content-note .note-inner .note-info .info-btngroup > li > button {
+	padding : 4px 15px;
+	background : #fff;
+	border : 1px solid #ccc;
+	border-radius : 3px;
+	font-size : 85%;
+}
+#l-content .content-note .note-inner .note-info .info-btngroup > li.dropdown.open {
+	position : relative;
+}
+#l-content .content-note .note-inner .note-info .info-btngroup > li.dropdown.open .dropdown-menu {
+	display : block !important;
+}
+#l-content .content-note .note-inner .note-info .info-btngroup > li.dropdown .dropdown-menu {
+	display : none;
+	position : absolute;
+	right : -5px;
+	top : 38px;
+	width : 300px;
+	height : 350px;
+	background : #fff;
+	padding : 15px 15px;
 	font-size : 85%;
 	text-align : left;
-	min-width : 320px;
-	width : auto !important;
-	width : 320px;
-	height : 500px;
 	overflow-y : scroll;
 	-webkit-overflow-scrolling : touch;
 }
-#l-content .content-note .note-inner .note-info .info-btngroup > li > .dropdown-menu ul {
-	padding : 0 12px;
-	list-style : none;
-}
-#l-content .content-note .note-inner .note-info .info-btngroup > li > .dropdown-menu ul > li {
+#l-content .content-note .note-inner .note-info .info-btngroup > li.dropdown .dropdown-menu > li {
 	line-height : 1.5;
 }
-#l-content .content-note .note-inner .note-info .info-btngroup > li > .dropdown-menu ul > li:last-child {
+#l-content .content-note .note-inner .note-info .info-btngroup > li.dropdown .dropdown-menu > li:last-child {
 	padding-bottom : 0;
 }
-#l-content .content-note .note-inner .note-info .info-btngroup > li > .dropdown-menu ul > li a {
+#l-content .content-note .note-inner .note-info .info-btngroup > li.dropdown .dropdown-menu > li a {
 	display : block;
 	color : #333;
-	margin : 6px 0;
-	padding : 0 0 0 8px;
-	border-left : 3px solid transparent;
+	margin : 10px 0;
+	padding : 0 0 0 10px;
+	border-left : 3px solid #eee;
 }
-#l-content .content-note .note-inner .note-info .info-btngroup > li > .dropdown-menu ul > li a.active {
+#l-content .content-note .note-inner .note-info .info-btngroup > li.dropdown .dropdown-menu > li a.active {
 	font-weight : bold;
-	border-left : 3px solid #264ba3;
+	border-left : 3px solid #f08300;
+}
+#l-content .content-note .note-inner .note-info .info-btngroup > li.shareurl.open {
+	position : relative;
+}
+#l-content .content-note .note-inner .note-info .info-btngroup > li.shareurl.open .dropdown-menu {
+	display : block !important;
+}
+#l-content .content-note .note-inner .note-info .info-btngroup > li.shareurl .dropdown-menu {
+	display : none;
+	position : absolute;
+	right : -5px;
+	top : 38px;
+	height : 2em;
+	background : #fff;
+	padding : 15px 15px;
+	font-size : 85%;
+	text-align : left;
+}
+#l-content .content-note .note-inner .note-info .info-btngroup > li.shareurl .dropdown-menu a {
+	color : inherit;
+}
+#l-content .content-note .note-inner .note-info .info-btngroup > li.like > .active {
+	border-color : #e81c4f;
+	color : #e81c4f;
 }
 #l-content .content-note .note-inner .note-body {
 	position : absolute;
@@ -2913,6 +2733,162 @@ button {
 	height : 100%;
 	overflow : auto;
 }
-#l-content .content-note .note-inner .dropdown-menu {
-	display : none;
+
+#l-sharenote {
+	margin : 100px auto 0 auto;
+	width : 650px;
+}
+#l-sharenote .sharenote-title {
+	font-size : 171%;
+	margin : 0 0 30px 0;
+	padding : 20px;
+	background : #eee;
+	text-align : center;
+}
+
+.wysiwyg > :first-child {
+	margin-top : 0 !important;
+}
+
+.wysiwyg > p:first-child + * {
+	margin-top : 0 !important;
+}
+
+.wysiwyg h1 {
+	font-size : 180%;
+	font-weight : bold;
+	border-bottom : 3px solid rgba(0, 0, 0, 0.1);
+	padding-bottom : 10px;
+	margin : 30px 0 10px;
+	padding-left : 0;
+}
+.wysiwyg h1 a {
+	color : #0a9b94;
+}
+.wysiwyg h1 a:hover {
+	color : #08837d;
+}
+
+.wysiwyg h2 {
+	font-size : 160%;
+	margin : 30px 0 10px;
+	font-weight : bold;
+	border-bottom : 1px solid rgba(0, 0, 0, 0.1);
+	padding-bottom : 10px;
+}
+.wysiwyg h2 a {
+	color : #0a9b94;
+}
+.wysiwyg h2 a:hover {
+	color : #08837d;
+}
+
+.wysiwyg h3 {
+	margin : 30px 0 10px;
+	font-size : 130%;
+	font-weight : bold;
+}
+.wysiwyg h3 .emoji {
+	width : 22px;
+	height : 22px;
+}
+
+.wysiwyg h4 {
+	font-size : 120%;
+	font-weight : bold;
+}
+
+.wysiwyg > ol, .wysiwyg > ul {
+	margin : 20px 0;
+}
+
+.wysiwyg li {
+	margin : 10px 20px;
+	list-style-type : disc;
+}
+.wysiwyg li > p {
+	margin : 0;
+}
+
+.wysiwyg li ul li {
+	list-style-type : circle;
+}
+
+.wysiwyg p {
+	margin : 20px 0 0 0;
+}
+.wysiwyg p img {
+	margin-bottom : 0;
+}
+
+.wysiwyg blockquote {
+	font-size : 100%;
+	color : rgba(60, 74, 96, 0.7);
+	border-left : 5px solid rgba(0, 0, 0, 0.1);
+	margin-bottom : 30px;
+	margin-left : 0;
+	margin-right : 0;
+	padding : 0 20px;
+}
+.wysiwyg blockquote p {
+	margin : 10px 0 !important;
+}
+
+.wysiwyg code {
+	white-space : pre-wrap;
+	background : rgba(0, 0, 0, 0.05);
+	border-radius : 4px;
+}
+
+.wysiwyg pre {
+	border : none;
+	background : #f6f6f6;
+	padding : 20px;
+	border-radius : 6px;
+	margin-bottom : 30px;
+}
+.wysiwyg pre code {
+	background : #f6f6f6;
+}
+
+.wysiwyg table {
+	border : 1px solid rgba(0, 0, 0, 0.1);
+	width : 100%;
+	border-collapse : collapse;
+	border-spacing : 0;
+	margin : 20px 0 30px;
+}
+.wysiwyg table tr:nth-child(odd) td {
+	background-color : #f9f9f9;
+}
+.wysiwyg table tr td, .wysiwyg table tr th {
+	padding : 8px;
+	line-height : 1.6;
+	vertical-align : top;
+	border : 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.wysiwyg strong {
+	font-weight : bold;
+}
+
+.wysiwyg img {
+	max-width : 100%;
+	border : 1px solid #eee;
+}
+
+.wysiwyg h1, .wysiwyg h2, .wysiwyg h3, .wysiwyg h4 {
+	-webkit-font-smoothing : antialiased;
+}
+
+.wysiwyg h1:hover .anchor, .wysiwyg h2:hover .anchor, .wysiwyg h3:hover .anchor {
+	display : block;
+}
+
+.wysiwyg code {
+	color : #3c4a60;
+}
+
+.wysiwyg iframe {
+	max-width : 100%;
 }

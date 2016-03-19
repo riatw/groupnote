@@ -237,16 +237,6 @@
 			width: 68px;
 		}
 	}
-	// .btn + .btn {
-	// 	margin-left: 5px;
-	// 	margin-bottom: 0;
-	// }
-	// .btn-group .btn + .btn {
-	// 	margin-left: -1px;
-	// }
-	// .btn-block + .btn-block {
-	// 	margin-left: 0;
-	// }
 }
 
 .m-box-form {
@@ -280,101 +270,10 @@
 	}
 }
 
-
-/*
-## 固定幅・中央揃えのボックス
-	<div class="mod-box-fixed">example</div>
-*/
-.mod-box-fixed {
-	width: $fixedWidth;
-	margin: 0 auto;
-}
-
-/*
-	module:　mod-opacityHover
-	- ホバー時に下の画像を透過させる
------------------------------------------------------------------*/
-.mod-box-opacity {
-	@include inline-block;
-
-	&:hover img {
-		@include opacity(0.7);
-	}
-}
-
-/*
-## コンテンツの区切りを表す基本ボックス
-	<div class="mod-section">example</div>
-*/
-.mod-box-section {
-	margin-top: 60px;
-	padding-bottom: 0;
-
-	.mod-box-section {
-		margin-top: 40px;
-	}
-}
-
-/*
-	module:box-imgTxt
-	- 画像とテキストの横並び
-*/
-.mod-box-imgTxt1 {
-	@include clearfix;
-
-	.imgBox {
-		float: left;
-		margin-right: 20px;
-	}
-	.textBox {
-		overflow: hidden;
-	}
-}
-.mod-box-imgTxt2 {
-	@include clearfix;
-
-	.imgBox {
-		float: right;
-		margin-left: 20px;
-	}
-	.txtBox {
-		overflow: hidden;
-	}
-}
-
-/*
-	module:　mod-box-padding
------------------------------------------------------------------*/
-.mod-box-padding {
-	padding: 20px;
-}
-
-html,
-body,
-#wrap,
-#l-content,
-#l-viewcol,
-.viewcol-tag,
-.viewcol-list,
-.viewcol-detail,
-{
-	height: 100%;
-	//overflow: hidden;
-}
-
 .mod-box-scroll {
 	height: 100%;
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
-	border-left: 1px solid #d5d5d5;
-
-	&.scroll-no-border {
-		border-left: 0;
-	}
-}
-
-.mod-box-tags {
-	font-size: fz(14,12);
 }
 
 .mod-box-wysiwyg {
@@ -385,113 +284,26 @@ body,
 
 		.base-body {
 			background: #fff;
-			//margin-top: 10px;
 			padding: 24px;
 			border: 1px solid #d5d5d5;
+		}
+	}
+}
 
-			h1 {
-				font-size: fz(14,28);
-				line-height: 1.35;
-				margin: 30px 0 10px 0;
-				padding: 10px 0 0 0;
-			}
-			h2 {
-				margin: 40px -24px 20px -24px;
-				padding: 0 24px 8px 24px;
-				border-bottom: 1px solid #d5d5d5;
-				font-size: fz(14,18);
-				line-height: 1.35;
-				font-weight: bold;
-			}
-			h3 {
-				margin: 28px 0 12px 0;
-				padding: 0 0 8px 0;
-				border-bottom: 1px solid #d5d5d5;
-				font-size: fz(14,14);
-				line-height: 1.35;
-				font-weight: bold;
-			}
-			h4 {
-				font-size: fz(14,14);
-				font-weight: bold;
-				line-height: 1.35;
-				margin: 28px 0 8px 0;
-			}
-			p {
-				line-height: 1.75;
-			}
-			ul {
+.m-box-editnote {
+	display: flex;
+	justify-content: space-between;
 
-				> li {
-					padding: 4px 0;
-					line-height: 1.5;
+	.editnote-left {
+		width: 49%;
+	}
+	.editnote-right {
+		width: 49%;
 
-					> ul {
-						> li {
-
-						}
-					}
-				}
-			}
-			pre {
-				padding: 12px;
-				@include border-radius(0);
-				border: 1px solid #d5d5d5;
-			}
-			table {
-				width: 100%;
-				vertical-align: middle;
-
-				caption {
-					font-weight: bold;
-					padding-bottom: 5px;
-				}
-
-				thead {
-					th {
-						padding: 8px 10px;
-						border: 1px solid #ccc;
-						background: #999;
-						color: #fff;
-						font-weight: bold;
-						line-height: 1.4;
-						text-align: center;
-						vertical-align: middle;
-
-						&:first-child {
-							//background: #EEBC93;
-						}
-					}
-				}
-				tbody {
-					th, td {
-						padding: 10px;
-						border: 1px solid #ccc;
-						vertical-align: middle;
-						line-height: 1.4;
-					}
-					th {
-						width: 20%;
-						background: #EEE;
-						font-weight: bold;
-						text-align: left;
-						vertical-align: middle;
-
-						span.indis {
-							font-size: fz(14,12);
-							vertical-align: middle;
-							margin-left: 10px;
-							color: #ed8835;
-						}
-					}
-					td {
-						vertical-align: middle;
-					}
-				}
-			}
-			blockquote {
-				font-size: fz(14,14);
-			}
+		.mod-box-scroll {
+			height: 535px;
+			overflow-y: auto;
+			border: 1px solid #d5d5d5;
 		}
 	}
 }

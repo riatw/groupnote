@@ -6,34 +6,49 @@
 
 	<div class="modal-body">
 		<div class="body-main">
-			<form class="m-box-form">
-				<div class="form-group">
-					<label for="exampleInputEmail1">タイトル</label>
-					<input type="text" class="form-control" ng-model="form.title" placeholder="ノートのタイトルを入力します">
-				</div>
-				<div class="form-group">
-					<label for="exampleInputPassword1">本文</label>
-					<textarea class="form-control" rows="10" ng-model="form.body"></textarea>
-				</div>
-				<div class="form-group">
-					<label for="exampleInputEmail1">タグ</label>
-					<input type="text" class="form-control" ng-model="form.tags" placeholder="ノートのタグをカンマ区切りで入力します">
-				</div>
-				<div class="form-group">
-					<label for="exampleInputEmail1">文章の状態</label>
-					<select class="form-control" ng-model="form.status" ng-options="repoName.key as repoName.label for repoName in [{ key: 'Draft', label: 'Draft（下書き・意見募集）'}, { key: 'Publish', label: 'Publish（完成・公開）' }]"></select>
-				</div>
-				<div class="form-group">
-					<label for="exampleInputEmail1">投稿フォーマット</label>
-					<select class="form-control" ng-model="form.format" ng-options="repoName.key as repoName.label for repoName in [{ key: 'markdown', label: 'Markdown'}, { key: '__default__', label: '改行を変換' }]"></select>
+			<div class="m-box-editnote">
+				<div class="editnote-left">
+					<form class="m-box-form">
+						<div class="form-group">
+							<label for="exampleInputEmail1">タイトル</label>
+							<input type="text" class="form-control" ng-model="form.title" placeholder="ノートのタイトルを入力します">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">本文</label>
+							<textarea class="form-control" rows="10" ng-model="form.body" ng-keyup="preview()"></textarea>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">タグ</label>
+							<input type="text" class="form-control" ng-model="form.tags" placeholder="ノートのタグをカンマ区切りで入力します">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">文章の状態</label>
+							<select class="form-control" ng-model="form.status" ng-options="repoName.key as repoName.label for repoName in [{ key: 'Draft', label: 'Draft（下書き・意見募集）'}, { key: 'Publish', label: 'Publish（完成・公開）' }]"></select>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">投稿フォーマット</label>
+							<select class="form-control" ng-model="form.format" ng-options="repoName.key as repoName.label for repoName in [{ key: 'markdown', label: 'Markdown'}, { key: '__default__', label: '改行を変換' }]"></select>
+						</div>
+
+						<ul class="m-list-btngroup">
+							<button class="m-button-common common-save" ng-click="ok()">保存</button>
+							<button class="m-button-common common-delete" ng-click="delete()">削除</button>
+							<button class="m-button-common common-cancel" ng-click="cancel()">キャンセル</button>
+						</ul>
+					</form>
 				</div>
 
-				<ul class="m-list-btngroup">
-					<button class="m-button-common common-save" ng-click="ok()">保存</button>
-					<button class="m-button-common common-delete" ng-click="delete()">削除</button>
-					<button class="m-button-common common-cancel" ng-click="cancel()">キャンセル</button>
-				</ul>
-			</form>
+				<div class="editnote-right">
+					<div class="mod-box-scroll">
+						<div class="mod-box-wysiwyg">
+							<div class="wysiwyg-base">
+								<div class="base-body wysiwyg" marked="form.preview">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

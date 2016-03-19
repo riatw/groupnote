@@ -8,195 +8,20 @@ require('marked');
 require('angular-marked');
 require('./setting.js');
 var SETTING = require('./setting.js')();
-console.log(SETTING);
-
-// angular.module('mynote').controller(
 
 //Define a Module
 // var mynote = angular.module('mynote', ['ui.bootstrap','ngRoute']);
 var mynote = angular.module('mynote', ['ui.bootstrap','hc.marked','ngRoute','duScroll']);
 
-angular.module('mynote').service('dataAPI', function(stateObject, $http, $location) {
-	var service = {
-		current: {
-			username: "",
-			sessionId: "",
-			accessToken: "",
-		},
-		saveLocalVars: function() {
-
-		},
-		baseurl: SETTING.CMSURL,
-		currentSessionId: function() {
-			return localStorage.getItem("sessionId");
-		},
-		init: function() {
-
-		},
-		login: function(username, password, callback, error) {
-			$http.defaults.headers.common['X-MT-Authorization'] = null;
-
-			var url = this.baseurl + "/authentication";
-			url = url + "?username=" + username + "&password=" + password + "&clientId=gnote";
-
-			$http.post(url).success(function(json, status){
-				localStorage.setItem("accessToken", json.accessToken);
-				localStorage.setItem("sessionId", json.sessionId);
-				localStorage.setItem("username", username);
-
-				stateObject.currentUser = json;
-
-				callback(json);
-			});
-		},
-		logout: function(callback) {
-			var url = this.baseurl + "/authentication";
-
-			$http.defaults.headers.common['X-MT-Authorization'] = "MTAuth sessionId=" + localStorage.getItem("sessionId");
-
-			$http.delete(url).success(function(json, status){
-				localStorage.setItem("accessToken", "");
-				localStorage.setItem("sessionId", "");
-
-				stateObject.currentUser = null;
-
-				callback(json);
-			});
-		},
-		token: function(callback, error) {
-			var url = this.baseurl + '/token';
-
-			$http.defaults.headers.common['X-MT-Authorization'] = "MTAuth sessionId=" + this.currentSessionId();
-
-			$http.post(url).success(function(json, status){
-				localStorage.setItem("accessToken", json.accessToken);
-				stateObject.currentUser = json;
-
-				callback(json);
-			});
-		},
-		get: function(filter, auth, callback) {
-			var url = 'http://riatw.me/mt/mt-data-api.fcgi/v3/sites/' + SETTING.BLOGID + '/entries';
-
-			url = url + '/' + stateObject.currentNoteId;
-
-			if ( filter == false ) {
-				url = url + '?no_text_filter=1';
-			}
-
-			if ( auth ) {
-				var accessToken = "MTAuth accessToken=" + localStorage.getItem("accessToken");
-				$http.defaults.headers.common['X-MT-Authorization'] = accessToken;
-			}
-
-			$http.get(url)
-			.success(function(json, status){
-				stateObject.currentNote = json;
-
-				callback(json);
-			})
-			.error(function() {
-				alert("接続が切断されました、リロードしてください");
-			});
-		},
-		load: function(type, filter, callback) {
-			var url = this.baseurl + '/sites/' + SETTING.BLOGID + '/' + filter + type;
-			url = url + '?limit=100';
-
-			if ( localStorage.getItem("accessToken")) {
-				var accessToken = "MTAuth accessToken=" + localStorage.getItem("accessToken");
-				$http.defaults.headers.common['X-MT-Authorization'] = accessToken;
-			}
-
-			$http.get(url)
-			.success(function(json, status){
-				callback(json);
-			})
-			.error(function() {
-				alert("接続が切断されました、リロードしてください");
-			});
-		},
-		create: function(type, object, callback) {
-			var url = this.baseurl + '/sites/' + SETTING.BLOGID + '/' + type;
-
-			var accessToken = "MTAuth accessToken=" + localStorage.getItem("accessToken");
-
-			$http.defaults.headers.common['X-MT-Authorization'] = accessToken;
-
-			$http.defaults.headers.post["Content-Type"] = 'application/x-www-form-urlencoded;application/json;charset=utf-8';
-
-			$http({
-				url: url,
-				method: "POST",
-				data: jQuery.param({"entry": JSON.stringify(object)})
-			})
-			.success(function (json, status) {
-				stateObject.currentNote = json;
-				stateObject.currentNoteId = json.id;
-
-				callback(json);
-			})
-			.error(function() {
-				alert("接続が切断されました、リロードしてください");
-			});
-		},
-		update: function(type, object, callback) {
-			var url = this.baseurl + '/sites/' + SETTING.BLOGID + '/' + type;
-			url = url + "/" + object.id + "?__method=PUT";
-
-			var accessToken = "MTAuth accessToken=" + localStorage.getItem("accessToken");
-
-			$http.defaults.headers.common['X-MT-Authorization'] = accessToken;
-
-			$http.defaults.headers.post["Content-Type"] = 'application/x-www-form-urlencoded;application/json;charset=utf-8';
-
-			$http({
-				url: url,
-				method: "POST",
-				data: jQuery.param({"entry": JSON.stringify(object)})
-			})
-			.success(function (json, status) {
-				stateObject.currentNote = json;
-				stateObject.currentNoteId = json.id;
-
-				callback(json);
-			})
-			.error(function() {
-				alert("接続が切断されました、リロードしてください");
-			});
-		},
-		delete: function(type, id,callback) {
-			var accessToken = "MTAuth accessToken=" + localStorage.getItem("accessToken");
-
-			$http.defaults.headers.common['X-MT-Authorization'] = accessToken;
-
-			var url = this.baseurl + '/sites/' + SETTING.BLOGID + '/' + type;
-			url = url + '/' + id;
-
-			$http({
-				url: url,
-				method: 'DELETE'
-			})
-			.success(function (json, status) {
-				stateObject.currentNote = null;
-				stateObject.currentNoteId = null;
-
-				callback(json);
-			})
-			.error(function() {
-				alert("接続が切断されました、リロードしてください");
-			});
-		}
-	}
-
-	return service;
-});
+var dataAPI = require('./service/dataapi.js');
+var stateObject = require('./service/state.js');
 
 // Markdown Render
 angular.module('mynote').config(['markedProvider', function(markedProvider) {
 	markedProvider.setOptions({
 		gfm: true,
-		breaks: true
+		tables: true,
+		smartLists: true
 	});
 }]);
 
@@ -206,57 +31,13 @@ angular.module('mynote').config(function($routeProvider) {
 	.when("/tag/:tagid", {
 		controller: 'tagListController'
 	})
-	.when("/tag/:tagid/note/:noteid", {
+	.when("/note/:noteid", {
 		controller: 'noteListController'
+	})
+	.when("/note/:noteid", {
+		controller: 'shareNoteController'
 	});
 }).run(function($route) {});
-
-//currentObject Service
-angular.module('mynote').service('stateObject', function() {
-	var service = {
-		currentUser: "",
-		currentTagId : "all",
-		currentNoteId: null
-	}
-
-	return service;
-});
-
-//SignUp
-angular.module('mynote').controller("signUpModalController", function ($scope, $modal) {
-	$scope.open = function (size) {
-		var modalInstance = $modal.open({
-			templateUrl: 'common/views/signup.html',
-			controller: signUpController,
-			size: size
-		});
-	}
-
-	var signUpController = function ($scope, $modalInstance) {
-		$scope.form = {
-			email: '',
-			username: '',
-			password: ''
-		}
-
-		$scope.ok = function () {
-			user.signUp(null, {
-				success: function(user) {
-					$scope.currentUser = user;
-					$scope.$apply();
-					$modalInstance.dismiss('cancel');
-
-					alert("ユーザの作成が完了しました。");
-					location.reload();
-				}
-			});
-		}
-
-		$scope.cancel = function () {
-			$modalInstance.dismiss('cancel');
-		}
-	}
-});
 
 //Login
 angular.module('mynote').controller("loginController", function($scope,stateObject,$rootScope, dataAPI) {
@@ -267,7 +48,7 @@ angular.module('mynote').controller("loginController", function($scope,stateObje
 
 			$rootScope.$broadcast('BCRefreshTags');
 			$rootScope.$broadcast('BCRefreshNoteList');
-			$rootScope.$broadcast('BCRefreshNoteDetail');
+			// $rootScope.$broadcast('BCRefreshNoteDetail');
 		});
 	}
 
@@ -307,7 +88,7 @@ angular.module('mynote').controller("addNoteModalController", function ($scope, 
 		});
 	}
 
-	var addNoteController = function ($scope, $modalInstance, items, $rootScope, stateObject, $location, dataAPI) {
+	var addNoteController = function ($scope, $modalInstance, items, $rootScope, stateObject, $location, dataAPI, marked) {
 
 		$scope.form = {
 			title: '',
@@ -315,6 +96,8 @@ angular.module('mynote').controller("addNoteModalController", function ($scope, 
 			tags: '',
 			status: 'Draft',
 			format: 'markdown',
+			preview: '',
+			preview_height: ''
 		}
 
 		$scope.noteIsLoaded = 0;
@@ -328,6 +111,7 @@ angular.module('mynote').controller("addNoteModalController", function ($scope, 
 				$scope.form.status = json.status;
 				$scope.form.format = json.format;
 				$scope.noteIsLoaded = 1;
+				$scope.preview();
 			});
 		}
 		else {
@@ -371,6 +155,7 @@ angular.module('mynote').controller("addNoteModalController", function ($scope, 
 					$modalInstance.dismiss('cancel');
 					$location.path("/tag/all");
 					$rootScope.$broadcast('BCRefreshNoteList');
+					$rootScope.$broadcast('BCResetNoteDetail');
 				});
 			}
 		}
@@ -378,7 +163,54 @@ angular.module('mynote').controller("addNoteModalController", function ($scope, 
 		$scope.cancel = function () {
 			$modalInstance.dismiss('cancel');
 		}
+
+		$scope.preview = function() {
+			$scope.form.preview = marked($scope.form.body, function (err, content) {
+				return content;
+			});
+		};
 	}
+});
+
+//addNote
+angular.module('mynote').controller("addNoteStarController", function ($scope, dataAPI) {
+	$scope.checkStar = function() {
+		$scope.liked = 0;
+		$scope.totalResults = 0;
+
+		dataAPI.listStar(function(json) {
+			for ( var i=0; i<json.items.length; i++ ) {
+				if ( json.items[i].name == localStorage.getItem("username") ) {
+					$scope.liked = 1;
+				}
+			}
+
+			$scope.likedResults = json.totalResults;
+		});
+	};
+
+	$scope.setStar = function() {
+		if ( ! $scope.liked ) {
+			dataAPI.addStar(function() {
+				dataAPI.listStar(function(json) {
+					$scope.liked = 1;
+					$scope.likedResults = json.totalResults;
+				});
+			});
+		}
+		else {
+			dataAPI.removeStar(function() {
+				dataAPI.listStar(function(json) {
+					$scope.liked = 0;
+					$scope.likedResults = json.totalResults;
+				});
+			});
+		}
+	}
+
+	$scope.$on('BCRefreshNoteDetail', function() {
+		$scope.checkStar();
+	});
 });
 
 //タグ一覧表示用のコントローラ
@@ -394,20 +226,22 @@ angular.module('mynote').controller("searchNoteController", function ($scope, st
 //タグ一覧表示用のコントローラ
 angular.module('mynote').controller("tagListController", function ($scope, stateObject, $routeParams, $rootScope, $location, dataAPI) {
 
-	//タグの一覧表示
-	$scope.viewTags = function() {
-		$scope.isNoteDetailLoaded = 0;
-		$scope.loadTagSp = 1;
+	var that = this;
 
-		dataAPI.load("tags", "", function(json) {
-			$scope.taglist = json.items;
-			$scope.loadTagSp = 0;
+	//タグの一覧表示
+	this.viewTags = function() {
+		this.isNoteDetailLoaded = 0;
+		this.loadTagSp = 1;
+
+		dataAPI.load("tags", "", "" , function(json) {
+			that.taglist = json.items;
+			that.loadTagSp = 0;
 		})
 	}
 
 	$scope.$on('BCRefreshTags', function() {
-		$scope.currentTagId = stateObject.currentTagId;
-		$scope.viewTags();
+		that.currentTagId = stateObject.currentTagId;
+		that.viewTags();
 	});
 
 	//URLに応じてタグを選択状態にする
@@ -416,13 +250,13 @@ angular.module('mynote').controller("tagListController", function ($scope, state
 			return;
 		}
 		if ( $routeParams.tagid ) {
-			$scope.currentTagId = $routeParams.tagid;
+			that.currentTagId = $routeParams.tagid;
 			stateObject.currentTagId = $routeParams.tagid;
 
 			$rootScope.$broadcast('BCRefreshNoteList');
 		}
 		else {
-			$scope.currentTagId = "all";
+			that.currentTagId = "all";
 		}
 	});
 });
@@ -444,7 +278,7 @@ angular.module('mynote').controller("noteListController", function($scope, state
 			filter = "tags/" + stateObject.currentTagId + "/"
 		}
 
-		dataAPI.load("entries", filter, function(json) {
+		dataAPI.load("entries", filter, "&sortBy=modified_on", function(json) {
 			$scope.feeds = json.items;
 
 			//スピナーを非表示
@@ -474,7 +308,7 @@ angular.module('mynote').controller("noteListController", function($scope, state
 			$scope.currentNoteId = $routeParams.noteid;
 			stateObject.currentNoteId = $routeParams.noteid;
 
-			dataAPI.get(true, false, function(json) {
+			dataAPI.get(false, true, function(json) {
 				$rootScope.$broadcast('BCRefreshNoteDetail');
 			});
 		}
@@ -492,6 +326,7 @@ angular.module('mynote').controller("noteDetailController", function($scope,stat
 			$scope.isNoteDetailLoaded = 0;
 
 			$scope.detailTitle = item.title;
+			$scope.shareUrl = location.protocol + "//" + location.host + "/share/#note/" + item.id;
 
 			$scope.detailBody = marked(item.body, function (err, content) {
 				var start = 0;
@@ -542,7 +377,7 @@ angular.module('mynote').controller("noteDetailController", function($scope,stat
 				$scope.outline = array;
 
 				$scope.isNoteDetailLoaded = 1;
-				return contentHTML.html();
+				return content;
 			});
 
 			$scope.currentNote = item.id;
@@ -552,8 +387,34 @@ angular.module('mynote').controller("noteDetailController", function($scope,stat
 		}
 	};
 
+	$scope.resetNoteDetail = function() {
+		$scope.isNoteDetailLoaded = 0;
+	}
+
 	$scope.$on('BCRefreshNoteDetail', function() {
 		$scope.currentNoteId = stateObject.currentNoteId;
 		$scope.viewNoteDetail();
+	});
+
+	$scope.$on('BCResetNoteDetail', function() {
+		$scope.currentNoteId = stateObject.currentNoteId;
+		$scope.resetNoteDetail();
+	});
+});
+
+angular.module('mynote').controller("shareNoteController", function($scope,stateObject, $rootScope,marked,dataAPI, $routeParams, $location) {
+
+	//URLに応じてノートを選択状態にする
+	$rootScope.$on("$routeChangeSuccess", function(event, current) {
+		if ( $routeParams.noteid ) {
+			stateObject.currentNoteId = $routeParams.noteid;
+
+			dataAPI.get(false, false, function(json) {
+				$scope.title = json.title;
+				$scope.detailBody = marked(json.body, function (err, content) {
+					return content;
+				});
+			});
+		}
 	});
 });
