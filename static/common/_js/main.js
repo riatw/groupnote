@@ -6,12 +6,13 @@ require('angular-bootstrap');
 require('angular-scroll');
 require('marked');
 require('angular-marked');
+require('ng-file-upload');
 require('./setting.js');
 var SETTING = require('./setting.js')();
 
 //Define a Module
 // var mynote = angular.module('mynote', ['ui.bootstrap','ngRoute']);
-var mynote = angular.module('mynote', ['ui.bootstrap','hc.marked','ngRoute','duScroll']);
+var mynote = angular.module('mynote', ['ui.bootstrap','hc.marked','ngRoute','duScroll','ngFileUpload']);
 
 var dataAPI = require('./service/dataapi.js');
 var stateObject = require('./service/state.js');
@@ -88,7 +89,7 @@ angular.module('mynote').controller("addNoteModalController", function ($scope, 
 		});
 	}
 
-	var addNoteController = function ($scope, $modalInstance, items, $rootScope, stateObject, $location, dataAPI, marked) {
+	var addNoteController = function ($scope, $modalInstance, items, $rootScope, stateObject, $location, dataAPI, marked,Upload) {
 
 		$scope.form = {
 			title: '',
@@ -168,6 +169,25 @@ angular.module('mynote').controller("addNoteModalController", function ($scope, 
 			$scope.form.preview = marked($scope.form.body, function (err, content) {
 				return content;
 			});
+		};
+
+		// upload on file select or drop
+		$scope.upload = function (files) {
+			for ( var i=0; i < files.length; i++ ) {
+				dataAPI.upload(files[i], function(json) {
+					var text;
+
+					if ( json.data.class == "image" ) {
+						text = "![" + json.config.data.file.name + "]("+ json.data.url +")";
+					}
+					else {
+						text = "[" + json.config.data.file.name + "]("+ json.data.url +")";
+					}
+
+					$scope.form.body = $scope.form.body + "\n" + text;
+					$scope.preview();
+				});
+			}
 		};
 	}
 });

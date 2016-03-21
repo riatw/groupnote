@@ -3,17 +3,13 @@ var $ = require('jquery');
 var jQuery = require('jquery');
 var SETTING = require('../setting.js')();
 
-module.exports = angular.module('mynote').service('dataAPI', function(stateObject, $http, $location) {
+module.exports = angular.module('mynote').service('dataAPI', function(stateObject, $http, $location,Upload) {
 		var service = {
 			current: {
 				username: "",
 				sessionId: "",
 				accessToken: "",
 			},
-			saveLocalVars: function() {
-
-			},
-			baseurl: SETTING.CMSURL,
 			currentSessionId: function() {
 				return localStorage.getItem("sessionId");
 			},
@@ -23,7 +19,7 @@ module.exports = angular.module('mynote').service('dataAPI', function(stateObjec
 			login: function(username, password, callback, error) {
 				$http.defaults.headers.common['X-MT-Authorization'] = null;
 
-				var url = this.baseurl + "/authentication";
+				var url = SETTING.CMSURL + "/authentication";
 				url = url + "?username=" + username + "&password=" + password + "&clientId=gnote";
 
 				$http.post(url).success(function(json, status){
@@ -37,7 +33,7 @@ module.exports = angular.module('mynote').service('dataAPI', function(stateObjec
 				});
 			},
 			logout: function(callback) {
-				var url = this.baseurl + "/authentication";
+				var url = SETTING.CMSURL + "/authentication";
 
 				$http.defaults.headers.common['X-MT-Authorization'] = "MTAuth sessionId=" + localStorage.getItem("sessionId");
 
@@ -51,7 +47,7 @@ module.exports = angular.module('mynote').service('dataAPI', function(stateObjec
 				});
 			},
 			token: function(callback, error) {
-				var url = this.baseurl + '/token';
+				var url = SETTING.CMSURL + '/token';
 
 				$http.defaults.headers.common['X-MT-Authorization'] = "MTAuth sessionId=" + this.currentSessionId();
 
@@ -64,7 +60,7 @@ module.exports = angular.module('mynote').service('dataAPI', function(stateObjec
 				});
 			},
 			get: function(filter, auth, callback) {
-				var url = this.baseurl + '/sites/' + SETTING.BLOGID + '/entries';
+				var url = SETTING.CMSURL + '/sites/' + SETTING.BLOGID + '/entries';
 
 				url = url + '/' + stateObject.currentNoteId;
 
@@ -85,7 +81,7 @@ module.exports = angular.module('mynote').service('dataAPI', function(stateObjec
 						})
 						.error(function(status) {
 							console.log(status);
-							alert("接続が切断されました、リロードしてください2");
+							alert("接続が切断されました、リロードしてください");
 						});
 					});
 				}
@@ -99,7 +95,7 @@ module.exports = angular.module('mynote').service('dataAPI', function(stateObjec
 				}
 			},
 			load: function(type, filter, terms, callback) {
-				var url = this.baseurl + '/sites/' + SETTING.BLOGID + '/' + filter + type;
+				var url = SETTING.CMSURL + '/sites/' + SETTING.BLOGID + '/' + filter + type;
 				url = url + '?limit=100' + terms;
 
 				this.token(function() {
@@ -111,12 +107,12 @@ module.exports = angular.module('mynote').service('dataAPI', function(stateObjec
 						callback(json);
 					})
 					.error(function() {
-						alert("接続が切断されました、リロードしてください1");
+						alert("接続が切断されました、リロードしてください");
 					});
 				});
 			},
 			create: function(type, object, callback) {
-				var url = this.baseurl + '/sites/' + SETTING.BLOGID + '/' + type;
+				var url = SETTING.CMSURL + '/sites/' + SETTING.BLOGID + '/' + type;
 
 				this.token(function() {
 					var accessToken = "MTAuth accessToken=" + localStorage.getItem("accessToken");
@@ -142,7 +138,7 @@ module.exports = angular.module('mynote').service('dataAPI', function(stateObjec
 				});
 			},
 			update: function(type, object, callback) {
-				var url = this.baseurl + '/sites/' + SETTING.BLOGID + '/' + type;
+				var url = SETTING.CMSURL + '/sites/' + SETTING.BLOGID + '/' + type;
 				url = url + "/" + object.id + "?__method=PUT";
 
 				this.token(function() {
@@ -169,7 +165,7 @@ module.exports = angular.module('mynote').service('dataAPI', function(stateObjec
 				});
 			},
 			delete: function(type, id,callback) {
-				var url = this.baseurl + '/sites/' + SETTING.BLOGID + '/' + type;
+				var url = SETTING.CMSURL + '/sites/' + SETTING.BLOGID + '/' + type;
 				url = url + '/' + id;
 
 				this.token(function() {
@@ -193,7 +189,7 @@ module.exports = angular.module('mynote').service('dataAPI', function(stateObjec
 				});
 			},
 			addStar: function(callback) {
-				var url = this.baseurl + '/sites/' + SETTING.BLOGID;
+				var url = SETTING.CMSURL + '/sites/' + SETTING.BLOGID;
 				url = url + "/entries/" + stateObject.currentNoteId + "/score/like" + "?__method=PUT";
 
 				this.token(function() {
@@ -212,12 +208,12 @@ module.exports = angular.module('mynote').service('dataAPI', function(stateObjec
 						callback(json);
 					})
 					.error(function() {
-						alert("接続が切断されました、リロードしてください4");
+						alert("接続が切断されました、リロードしてください");
 					});
 				});
 			},
 			listStar: function(callback) {
-				var url = this.baseurl + '/sites/' + SETTING.BLOGID;
+				var url = SETTING.CMSURL + '/sites/' + SETTING.BLOGID;
 
 				url = url + "/entries/" + stateObject.currentNoteId + '/score/like';
 
@@ -232,12 +228,12 @@ module.exports = angular.module('mynote').service('dataAPI', function(stateObjec
 						callback(json);
 					})
 					.error(function() {
-						alert("接続が切断されました、リロードしてください5");
+						alert("接続が切断されました、リロードしてください");
 					});
 				});
 			},
 			removeStar: function(callback) {
-				var url = this.baseurl + '/sites/' + SETTING.BLOGID + '/' + "entries";
+				var url = SETTING.CMSURL + '/sites/' + SETTING.BLOGID + '/' + "entries";
 				url = url + '/' + stateObject.currentNoteId + '/score/like';
 
 				this.token(function() {
@@ -253,7 +249,23 @@ module.exports = angular.module('mynote').service('dataAPI', function(stateObjec
 						callback(json);
 					})
 					.error(function() {
-						alert("接続が切断されました、リロードしてください7");
+						alert("接続が切断されました、リロードしてください");
+					});
+				});
+			},
+			upload: function(file, callback) {
+				var url = SETTING.CMSURL + '/assets/upload';
+
+				this.token(function() {
+					var accessToken = "MTAuth accessToken=" + localStorage.getItem("accessToken");
+
+					Upload.upload({
+						url: url,
+						data: { file: file, path: "/files", site_id: SETTING.BLOGID, autoRenameIfExists: true },
+						method: "post",
+						headers: {'X-MT-Authorization': accessToken},
+					}).then(function (json) {
+						callback(json);
 					});
 				});
 			},

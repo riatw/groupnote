@@ -1907,7 +1907,7 @@ img {
 }
 .modal-content .content-inner {
 	height : 100%;
-	padding : 66px 0 0 0;
+	padding : 46px 0 0 0;
 	box-sizing : border-box;
 }
 .modal-content .content-inner.is-footer {
@@ -1943,7 +1943,6 @@ img {
 	left : 0;
 	right : 0;
 	border-bottom : 1px solid #e5e5e5;
-	padding-top : 20px;
 	min-height : 46px;
 	height : auto !important;
 	height : 46px;
@@ -1964,7 +1963,7 @@ img {
 .modal-header .btn-close {
 	position : absolute;
 	left : 0;
-	bottom : 0;
+	bottom : -3px;
 	width : 46px;
 	height : 46px;
 	cursor : pointer;
@@ -2578,6 +2577,16 @@ html, body, #wrap, #l-content, #l-viewcol, .viewcol-tag, .viewcol-list, .viewcol
 }
 #l-viewcol .viewcol-detail {
 	width : 50%;
+}
+
+.drop-box {
+	width : 100%;
+	padding : 10px;
+	border : 3px dashed #ccc;
+	box-sizing : border-box;
+}
+.drop-box.dragover, .drop-box:hover {
+	background : #eee;
 }
 
 #l-content .content-tag {

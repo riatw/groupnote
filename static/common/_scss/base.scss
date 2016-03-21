@@ -299,6 +299,17 @@ body,
 	}
 }
 
+.drop-box {
+	width: 100%;
+	padding: 10px;
+	border: 3px dashed #ccc;
+	box-sizing: border-box;
+
+	&.dragover,
+	&:hover {
+		background: #eee;
+	}
+}
 #l-content {
 	.content-tag {
 		position: relative;

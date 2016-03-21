@@ -63,7 +63,7 @@
 
 	.content-inner {
 		height: 100%;
-		padding: 66px 0 0 0;
+		padding: 46px 0 0 0;
 		@include box-sizing(border-box);
 
 		&.is-footer {
@@ -98,7 +98,6 @@
 	//background-color: $col-green1;
 	//color: #fff;
 	border-bottom: 1px solid #e5e5e5;
-	padding-top: 20px;
 	//line-height: 46px;
 	@include min-height(46px);
 	z-index: 1;
@@ -120,7 +119,7 @@
 	.btn-close {
 		position: absolute;
 		left: 0;
-		bottom: 0;
+		bottom: -3px;
 		width: 46px;
 		height: 46px;
 		cursor: pointer;
