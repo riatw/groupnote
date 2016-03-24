@@ -55,12 +55,17 @@ angular.module('mynote').controller("loginController", function($scope,stateObje
 
 	$scope.logIn = function() {
 		dataAPI.login($scope.username, $scope.password, function() {
+			$scope.login_error = 0;
+
 			$scope.currentUser = stateObject.currentUser;
 			$scope.currentUserName = stateObject.currentUser.name;
 
 			$rootScope.$broadcast('BCRefreshTags');
 			$rootScope.$broadcast('BCRefreshNoteList');
 			$rootScope.$broadcast('BCRefreshNoteDetail');
+		},
+		function() {
+			$scope.login_error = 1;
 		});
 	}
 
@@ -266,9 +271,6 @@ angular.module('mynote').controller("tagListController", function ($scope, state
 
 	//URLに応じてタグを選択状態にする
 	$rootScope.$on("$routeChangeSuccess", function(event, current) {
-		if ( $routeParams.noteid != null ) {
-			return;
-		}
 		if ( $routeParams.tagid ) {
 			that.currentTagId = $routeParams.tagid;
 			stateObject.currentTagId = $routeParams.tagid;

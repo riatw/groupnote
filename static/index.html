@@ -78,6 +78,11 @@
 									<li>
 										<input type="password" placeholder="パスワード" class="form-control" ng-model="password">
 									</li>
+									<li ng-show="login_error">
+										<p class="login-error">
+											ユーザID、またはパスワードが間違っています
+										</p>
+									</li>
 									<li>
 										<button type="submit" class="btn btn-success" ng-click="logIn()">Login</button>
 									</li>
@@ -102,7 +107,7 @@
 									<div class="mod-icon-spinner" ng-show="loadTagSp"></div>
 									<ul class="mod-list-line">
 										<li ng-class="{'active':tlCtl.currentTagId==='all'}"><a href="#/tag/all">すべてのノート</a></li>
-										<li ng-repeat="tag in tlCtl.taglist" ng-class="{'active':main.currentTagId===tag.id}"><a href="#/tag/{{tag.id}}">#{{tag.name}}</a></li>
+										<li ng-repeat="tag in tlCtl.taglist" ng-class="{'active':tlCtl.currentTagId===tag.id}"><a href="#/tag/{{tag.id}}">#{{tag.name}}</a></li>
 									</ul>
 								</div>
 							</div>

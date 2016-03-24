@@ -2536,6 +2536,9 @@ html, body, #wrap, #l-content, #l-viewcol, .viewcol-tag, .viewcol-list, .viewcol
 	font-size : 114%;
 	font-weight : bold;
 }
+#l-guide .guide-login .login-error {
+	color : #f00;
+}
 #l-guide .guide-login ul li {
 	margin : 10px 0 0 0;
 }

@@ -16,13 +16,14 @@ module.exports = angular.module('mynote').service('dataAPI', function(stateObjec
 			init: function() {
 
 			},
-			login: function(username, password, callback, error) {
+			login: function(username, password, callback, error_callback) {
 				$http.defaults.headers.common['X-MT-Authorization'] = null;
 
 				var url = SETTING.CMSURL + "/authentication";
 				url = url + "?username=" + username + "&password=" + password + "&clientId=gnote";
 
-				$http.post(url).success(function(json, status){
+				$http.post(url)
+				.success(function(json, status){
 					localStorage.setItem("accessToken", json.accessToken);
 					localStorage.setItem("sessionId", json.sessionId);
 					localStorage.setItem("username", username);
@@ -30,6 +31,9 @@ module.exports = angular.module('mynote').service('dataAPI', function(stateObjec
 					stateObject.currentUser = json;
 
 					callback(json);
+				})
+				.error(function() {
+					error_callback();
 				});
 			},
 			logout: function(callback) {
