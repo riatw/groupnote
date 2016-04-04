@@ -136,6 +136,8 @@
 
 				<div class="viewcol-detail" ng-controller="noteDetailController">
 					<div class="content-note">
+						<div class="mod-icon-spinner note-spinner ng-hide" ng-hide="isNoteDetailLoaded"></div>
+
 						<div class="note-inner" ng-show="isNoteDetailLoaded">
 							<div class="note-info">
 								<h1 class="info-title">{{detailTitle}}</h1>

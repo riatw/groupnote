@@ -2097,6 +2097,7 @@ img {
 }
 
 .mod-box-scroll {
+	position : relative;
 	height : 100%;
 	overflow : auto;
 	-webkit-overflow-scrolling : touch;

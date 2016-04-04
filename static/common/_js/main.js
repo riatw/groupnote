@@ -330,9 +330,7 @@ angular.module('mynote').controller("noteListController", function($scope, state
 			$scope.currentNoteId = $routeParams.noteid;
 			stateObject.currentNoteId = $routeParams.noteid;
 
-			dataAPI.get(false, true, function(json) {
-				$rootScope.$broadcast('BCRefreshNoteDetail');
-			});
+			$rootScope.$broadcast('BCRefreshNoteDetail');
 		}
 		else {
 			$scope.currentNoteId = "";
@@ -340,7 +338,7 @@ angular.module('mynote').controller("noteListController", function($scope, state
 	});
 });
 
-angular.module('mynote').controller("noteDetailController", function($scope,stateObject, $rootScope,marked) {
+angular.module('mynote').controller("noteDetailController", function($scope,stateObject, $rootScope,marked,dataAPI) {
 	$scope.viewNoteDetail = function() {
 		var item = stateObject.currentNote;
 
@@ -415,7 +413,12 @@ angular.module('mynote').controller("noteDetailController", function($scope,stat
 
 	$scope.$on('BCRefreshNoteDetail', function() {
 		$scope.currentNoteId = stateObject.currentNoteId;
-		$scope.viewNoteDetail();
+		$scope.detailBody = "";
+		$scope.isNoteDetailLoaded = 0;
+
+		dataAPI.get(false, true, function(json) {
+			$scope.viewNoteDetail();
+		});
 	});
 
 	$scope.$on('BCResetNoteDetail', function() {
