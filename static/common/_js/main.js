@@ -37,6 +37,9 @@ angular.module('mynote').config(function($routeProvider) {
 	})
 	.when("/note/:noteid", {
 		controller: 'shareNoteController'
+	})
+	.when("/note/:noteid", {
+		controller: 'presentationNoteController'
 	});
 }).run(function($route) {});
 
@@ -438,6 +441,42 @@ angular.module('mynote').controller("shareNoteController", function($scope,state
 				$scope.title = json.title;
 				$scope.detailBody = marked(json.body, function (err, content) {
 					return content;
+				});
+			});
+		}
+	});
+});
+
+angular.module('mynote').controller("presentationNoteController", function($scope,stateObject, $rootScope,marked,dataAPI, $routeParams, $location) {
+
+	//URLに応じてノートを選択状態にする
+	$rootScope.$on("$routeChangeSuccess", function(event, current) {
+		if ( $routeParams.noteid ) {
+			stateObject.currentNoteId = $routeParams.noteid;
+
+			dataAPI.get(false, false, function(json) {
+				$scope.title = json.title;
+				$scope.detailBody = json.body;
+
+				// Full list of configuration options available at:
+				// https://github.com/hakimel/reveal.js#configuration
+				Reveal.initialize({
+					controls: true,
+					progress: true,
+					history: true,
+					center: true,
+
+					transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+					// Optional reveal.js plugins
+					dependencies: [
+						{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+						{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+						{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+						{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+						{ src: 'plugin/zoom-js/zoom.js', async: true },
+						{ src: 'plugin/notes/notes.js', async: true }
+					]
 				});
 			});
 		}
