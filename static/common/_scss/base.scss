@@ -211,7 +211,7 @@ body,
 					cursor: pointer;
 
 					&:hover {
-						background: orange;
+						background: darken($siteMainColor,5%);
 					}
 				}
 			}
@@ -402,6 +402,10 @@ body,
 							border: 1px solid #ccc;
 							border-radius: 3px;
 							font-size: fz(14,12);
+
+							&:hover {
+								background: darken(#fff,5%);
+							}
 						}
 
 						&.dropdown {
@@ -552,12 +556,9 @@ body,
 		margin: 30px 0 10px;
 		font-size: 130%;
 		font-weight: bold;
-		.emoji {
-			width: 22px;
-			height: 22px;
-		}
 	}
 	h4 {
+		margin: 30px 0 10px;
 		font-size: 120%;
 		font-weight: bold;
 	}

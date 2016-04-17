@@ -7,12 +7,13 @@ require('angular-scroll');
 require('marked');
 require('angular-marked');
 require('ng-file-upload');
+require('ng-tags-input');
 require('./setting.js');
 var SETTING = require('./setting.js')();
 
 //Define a Module
 // var mynote = angular.module('mynote', ['ui.bootstrap','ngRoute']);
-var mynote = angular.module('mynote', ['ui.bootstrap','hc.marked','ngRoute','duScroll','ngFileUpload']);
+var mynote = angular.module('mynote', ['ui.bootstrap','hc.marked','ngRoute','duScroll','ngFileUpload','ngTagsInput']);
 
 var dataAPI = require('./service/dataapi.js');
 var stateObject = require('./service/state.js');
@@ -102,7 +103,7 @@ angular.module('mynote').controller("addNoteModalController", function ($scope, 
 		$scope.form = {
 			title: '',
 			body: '',
-			tags: '',
+			tags: { text: 'just' },
 			status: 'Draft',
 			format: 'markdown',
 			preview: '',
@@ -352,55 +353,62 @@ angular.module('mynote').controller("noteDetailController", function($scope,stat
 			$scope.shareUrl = location.protocol + "//" + location.host + "/share/#note/" + item.id;
 
 			$scope.detailBody = marked(item.body, function (err, content) {
-				var start = 0;
-				var end = 0;
-				var stash = "<ul>";
-				var array = [];
 				//array
 					// - id
 					// - text
 					// - child - id / - text
 
+				var start = 0;
+				var end = 0;
+				var array = [];
+
 				var contentHTML = $("<div />").append(content);
-				var all = $(contentHTML).children();
-				var h3Count = 0;
+				var $child = $(contentHTML).children();
 
-				contentHTML.find("h2").each(function(i){
-					var array_temp = new Object;
-					array_temp.child = [];
+				contentHTML.find("h1").each(function(i){
+					var $this = $(this);
+					var temp = {};
+					var parentId;
 
-					end = $(this).nextAll("h2").eq("0").index();
+					// 次のh1を探す
+					end = $this.nextAll("h1").eq("0").index();
 
+					// 最後のh1だったら
 					if ( end == -1 ) {
-						end = all.length;
+						end = $child.length;
 					}
 
-					var count = all.slice(start,end).filter("h3").length - 1;
-					array_temp.id = "h2-" + (i+1);
-					$(this).attr("id","h2-" + (i+1));
+					parentId = "h1-" + (i+1);
 
-					array_temp.text = $(this).text();
+					temp = {
+						id: parentId,
+						text: $this.text(),
+						child: []
+					}
 
-					all.slice(start,end).filter("h3").each(function(i){
-						var array_temp2 = new Object;
-						h3Count++;
-						array_temp2.id = "h3-" + h3Count;
-						array_temp2.text = $(this).text();
+					$this.attr("id","h1-" + (i+1));
 
-						$(this).attr("id","h3-" + h3Count);
+					$child.slice(start,end).filter("h2").each(function(j){
+						var childId = "h2-" + i + "-" + j;
+						var $that = $(this);
 
-						array_temp.child.push(array_temp2);
+						temp.child.push({
+							id:  childId,
+							text: $that.text()
+						});
+
+						$that.attr("id",childId);
 					});
 
 					start = end;
 
-					array.push(array_temp);
+					array.push(temp);
 				});
 
 				$scope.outline = array;
 
 				$scope.isNoteDetailLoaded = 1;
-				return content;
+				return contentHTML.html();
 			});
 
 			$scope.currentNote = item.id;

@@ -23,7 +23,10 @@
 						</div>
 						<div class="form-group">
 							<label for="exampleInputEmail1">タグ</label>
-							<input type="text" class="form-control" ng-model="form.tags" placeholder="ノートのタグをカンマ区切りで入力">
+							<!-- <input type="text" class="form-control" ng-model="form.tags" placeholder="ノートのタグをカンマ区切りで入力"> -->
+							<tags-input ng-model="form.tags">
+								<auto-complete source="loadItems($query)"></auto-complete>
+							</tags-input>
 						</div>
 						<div class="form-group">
 							<label for="exampleInputEmail1">文章の状態</label>

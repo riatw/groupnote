@@ -2314,12 +2314,19 @@ img {
 	border-radius : 3px;
 	background : #eee;
 }
+.m-button-common:hover {
+	background : #e1e1e1;
+}
 .m-button-common:first-child {
 	margin-left : 0;
 }
 .m-button-common.common-save {
 	background : #f08300;
 	color : #fff;
+}
+.m-button-common.common-save:hover {
+	background : #d77500;
+	color : #eee;
 }
 
 /*----------------------- support browser ------------------------
@@ -2504,7 +2511,7 @@ html, body, #wrap, #l-content, #l-viewcol, .viewcol-tag, .viewcol-list, .viewcol
 	cursor : pointer;
 }
 #l-header .header-login ul li a:hover {
-	background : orange;
+	background : #d77500;
 }
 
 #l-guide {
@@ -2676,6 +2683,9 @@ html, body, #wrap, #l-content, #l-viewcol, .viewcol-tag, .viewcol-list, .viewcol
 	border-radius : 3px;
 	font-size : 85%;
 }
+#l-content .content-note .note-inner .note-info .info-btngroup > li > button:hover {
+	background : #f2f2f2;
+}
 #l-content .content-note .note-inner .note-info .info-btngroup > li.dropdown.open {
 	position : relative;
 }
@@ -2801,12 +2811,9 @@ html, body, #wrap, #l-content, #l-viewcol, .viewcol-tag, .viewcol-list, .viewcol
 	font-size : 130%;
 	font-weight : bold;
 }
-.wysiwyg h3 .emoji {
-	width : 22px;
-	height : 22px;
-}
 
 .wysiwyg h4 {
+	margin : 30px 0 10px;
 	font-size : 120%;
 	font-weight : bold;
 }
