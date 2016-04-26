@@ -7,13 +7,12 @@ require('angular-scroll');
 require('marked');
 require('angular-marked');
 require('ng-file-upload');
-require('ng-tags-input');
 require('./setting.js');
 var SETTING = require('./setting.js')();
 
 //Define a Module
 // var mynote = angular.module('mynote', ['ui.bootstrap','ngRoute']);
-var mynote = angular.module('mynote', ['ui.bootstrap','hc.marked','ngRoute','duScroll','ngFileUpload','ngTagsInput']);
+var mynote = angular.module('mynote', ['ui.bootstrap','hc.marked','ngRoute','duScroll','ngFileUpload']);
 
 var dataAPI = require('./service/dataapi.js');
 var stateObject = require('./service/state.js');
@@ -103,7 +102,7 @@ angular.module('mynote').controller("addNoteModalController", function ($scope, 
 		$scope.form = {
 			title: '',
 			body: '',
-			tags: { text: 'just' },
+			tags: [],
 			status: 'Draft',
 			format: 'markdown',
 			preview: '',
