@@ -143,7 +143,7 @@
 								<h1 class="info-title">{{detailTitle}}</h1>
 
 								<ul class="info-btngroup">
-									<li ng-controller="addNoteModalController" ng-click="open(item)"><button>編集</button></li>
+									<li ng-controller="addNoteModalController" ng-click="open(item)" ng-show="updatable"><button>編集</button></li>
 
 									<li class="dropdown" dropdown>
 										<button class="dropdown-toggle" dropdown-toggle>目次 <span class="caret"></button>

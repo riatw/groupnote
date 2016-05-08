@@ -46,6 +46,7 @@ module.exports = angular.module('mynote').service('dataAPI', function(stateObjec
 					localStorage.setItem("sessionId", "");
 
 					stateObject.currentUser = null;
+					stateObject.currentNoteId = null;
 
 					callback(json);
 				});
@@ -108,6 +109,7 @@ module.exports = angular.module('mynote').service('dataAPI', function(stateObjec
 
 					$http.get(url)
 					.success(function(json, status){
+						console.log(json);
 						callback(json);
 					})
 					.error(function() {

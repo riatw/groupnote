@@ -201,7 +201,7 @@ angular.module('mynote').controller("addNoteModalController", function ($scope, 
 });
 
 //addNote
-angular.module('mynote').controller("addNoteStarController", function ($scope, dataAPI) {
+angular.module('mynote').controller("addNoteStarController", function ($scope, stateObject, dataAPI) {
 	$scope.checkStar = function() {
 		$scope.liked = 0;
 		$scope.totalResults = 0;
@@ -237,6 +237,9 @@ angular.module('mynote').controller("addNoteStarController", function ($scope, d
 	}
 
 	$scope.$on('BCRefreshNoteDetail', function() {
+		if ( stateObject.currentNoteId == null ) {
+			return;
+		}
 		$scope.checkStar();
 	});
 });
@@ -342,6 +345,7 @@ angular.module('mynote').controller("noteListController", function($scope, state
 });
 
 angular.module('mynote').controller("noteDetailController", function($scope,stateObject, $rootScope,marked,dataAPI) {
+
 	$scope.viewNoteDetail = function() {
 		var item = stateObject.currentNote;
 
@@ -349,6 +353,8 @@ angular.module('mynote').controller("noteDetailController", function($scope,stat
 			$scope.isNoteDetailLoaded = 0;
 
 			$scope.detailTitle = item.title;
+			$scope.updatable = item.updatable;
+
 			$scope.shareUrl = location.protocol + "//" + location.host + "/share/#note/" + item.id;
 
 			$scope.detailBody = marked(item.body, function (err, content) {
@@ -422,6 +428,12 @@ angular.module('mynote').controller("noteDetailController", function($scope,stat
 	}
 
 	$scope.$on('BCRefreshNoteDetail', function() {
+		if ( stateObject.currentNoteId == null ) {
+			console.log("nullのはず");
+			$scope.isNoteDetailLoaded = 0;
+			return;
+		}
+
 		$scope.currentNoteId = stateObject.currentNoteId;
 		$scope.detailBody = "";
 		$scope.isNoteDetailLoaded = 0;
