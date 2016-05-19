@@ -7,8 +7,6 @@ require('angular-scroll');
 require('marked');
 require('angular-marked');
 require('ng-file-upload');
-require('./setting.js');
-var SETTING = require('./setting.js')();
 
 //Define a Module
 // var mynote = angular.module('mynote', ['ui.bootstrap','ngRoute']);
