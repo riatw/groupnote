@@ -108,7 +108,6 @@ module.exports = angular.module('mynote').service('dataAPI', function(stateObjec
 
 					$http.get(url)
 					.success(function(json, status){
-						console.log(json);
 						callback(json);
 					})
 					.error(function() {

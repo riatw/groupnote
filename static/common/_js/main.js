@@ -427,7 +427,6 @@ angular.module('mynote').controller("noteDetailController", function($scope,stat
 
 	$scope.$on('BCRefreshNoteDetail', function() {
 		if ( stateObject.currentNoteId == null ) {
-			console.log("nullのはず");
 			$scope.isNoteDetailLoaded = 0;
 			return;
 		}
