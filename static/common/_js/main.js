@@ -22,6 +22,12 @@ angular.module('mynote').config(['markedProvider', function(markedProvider) {
 		tables: true,
 		smartLists: true
 	});
+
+	markedProvider.setRenderer({
+		link: function(href, title, text) {
+			return "<a href='" + href + "'" + (title ? " title='" + title + "'" : '') + " target='_blank'>" + text + "</a>";
+		}
+	});
 }]);
 
 //Router

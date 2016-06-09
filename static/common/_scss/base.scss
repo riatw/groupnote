@@ -519,7 +519,7 @@ body,
 	> :first-child {
 		margin-top: 0 !important;
 	}
-	> p:first-child + * {
+	> p:first-child:empty + * {
 		margin-top: 0 !important;
 	}
 

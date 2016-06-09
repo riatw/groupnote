@@ -1865,30 +1865,24 @@ img {
 	outline : 0;
 }
 .modal.fade .modal-dialog {
-	-webkit-transform : scale(0.95);
-	    -ms-transform : scale(0.95);
-	        transform : scale(0.95);
+	-ms-transform : scale(0.95);
+	    transform : scale(0.95);
 	opacity : 0;
 	-ms-filter : 'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';
-	-webkit-transform : translateY(100%);
-	    -ms-transform : translateY(100%);
-	        transform : translateY(100%);
-	-webkit-transform : translate3d(0, 100%, 0);
-	        transform : translate3d(0, 100%, 0);
+	-ms-transform : translateY(100%);
+	    transform : translateY(100%);
+	    transform : translate3d(0, 100%, 0);
 	transition : all 0.3s ease;
 }
 .modal.in .modal-dialog {
 	top : 0;
-	-webkit-transform : scale(1);
-	    -ms-transform : scale(1);
-	        transform : scale(1);
+	-ms-transform : scale(1);
+	    transform : scale(1);
 	opacity : 1;
 	-ms-filter : 'progid:DXImageTransform.Microsoft.Alpha(Opacity=100)';
-	-webkit-transform : translateY(0);
-	    -ms-transform : translateY(0);
-	        transform : translateY(0);
-	-webkit-transform : translate3d(0, 0, 0);
-	        transform : translate3d(0, 0, 0);
+	-ms-transform : translateY(0);
+	    transform : translateY(0);
+	    transform : translate3d(0, 0, 0);
 	transition : all 0.3s ease;
 }
 
@@ -2072,9 +2066,8 @@ img {
 
 .m-box-form .form-group {
 	margin-top : 15px;
-	-webkit-align-items : top;
 	-ms-flex-align : top;
-	        align-items : top;
+	align-items : top;
 }
 .m-box-form .form-group:first-child {
 	margin-top : 0;
@@ -2115,12 +2108,10 @@ img {
 }
 
 .m-box-editnote {
-	display : -webkit-flex;
 	display : -ms-flexbox;
-	display :         flex;
-	-webkit-justify-content : space-between;
+	display : flex;
 	-ms-flex-pack : justify;
-	        justify-content : space-between;
+	justify-content : space-between;
 }
 .m-box-editnote .editnote-left {
 	width : 49%;
@@ -2145,8 +2136,7 @@ img {
 	height : 30px;
 	width : 30px;
 	margin : -15px 0 0 -15px;
-	-webkit-animation : rotation 0.6s infinite linear;
-	        animation : rotation 0.6s infinite linear;
+	animation : rotation 0.6s infinite linear;
 	border-left : 1px solid rgba(120, 120, 120, 0.15);
 	border-right : 1px solid rgba(120, 120, 120, 0.15);
 	border-bottom : 1px solid rgba(120, 120, 120, 0.15);
@@ -2168,23 +2158,12 @@ img {
 	letter-spacing : normal;
 }
 
-@-webkit-keyframes rotation {
-	from {
-		-webkit-transform : rotate(0deg);
-	}
-	to {
-		-webkit-transform : rotate(359deg);
-	}
-}
-
 @keyframes rotation {
 	from {
-		-webkit-transform : rotate(0deg);
-		        transform : rotate(0deg);
+		transform : rotate(0deg);
 	}
 	to {
-		-webkit-transform : rotate(359deg);
-		        transform : rotate(359deg);
+		transform : rotate(359deg);
 	}
 }
 
@@ -2439,18 +2418,15 @@ html, body, #wrap, #l-content, #l-viewcol, .viewcol-tag, .viewcol-list, .viewcol
 	position : absolute;
 	left : 0;
 	top : 0;
-	display : -webkit-flex;
 	display : -ms-flexbox;
-	display :         flex;
+	display : flex;
 	width : 100%;
 	height : 50px;
 	background : #f08300;
-	-webkit-align-items : center;
 	-ms-flex-align : center;
-	        align-items : center;
-	-webkit-justify-content : flex-end;
+	align-items : center;
 	-ms-flex-pack : end;
-	        justify-content : flex-end;
+	justify-content : flex-end;
 }
 #l-header.header-compact {
 	display : block;
@@ -2487,18 +2463,15 @@ html, body, #wrap, #l-content, #l-viewcol, .viewcol-tag, .viewcol-list, .viewcol
 	border-radius : 3px;
 }
 #l-header .header-login {
-	display : -webkit-flex;
 	display : -ms-flexbox;
-	display :         flex;
-	-webkit-align-items : center;
+	display : flex;
 	-ms-flex-align : center;
-	        align-items : center;
+	align-items : center;
 	height : 100%;
 }
 #l-header .header-login ul {
-	display : -webkit-flex;
 	display : -ms-flexbox;
-	display :         flex;
+	display : flex;
 }
 #l-header .header-login ul li a {
 	display : block;
@@ -2519,12 +2492,10 @@ html, body, #wrap, #l-content, #l-viewcol, .viewcol-tag, .viewcol-list, .viewcol
 	padding-top : 50px;
 }
 #l-guide .guide-inner {
-	display : -webkit-flex;
 	display : -ms-flexbox;
-	display :         flex;
-	-webkit-justify-content : space-between;
+	display : flex;
 	-ms-flex-pack : justify;
-	        justify-content : space-between;
+	justify-content : space-between;
 	width : 960px;
 	margin : 0 auto;
 	padding-top : 40px;
@@ -2573,9 +2544,8 @@ html, body, #wrap, #l-content, #l-viewcol, .viewcol-tag, .viewcol-list, .viewcol
 }
 
 #l-viewcol {
-	display : -webkit-flex;
 	display : -ms-flexbox;
-	display :         flex;
+	display : flex;
 	height : 100%;
 	padding-top : 50px;
 }
@@ -2773,7 +2743,7 @@ html, body, #wrap, #l-content, #l-viewcol, .viewcol-tag, .viewcol-list, .viewcol
 	margin-top : 0 !important;
 }
 
-.wysiwyg > p:first-child + * {
+.wysiwyg > p:first-child:empty + * {
 	margin-top : 0 !important;
 }
 

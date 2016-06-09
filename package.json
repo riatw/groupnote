@@ -1,37 +1,39 @@
 {
   "private": true,
   "devDependencies": {
-    "browser-sync": "~2.11.1",
-    "browserify": "^13.0.0",
-    "compass-mixins": "^0.12.7",
-    "gulp": "^3.8.11",
+    "browser-sync": "~2.12.12",
+    "browserify": "^13.0.1",
+    "compass-mixins": "^0.12.10",
+    "gulp": "^3.9.1",
     "gulp-concat": "~2.6.0",
-    "gulp-csscomb": "^3.0.6",
-    "gulp-frontnote": "^1.0.1",
-    "gulp-imagemin": "~2.4.0",
-    "gulp-load-plugins": "^1.2.0",
+    "gulp-csscomb": "^3.0.7",
+    "gulp-frontnote": "^1.0.3",
+    "gulp-imagemin": "~3.0.1",
+    "gulp-load-plugins": "^1.2.4",
     "gulp-pleeease": "~2.0.2",
-    "gulp-plumber": "^1.0.1",
-    "gulp-sass": "~2.2.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-sass": "~2.3.1",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "~1.5.3",
-    "imagemin-pngquant": "~4.2.2",
+    "imagemin-pngquant": "~5.0.0",
     "ng-file-upload": "^12.0.4",
     "vinyl-source-stream": "^1.1.0",
     "vinyl-transform": "^1.0.0"
   },
   "dependencies": {
-    "angular": "^1.5.0",
-    "angular-animate": "^1.5.0",
+    "angular": "^1.5.6",
+    "angular-animate": "^1.5.6",
     "angular-bootstrap": "^0.12.2",
-    "angular-marked": "^1.0.1",
-    "angular-route": "^1.5.0",
+    "angular-marked": "^1.2.0",
+    "angular-route": "^1.5.6",
     "angular-scroll": "^1.0.0",
-    "angular-touch": "^1.5.0",
+    "angular-touch": "^1.5.6",
     "bootstrap": "^3.3.6",
-    "jquery": "^2.2.1",
+    "jquery": "^2.2.4",
     "modernizr": "^3.3.1",
-    "ng-tags-input": "^3.0.0",
-    "ui-bootstrap": "0.0.23"
+    "ui-bootstrap": "0.1.0"
+  },
+  "scripts": {
+    "gulp": "gulp"
   }
 }
