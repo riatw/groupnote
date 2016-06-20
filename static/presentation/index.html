@@ -49,11 +49,17 @@
 body {
 font-family: Verdana, 'メイリオ', Meiryo, 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', '游ゴシック', YuGothic, 'ＭＳ Ｐゴシック', Helvetica, Arial, sans-serif;
 }
+.remark-slide-scaler {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
 .remark-slide-content {
 background: #fafafa;
 color: #555;
 font-size: 24px;
 line-height: 2;
+border-top: 5px solid #f08300;
+box-sizing: border-box;
 }
 .remark-slide-content h1,
 .remark-slide-content h2,
@@ -67,8 +73,9 @@ line-height: 2;
 }
 .remark-slide-content h2 {
 	margin-bottom: 0.5em;
+	margin-left: -35px;
 	padding-left: 25px;
-	border-left: 10px solid #333;
+	border-left: 10px solid #f08300;
 	font-size: 35px;
 }
 .remark-slide-content h3 {
