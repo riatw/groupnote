@@ -2747,6 +2747,10 @@ html, body, #wrap, #l-content, #l-viewcol, .viewcol-tag, .viewcol-list, .viewcol
 	margin-top : 0 !important;
 }
 
+.wysiwyg hr {
+	display : none;
+}
+
 .wysiwyg h1 {
 	font-size : 180%;
 	font-weight : bold;

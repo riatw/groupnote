@@ -1,53 +1,85 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="ja" class="no-js"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>GROUP NOTE beta</title>
+	<meta name="viewport" content="width=1024">
 
-	<head>
-		<meta charset="utf-8">
+	<script type="text/javascript" src="../common/js/setting.js"></script>
+	<script src="../common/lib/data-api/v3/js/mt-data-api.js"></script>
+	<script src="https://gnab.github.io/remark/downloads/remark-latest.min.js"></script>
 
-		<title>reveal.js – The HTML Presentation Framework</title>
+	<script>
+	var entryId = location.search.replace("?note=","");
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+	//api setting
+	var api = new MT.DataAPI({
+		baseUrl:  SETTING.CMSURL.replace("/v3",""),
+		clientId: "gnote"
+	});
 
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	var siteId = SETTING.BLOGID;
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+	api.storeTokenData({
+		accessToken: localStorage.getItem("accessToken"),
+		expiresIn: 3600,
+		sessionId: localStorage.getItem("sessionId")
+	});
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+	api.getToken(function(response) {
+		api.getEntry(siteId, entryId, { no_text_filter: 1 }, function(response) {
+			if (response.error) {
+				// エラー処理
+				return;
+			}
+			var slideshow = remark.create({
+				source: response.body.replace(/^# /gm,"---\n#").replace(/^## /gm,"---\n##").slice(4),
+				highlightStyle: 'monokai',
+				highlightLanguage: 'remark',
+				highlightLines: true
+			});
+		});
+	});
+	</script>
+<style>
+body {
+font-family: Verdana, 'メイリオ', Meiryo, 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', '游ゴシック', YuGothic, 'ＭＳ Ｐゴシック', Helvetica, Arial, sans-serif;
+}
+.remark-slide-content {
+background: #fafafa;
+color: #555;
+font-size: 24px;
+line-height: 2;
+}
+.remark-slide-content h1,
+.remark-slide-content h2,
+.remark-slide-content h3 {
+	color: #333;
+	line-height: 1.5;
+}
+.remark-slide-content h1 {
+	margin-bottom: 0.5em;
+	font-size: 40px;
+}
+.remark-slide-content h2 {
+	margin-bottom: 0.5em;
+	padding-left: 25px;
+	border-left: 10px solid #333;
+	font-size: 35px;
+}
+.remark-slide-content h3 {
+	margin-bottom: 0.5em;
+	font-size: 25px;
+}
 
-		<!-- Code syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
-		<script type="text/javascript" src="../common/js/main.min.js"></script>
+</style>
+</head>
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
-
-	<body ng-app="mynote">
-		<div class="reveal">
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides" ng-controller="presentationNoteController">
-				<section data-markdown>
-					<script type="text/template">
-						{{detailBody}}
-					</script>
-				</section>
-			</div>
-		</div>
-	</body>
+<body class="index" ng-app="mynote" ng-controller="psNoteController">
+</body>
 </html>
