@@ -37,7 +37,9 @@
 				return;
 			}
 
-			var body = response.body.replace(/^# /gm,"---\n# ").replace(/^## /gm,"---\n## ").replace(/^---\n---\n/gm,"---\nclass: center, middle\n");
+			// var body = response.body.replace(/^# /gm,"---\n# ").replace(/^## /gm,"---\n## ").replace(/^---\n---\n/gm,"---\nclass: center, middle\n");
+
+			var body = response.body.replace(/^# /gm,"---\n# ");
 
 			// 冒頭h1で始まる場合は改ページを省略
 			if ( body.match(/^---\n/) ) {
@@ -46,6 +48,7 @@
 
 			var slideshow = remark.create({
 				source: body,
+				scroll: false,
 				highlightStyle: 'monokai',
 				highlightLanguage: 'remark',
 				highlightLines: true
@@ -79,16 +82,19 @@ box-sizing: border-box;
 	color: #333;
 	line-height: 1.5;
 }
+.remark-slide-content a {
+	color: #f08300;
+}
 .remark-slide-content h1 {
-	margin-bottom: 0.5em;
+	margin-bottom: 1.0em;
 	font-size: 40px;
+	line-height: 1;
 }
 .remark-slide-content h2 {
 	margin-bottom: 0.5em;
-	margin-left: -35px;
 	padding-left: 25px;
 	border-left: 10px solid #f08300;
-	font-size: 35px;
+	font-size: 30px;
 }
 .remark-slide-content h3 {
 	margin-bottom: 0.5em;
