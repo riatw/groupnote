@@ -48,10 +48,12 @@
 
 			var slideshow = remark.create({
 				source: body,
-				scroll: false,
 				highlightStyle: 'monokai',
 				highlightLanguage: 'remark',
-				highlightLines: true
+				highlightLines: true,
+				navigation: {
+					scroll: false
+				}
 			});
 		});
 	});
