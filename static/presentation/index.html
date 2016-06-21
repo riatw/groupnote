@@ -36,8 +36,16 @@
 				// エラー処理
 				return;
 			}
+
+			var body = response.body.replace(/^# /gm,"---\n# ").replace(/^## /gm,"---\n## ").replace(/^---\n---\n/gm,"---\nclass: center, middle\n");
+
+			// 冒頭h1で始まる場合は改ページを省略
+			if ( body.match(/^---\n/) ) {
+				body = body.slice(4);
+			}
+
 			var slideshow = remark.create({
-				source: response.body.replace(/^# /gm,"---\n#").replace(/^## /gm,"---\n##").slice(4),
+				source: body,
 				highlightStyle: 'monokai',
 				highlightLanguage: 'remark',
 				highlightLines: true
@@ -52,6 +60,7 @@ font-family: Verdana, 'メイリオ', Meiryo, 'Hiragino Kaku Gothic ProN', 'ヒ�
 .remark-slide-scaler {
 	-webkit-box-shadow: none;
 	box-shadow: none;
+	overflow: auto;
 }
 .remark-slide-content {
 background: #fafafa;
@@ -60,6 +69,9 @@ font-size: 24px;
 line-height: 2;
 border-top: 5px solid #f08300;
 box-sizing: border-box;
+}
+.remark-slide {
+	position: relative;
 }
 .remark-slide-content h1,
 .remark-slide-content h2,
