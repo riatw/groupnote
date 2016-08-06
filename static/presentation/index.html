@@ -46,6 +46,10 @@
 				body = body.slice(4);
 			}
 
+			body = "class: center, middle\n# " + response.title + "\n---\n" + body;
+
+			console.log(body);
+
 			var slideshow = remark.create({
 				source: body,
 				highlightStyle: 'monokai',
@@ -82,7 +86,7 @@ box-sizing: border-box;
 .remark-slide-content h2,
 .remark-slide-content h3 {
 	color: #333;
-	line-height: 1.5;
+	line-height: 1.5 !important;
 }
 .remark-slide-content a {
 	color: #f08300;
@@ -102,11 +106,14 @@ box-sizing: border-box;
 	margin-bottom: 0.5em;
 	font-size: 25px;
 }
-
+.remark-slide-content.center.middle h1 {
+	font-size: 55px !important;
+	line-height: 2 !important;
+}
 
 </style>
 </head>
 
-<body class="index" ng-app="mynote" ng-controller="psNoteController">
+<body class="index">
 </body>
 </html>
