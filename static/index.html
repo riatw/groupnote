@@ -106,8 +106,22 @@
 								<div class="mod-box-scroll">
 									<div class="mod-icon-spinner" ng-show="loadTagSp"></div>
 									<ul class="mod-list-line">
-										<li ng-class="{'active':tlCtl.currentTagId==='all'}"><a href="#/tag/all">すべてのノート</a></li>
-										<li ng-repeat="tag in tlCtl.taglist" ng-class="{'active':tlCtl.currentTagId===tag.id}"><a href="#/tag/{{tag.id}}">#{{tag.name}}</a></li>
+										<!-- <li ng-class="{'active':tlCtl.currentTagId==='all'}"><a href="#/tag/all">すべてのノート</a></li>
+										<li ng-repeat="tag in tlCtl.taglist" ng-class="{'active':tlCtl.currentTagId===tag.id}"><a href="#/tag/{{tag.id}}">#{{tag.name}}</a></li> -->
+
+										<li ng-repeat="tag in tlCtl.taglist">
+											<a href="#/tag/{{tag.id}}">{{tag.name}}</a>
+											<ul>
+												<li ng-repeat="tag in tag.child">
+													<a href="#/tag/{{tag.id}}">{{tag.name}}</a>
+													<ul>
+														<li ng-repeat="tag in tag.child">
+															<a href="#/tag/{{tag.id}}">{{tag.name}}</a>
+														</li>
+													</ul>
+												</li>
+											</ul>
+										</li>
 									</ul>
 								</div>
 							</div>

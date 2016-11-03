@@ -29,7 +29,7 @@ angular.module('mynote').config(['markedProvider', function(markedProvider) {
 //Router
 angular.module('mynote').config(function($routeProvider) {
 	$routeProvider
-	.when("/tag/:tagid", {
+	.when("/tag/:tagid*", {
 		controller: 'tagListController'
 	})
 	.when("/note/:noteid", {
@@ -249,7 +249,6 @@ angular.module('mynote').controller("searchNoteController", function ($scope, st
 
 	$scope.search = function() {
 		stateObject.currentSearchKeyword = $scope.q;
-		console.log($scope.q);
 		$rootScope.$broadcast('BCChangeSearchKeyword');
 	}
 });
@@ -265,7 +264,76 @@ angular.module('mynote').controller("tagListController", function ($scope, state
 		this.loadTagSp = 1;
 
 		dataAPI.load("tags", "", "" , function(json) {
-			that.taglist = json.items;
+			var tags = [];
+
+			/* memo
+				string: hoge/fuga/piyo
+				arr:
+					[0]
+						- name: hoge
+						- child: [0]
+								- name: fuga
+								- child[0]
+									- name: piyo
+			*/
+
+			var arr = [];
+
+			for ( var i = 0; i < json.items.length; i++ ) {
+				var items_var = json.items[i];
+				var items_arr = items_var.name.split("/");
+				var id = [];
+
+				for ( var j = 0; j < items_arr.length; j++ ) {
+					var current_var = items_arr[j];
+
+					id.push(current_var);
+
+					function inArrayHash(arr, val) {
+						var found = -1;
+
+						for ( var i = 0; i < arr.length; i++ ){
+							if ( arr[i].name == val ) {
+								found = i;
+							}
+						}
+
+						return found;
+					}
+
+					if ( j == 0 ) {
+						//ルートが新しくなった
+						//tmpに1個目を入れる
+						var found = inArrayHash(arr, current_var);
+
+						if ( found == -1 ) {
+							arr.push( { id: id.join("/"), name: current_var, child: [] });
+						}
+					}
+					else if ( j == 1 ) {
+						//childに入れる
+						var found = inArrayHash(arr[arr.length-1].child, current_var);
+
+						if ( found == -1 ) {
+							arr[arr.length-1].child.push( { id: id.join("/"), name: current_var, child: [] } );
+						}
+					}
+					else if ( j == 2 ) {
+						//childに入れる
+						var child = arr[arr.length-1].child.length -1;
+						var found = inArrayHash(arr[arr.length-1].child[child].child, current_var);
+
+						if ( found == -1 ) {
+							arr[arr.length-1].child[ child ].child.push( { id: id.join("/"), name: current_var } );
+						}
+					}
+				}
+			}
+
+			console.log();
+
+			that.taglist = arr;
+
 			that.loadTagSp = 0;
 		})
 	}
@@ -302,12 +370,23 @@ angular.module('mynote').controller("noteListController", function($scope, state
 		//スピナーを表示
 		$scope.spinnerView = 1;
 
-		if ( stateObject.currentTagId != "all" ) {
-			filter = "tags/" + stateObject.currentTagId + "/"
+		// if ( stateObject.currentTagId != "all" ) {
+		// 	filter = "tags/" + stateObject.currentTagId + "/"
+		// }
+		if ( stateObject.currentTagId == "all" ) {
+			stateObject.currentTagId = "";
 		}
 
-		dataAPI.load("entries", filter, "&sortBy=modified_on", function(json) {
-			$scope.feeds = json.items;
+		dataAPI.load("entries", "", "&sortBy=modified_on", function(json) {
+			$scope.feeds = $.grep(json.items, function(value,index) {
+				console.log(stateObject.currentTagId);
+
+				for ( var i = 0; i < value.tags.length; i++ ) {
+					if ( value.tags[i].lastIndexOf(stateObject.currentTagId, 0) === 0 ) {
+						return true;
+					}
+				}
+			});
 
 			//スピナーを非表示
 			$scope.spinnerView = 0;
@@ -323,7 +402,6 @@ angular.module('mynote').controller("noteListController", function($scope, state
 		$scope.currentNoteId = stateObject.currentNoteId;
 		$scope.currentTagId = stateObject.currentTagId;
 		$scope.viewNotes();
-		console.log("ref list");
 	});
 
 	$scope.$on('BCChangeSearchKeyword', function() {
@@ -429,7 +507,6 @@ angular.module('mynote').controller("noteDetailController", function($scope,stat
 
 	$scope.$on('BCRefreshNoteDetail', function() {
 		if ( stateObject.currentNoteId == null ) {
-			console.log("nullのはず");
 			$scope.isNoteDetailLoaded = 0;
 			return;
 		}

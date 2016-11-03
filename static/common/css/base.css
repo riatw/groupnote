@@ -2243,11 +2243,13 @@ img {
 	transition-property : all;
 	transition-duration : 0.2s;
 }
-.mod-list-line > li {
+.mod-list-line li {
 	background : #fff;
-	border-bottom : 1px solid #d5d5d5;
 }
-.mod-list-line > li .line-tag {
+.mod-list-line li li {
+	padding-left : 15px;
+}
+.mod-list-line li .line-tag {
 	display : block;
 	width : 4.5em;
 	margin-bottom : 3px;
@@ -2257,43 +2259,44 @@ img {
 	font-size : 71%;
 	text-align : center;
 }
-.mod-list-line > li:first-child {
+.mod-list-line li > li:first-child {
 	border-top : 0;
 }
-.mod-list-line > li.active {
+.mod-list-line li.active {
 	position : relative;
 	background : #eee;
 }
-.mod-list-line > li a {
+.mod-list-line li a {
 	display : block;
 	padding : 10px 15px;
+	border-bottom : 1px solid #d5d5d5;
 	color : #333;
 	cursor : pointer;
 	transition-property : background;
 	transition-duration : 0.2s;
 }
-.mod-list-line > li a:hover {
+.mod-list-line li a:hover {
 	background : #eee;
 	text-decoration : none;
 	transition-property : background;
 	transition-duration : 0.2s;
 }
-.mod-list-line > li a .list-group-item-heading {
+.mod-list-line li a .list-group-item-heading {
 	font-size : 114%;
 	line-height : 1.35;
 }
-.mod-list-line > li a .list-group-item-text {
+.mod-list-line li a .list-group-item-text {
 	font-size : 85%;
 	color : #999;
 }
-.mod-list-line > li a .list-group-item-text .text-author {
+.mod-list-line li a .list-group-item-text .text-author {
 	margin-right : 0.5em;
 	font-weight : bold;
 }
-.mod-list-line > li a .list-group-item-text .text-date {
+.mod-list-line li a .list-group-item-text .text-date {
 	margin : 0 0.5em;
 }
-.mod-list-line > li a .list-group-item-edit {
+.mod-list-line li a .list-group-item-edit {
 	font-size : 85%;
 	color : #666;
 	margin : 0;

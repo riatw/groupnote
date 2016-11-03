@@ -85,7 +85,6 @@ module.exports = angular.module('mynote').service('dataAPI', function(stateObjec
 							callback(json);
 						})
 						.error(function(status) {
-							console.log(status);
 							alert("接続が切断されました、リロードしてください");
 						});
 					});
@@ -109,7 +108,6 @@ module.exports = angular.module('mynote').service('dataAPI', function(stateObjec
 
 					$http.get(url)
 					.success(function(json, status){
-						console.log(json);
 						callback(json);
 					})
 					.error(function() {
@@ -210,7 +208,6 @@ module.exports = angular.module('mynote').service('dataAPI', function(stateObjec
 						method: "POST"
 					})
 					.success(function (json, status) {
-						console.log(json);
 						callback(json);
 					})
 					.error(function() {
