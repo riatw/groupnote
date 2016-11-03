@@ -7,8 +7,6 @@ require('angular-scroll');
 require('marked');
 require('angular-marked');
 require('ng-file-upload');
-require('./setting.js');
-var SETTING = require('./setting.js')();
 
 //Define a Module
 // var mynote = angular.module('mynote', ['ui.bootstrap','ngRoute']);
@@ -24,6 +22,12 @@ angular.module('mynote').config(['markedProvider', function(markedProvider) {
 		tables: true,
 		smartLists: true
 	});
+
+	markedProvider.setRenderer({
+		link: function(href, title, text) {
+			return "<a href='" + href + "'" + (title ? " title='" + title + "'" : '') + " target='_blank'>" + text + "</a>";
+		}
+	});
 }]);
 
 //Router
@@ -37,6 +41,9 @@ angular.module('mynote').config(function($routeProvider) {
 	})
 	.when("/note/:noteid", {
 		controller: 'shareNoteController'
+	})
+	.when("/note/:noteid", {
+		controller: 'psNoteController'
 	})
 	.when("/note/:noteid", {
 		controller: 'presentationNoteController'
@@ -435,6 +442,8 @@ angular.module('mynote').controller("noteDetailController", function($scope,stat
 
 			$scope.shareUrl = location.protocol + "//" + location.host + "/share/#note/" + item.id;
 
+			$scope.psUrl = location.protocol + "//" + location.host + "/presentation/?note=" + item.id;
+
 			$scope.detailBody = marked(item.body, function (err, content) {
 				//array
 					// - id
@@ -543,36 +552,21 @@ angular.module('mynote').controller("shareNoteController", function($scope,state
 	});
 });
 
-angular.module('mynote').controller("presentationNoteController", function($scope,stateObject, $rootScope,marked,dataAPI, $routeParams, $location) {
+angular.module('mynote').controller("psNoteController", function($scope,stateObject, $rootScope,marked,dataAPI, $routeParams, $location) {
 
 	//URLに応じてノートを選択状態にする
 	$rootScope.$on("$routeChangeSuccess", function(event, current) {
 		if ( $routeParams.noteid ) {
 			stateObject.currentNoteId = $routeParams.noteid;
 
-			dataAPI.get(false, false, function(json) {
+			dataAPI.get(false, true, function(json) {
 				$scope.title = json.title;
 				$scope.detailBody = json.body;
 
-				// Full list of configuration options available at:
-				// https://github.com/hakimel/reveal.js#configuration
-				Reveal.initialize({
-					controls: true,
-					progress: true,
-					history: true,
-					center: true,
+				var slideshow = remark.create();
 
-					transition: 'slide', // none/fade/slide/convex/concave/zoom
-
-					// Optional reveal.js plugins
-					dependencies: [
-						{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-						{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-						{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-						{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-						{ src: 'plugin/zoom-js/zoom.js', async: true },
-						{ src: 'plugin/notes/notes.js', async: true }
-					]
+				var slideshow = remark.create({
+					source: json.body
 				});
 			});
 		}
