@@ -543,6 +543,7 @@ angular.module('mynote').controller("shareNoteController", function($scope,state
 			stateObject.currentNoteId = $routeParams.noteid;
 
 			dataAPI.get(false, false, function(json) {
+				document.title = json.title;
 				$scope.title = json.title;
 				$scope.detailBody = marked(json.body, function (err, content) {
 					return content;
