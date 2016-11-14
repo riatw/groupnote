@@ -142,8 +142,8 @@
 							<li ng-repeat="item in feeds | filter: currentSearchKeyword" ng-class="{'is-show':!spinnerView, 'active':currentNoteId==item.id}">
 								<a ng-href="#/note/{{item.id}}">
 									<p class="list-group-item-tags">{{item.tags.join('')}}</p>
-									<h4 class="list-group-item-heading">{{item.title}}</h4>
-									<p class="list-group-item-text">{{item.status}} / Updated by <span class="text-author">{{item.author.displayName}} / </span><span class="text-date">{{item.modifiedDate | date:'yyyy-MM-dd H:M'}}</span></p>
+									<h4 class="list-group-item-heading"><span class="line-tag">{{item.status}}</span>{{item.title}}</h4>
+									<p class="list-group-item-text">Updated by <span class="text-author">{{item.author.displayName}}</span><span class="text-date">{{item.modifiedDate | date:'yyyy-MM-dd H:M'}}</span></p>
 								</a>
 							</li>
 						</ul>
