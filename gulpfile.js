@@ -33,26 +33,11 @@ gulp.task('js', function(){
 		entries: ['static/common/_js/main.js']
 	})
 	.bundle()
+	.on('error', function(err) {
+		return $.notify().write(err);
+	})
 	.pipe(source('main.min.js'))
 	.pipe(gulp.dest('static/common/js/'));
-});
-
-// ‰æ‘œÅ“K‰»
-var pngquant 	= require('imagemin-pngquant');
-
-gulp.task('imagemin', function() {
-	gulp.src(['static/common/_images/**/*.{png,jpg,gif,svg}'])
-		.pipe(imagemin({
-			optimizationLevel: 5,
-			progressive: true,
-			interlaced: true,
-			use: [pngquant({
-				quality: 60-80,
-				speed: 1
-			})]
-		}))
-		.pipe(notify("[images] Optimized:)"))
-		.pipe(gulp.dest('./static/common/images'));
 });
 
 // Static server
@@ -80,6 +65,5 @@ gulp.task('bs-reload', function () {
 gulp.task('default',['browser-sync'], function() {
 	gulp.watch('static/common/_scss/**/*.scss',['sass']);
 	gulp.watch('static/common/_js/**/*.js',['js']);
-	gulp.watch('static/common/_images/**/*.{png,jpg,gif,svg}',['imagemin']);
 	gulp.watch("static/*.html", ['bs-reload']);
 });

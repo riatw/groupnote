@@ -1,0 +1,35 @@
+<app>
+<!-- [ WRAP ] -->
+<div id="wrap" ng-controller="loginController" ng-init="init()">
+	<div id="l-header">
+		<h1 class="header-logo">
+			<a href="#">Group Note</a>
+		</h1>
+
+		<div class="header-search">
+			<form ng-controller="searchNoteController" ng-show="currentUser">
+				<div class="form-group">
+					<input type="text" placeholder="フィルタ" class="form-control" ng-model="q" ng-keyup="search()">
+				</div>
+			</form>
+		</div>
+
+		<div class="header-login">
+			<ul ng-show="currentUser">
+				<li>
+					<select name="" id=""></select>
+				</li>
+				<li ng-controller="addNoteModalController"><a ng-click="open()">ノートを書く</a></li>
+				<li><a ng-click="logOut()">ログアウト</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div id="l-content">
+		<login></login>
+		<iflogin></iflogin>
+	</div>
+</div>
+<!-- [ WRAP ] -->
+
+</app>
