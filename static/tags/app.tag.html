@@ -7,7 +7,7 @@
 		</h1>
 
 		<div class="header-search">
-			<form ng-controller="searchNoteController" ng-show="currentUser">
+			<form ng-controller="searchNoteController" if="{status==='login'}">
 				<div class="form-group">
 					<input type="text" placeholder="フィルタ" class="form-control" ng-model="q" ng-keyup="search()">
 				</div>
@@ -15,7 +15,7 @@
 		</div>
 
 		<div class="header-login">
-			<ul ng-show="currentUser">
+			<ul if="{status==='login'}">
 				<li>
 					<select name="" id=""></select>
 				</li>
@@ -31,5 +31,21 @@
 	</div>
 </div>
 <!-- [ WRAP ] -->
+
+<script>
+this.status = "nologin";
+
+var that = this;
+
+api.getToken(function(response) {
+	if (response.error) {
+		// エラー処理
+		return;
+	}
+
+	that.status = "login";
+	that.update();
+});
+</script>
 
 </app>

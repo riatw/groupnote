@@ -1,5 +1,5 @@
 <login>
-<div id="l-guide">
+<div id="l-guide" if="{status==='nologin'}">
 	<div class="guide-inner">
 		<div class="guide-left">
 			<div class="wysiwyg">
@@ -32,21 +32,21 @@
 
 		<div class="guide-right">
 			<div class="guide-login">
-				<form>
+				<form onsubmit="{login}">
 					<ul>
 						<li>
-							<input type="text" placeholder="ユーザーID" class="form-control" ng-model="username">
+							<input type="text" name="username" placeholder="ユーザーID" class="form-control">
 						</li>
 						<li>
-							<input type="password" placeholder="パスワード" class="form-control" ng-model="password">
+							<input type="password" name="password" placeholder="パスワード" class="form-control">
 						</li>
-						<li ng-show="login_error">
+						<li>
 							<p class="login-error">
 								ユーザID、またはパスワードが間違っています
 							</p>
 						</li>
 						<li>
-							<button type="submit" class="btn btn-success" ng-click="logIn()">Login</button>
+							<button type="submit" class="btn btn-success">Login</button>
 						</li>
 					</ul>
 				</form>
@@ -70,6 +70,43 @@ api.getToken(function(response) {
 	that.status = "login";
 	that.update();
 });
+
+login(e) {
+	var that = this;
+
+	api.authenticate({
+		username: $("[name='username']").val(),
+		password: $("[name='password']").val(),
+		remember: true
+	}, function(response) {
+		if (response.error) {
+			// エラー処理
+			return;
+		}
+
+		that.status = "login";
+		that.update();
+	});
+
+	return false;
+};
+
+logout(e) {
+	var that = this;
+
+	api.revokeAuthentication(function(response) {
+		if (response.error) {
+			// エラー処理
+			return;
+		}
+
+		that.status = "nologin";
+		that.username = "";
+		that.update();
+	});
+
+	return false;
+};
 </script>
 
 </login>

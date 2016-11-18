@@ -1,0 +1,108 @@
+<taglist>
+<div class="content-tag">
+	<div class="tag-inner">
+		<div class="tag-info">
+			<p class="info-title">タグ</p>
+		</div>
+
+		<div class="tag-body">
+			<div class="mod-box-scroll">
+				<div class="mod-icon-spinner" ng-show="loadTagSp"></div>
+				<ul class="mod-list-line">
+					<li><a href="#/tag/all">すべてのノート</a></li>
+					<li each={ taglist }>
+						<a href="#/tag/{id}">
+							{name}
+						</a>
+						<ul>
+							<li each={ child }>
+								<a href="#/tag/{id}">
+									{name}
+								</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	var that = this;
+
+	api.listTagsForSite(SETTING.BLOGID, function(response) {
+		var tags = [];
+
+		/* memo
+			string: hoge/fuga/piyo
+			arr:
+				[0]
+					- name: hoge
+					- child: [0]
+							- name: fuga
+							- child[0]
+								- name: piyo
+		*/
+
+		var arr = [];
+
+		for ( var i = 0; i < response.items.length; i++ ) {
+			var items_var = response.items[i];
+			var items_arr = items_var.name.split("/");
+			var id = [];
+
+			for ( var j = 0; j < items_arr.length; j++ ) {
+				var current_var = items_arr[j];
+
+				id.push(current_var);
+
+				function inArrayHash(arr, val) {
+					var found = -1;
+
+					for ( var i = 0; i < arr.length; i++ ){
+						if ( arr[i].name == val ) {
+							found = i;
+						}
+					}
+
+					return found;
+				}
+
+				if ( j == 0 ) {
+					//ルートが新しくなった
+					//tmpに1個目を入れる
+					var found = inArrayHash(arr, current_var);
+
+					if ( found == -1 ) {
+						arr.push( { id: id.join("/"), name: current_var, child: [] });
+					}
+				}
+				else if ( j == 1 ) {
+					//childに入れる
+					var found = inArrayHash(arr[arr.length-1].child, current_var);
+
+					if ( found == -1 ) {
+						arr[arr.length-1].child.push( { id: id.join("/"), name: current_var, child: [] } );
+					}
+				}
+				else if ( j == 2 ) {
+					//childに入れる
+					var child = arr[arr.length-1].child.length -1;
+					var found = inArrayHash(arr[arr.length-1].child[child].child, current_var);
+
+					if ( found == -1 ) {
+						arr[arr.length-1].child[ child ].child.push( { id: id.join("/"), name: current_var } );
+					}
+				}
+			}
+		}
+
+		that.taglist = arr;
+
+		that.loadTagSp = 0;
+
+		that.update();
+	});
+</script>
+</taglist>

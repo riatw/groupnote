@@ -1,134 +1,31 @@
 <iflogin>
 	<div id="l-viewcol" if="{status==='login'}">
-		<div class="viewcol-tag" ng-controller="tagListController as tlCtl">
-			<div class="content-tag">
-				<div class="tag-inner">
-					<div class="tag-info">
-						<p class="info-title">タグ</p>
-					</div>
-
-					<div class="tag-body">
-						<div class="mod-box-scroll">
-							<div class="mod-icon-spinner" ng-show="loadTagSp"></div>
-							<ul class="mod-list-line">
-								<li ng-class="{'active':tlCtl.currentTagId==='all'}"><a href="#/tag/all">すべてのノート</a></li>
-								<!-- <li ng-repeat="tag in tlCtl.taglist" ng-class="{'active':tlCtl.currentTagId===tag.id}"><a href="#/tag/[[tag.id]]">#[[tag.name]]</a></li> -->
-
-								<li ng-repeat="tag in tlCtl.taglist">
-									<a href="#/tag/[[tag.id]]">[[tag.name]]</a>
-									<ul>
-										<li ng-repeat="tag in tag.child">
-											<a href="#/tag/[[tag.id]]">[[tag.name]]</a>
-											<ul>
-												<li ng-repeat="tag in tag.child">
-													<a href="#/tag/[[tag.id]]">[[tag.name]]</a>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
+		<div class="viewcol-tag">
+			<taglist></taglist>
 		</div>
 
-		<div class="viewcol-list" ng-controller="noteListController">
-			<div class="mod-box-scroll">
-				<div class="mod-icon-spinner note-spinner" ng-show="spinnerView"></div>
-
-				<div class="mod-icon-empty note" ng-show="noteIsEmpty">
-					<p class="empty-txt">該当するノートがありません</p>
-				</div>
-
-				<ul class="mod-list-line mab0 note">
-					<li ng-repeat="item in feeds | filter: currentSearchKeyword" ng-class="{'is-show':!spinnerView, 'active':currentNoteId==item.id}">
-						<a ng-href="#/note/[[item.id]]">
-							<p class="list-group-item-tags">[[item.tags.join('')]]</p>
-							<h4 class="list-group-item-heading"><span class="line-tag">[[item.status]]</span>[[item.title]]</h4>
-							<p class="list-group-item-text">Updated by <span class="text-author">[[item.author.displayName]]</span><span class="text-date">[[item.modifiedDate | date:'yyyy-MM-dd H:M']]</span></p>
-						</a>
-					</li>
-				</ul>
-			</div>
+		<div class="viewcol-list">
+			<notelist></notelist>
 		</div>
 
-		<div class="viewcol-detail" ng-controller="noteDetailController">
-			<div class="content-note">
-				<div class="mod-icon-spinner note-spinner ng-hide" ng-hide="isNoteDetailLoaded"></div>
-
-				<div class="note-inner" ng-show="isNoteDetailLoaded">
-					<div class="note-info">
-						<h1 class="info-title">[[detailTitle]]</h1>
-
-						<ul class="info-btngroup">
-							<li ng-controller="addNoteModalController" ng-click="open(item)" ng-show="updatable"><button>編集</button></li>
-
-							<li class="dropdown" dropdown>
-								<button class="dropdown-toggle" dropdown-toggle>目次 <span class="caret"></button>
-
-								<ul class="dropdown-menu" du-scroll-container="scroll-container">
-									<li ng-repeat="line in outline">
-										<a href="#[[line.id]]" du-smooth-scroll du-scrollspy="line.id">[[line.text]]</a>
-
-										<ul>
-											<li ng-repeat="line2 in line.child">
-												<a href="#[[line2.id]]" du-smooth-scroll du-scrollspy="line.id">[[line2.text]]</a>
-											</li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-
-							<li class="shareurl" dropdown>
-								<button class="dropdown-toggle" dropdown-toggle>共有</button>
-
-								<ul class="dropdown-menu" du-scroll-container="scroll-container">
-									<li>
-										<a href="[[shareUrl]]" target="_blank">[[shareUrl]]</a>
-									</li>
-								</ul>
-							</li>
-
-							<li class="shareurl" dropdown>
-								<button class="dropdown-toggle" dropdown-toggle>プレゼンモード</button>
-
-								<ul class="dropdown-menu" du-scroll-container="scroll-container">
-									<li>
-										<a href="[[psUrl]]" target="_blank">[[psUrl]]</a>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-					<div class="note-body">
-						<div class="mod-box-scroll scroll-no-border" id="scroll-container">
-							<div class="mod-box-wysiwyg" ng-show="isNoteDetailLoaded">
-								<div class="wysiwyg-base">
-									<div class="base-body wysiwyg" marked="detailBody"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+		<div class="viewcol-detail">
+			<notedetail></notedetail>
 		</div>
 	</div>
 
-<script>
-this.status = "nologin";
+	<script>
+		this.status = "nologin";
 
-var that = this;
+		var that = this;
 
-api.getToken(function(response) {
-	if (response.error) {
-		// エラー処理
-		return;
-	}
+		api.getToken(function(response) {
+			if (response.error) {
+				// エラー処理
+				return;
+			}
 
-	that.status = "login";
-	that.update();
-});
-</script>
+			that.status = "login";
+			that.update();
+		});
+	</script>
 </iflogin>

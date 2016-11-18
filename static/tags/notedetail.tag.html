@@ -1,0 +1,189 @@
+<notedetail>
+<div class="content-note">
+	<div class="mod-icon-spinner note-spinner ng-hide" ng-hide="isNoteDetailLoaded"></div>
+
+	<div class="note-inner" ng-show="isNoteDetailLoaded">
+		<div class="note-info">
+			<h1 class="info-title">{detailTitle}</h1>
+
+			<ul class="info-btngroup">
+				<li ng-controller="addNoteModalController" ng-click="open(item)" ng-show="updatable"><button>編集</button></li>
+
+				<li class="dropdown" dropdown>
+					<button class="dropdown-toggle" id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">目次 <span class="caret"></button>
+
+					<ul class="dropdown-menu" aria-labelledby="dLabel" du-scroll-container="scroll-container">
+						<li each={ outline }>
+							<a href="#{id}" du-smooth-scroll du-scrollspy="id">{text}</a>
+
+							<ul>
+								<li each={ child }>
+									<a href="#{id}" du-smooth-scroll du-scrollspy="id">{text}</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+
+				<li class="shareurl" dropdown>
+					<button class="dropdown-toggle" id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">共有</button>
+
+					<ul class="dropdown-menu" aria-labelledby="dLabel">
+						<li>
+							<a href="{shareUrl}" target="_blank">{shareUrl}</a>
+						</li>
+					</ul>
+				</li>
+
+				<li class="shareurl" dropdown>
+					<button class="dropdown-toggle" id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">プレゼンモード</button>
+
+					<ul class="dropdown-menu" aria-labelledby="dLabel">
+						<li>
+							<a href="{psUrl}" target="_blank">{psUrl}</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="note-body">
+			<div class="mod-box-scroll scroll-no-border" id="scroll-container">
+				<div class="mod-box-wysiwyg" ng-show="isNoteDetailLoaded">
+					<div class="wysiwyg-base">
+						<div id="marked" class="base-body wysiwyg"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+var that = this;
+
+function getNoteDetail() {
+	if ( stateObject.currentNoteId == null ) {
+		that.isNoteDetailLoaded = 0;
+		return;
+	}
+
+	that.currentNoteId = stateObject.currentNoteId;
+	that.detailBody = "";
+	that.isNoteDetailLoaded = 0;
+
+	var _param = {
+		no_text_filter: 1
+	};
+
+	api.getEntry(SETTING.BLOGID, stateObject.currentNoteId, _param, function(response) {
+		stateObject.currentNote = response;
+
+		viewNoteDetail();
+
+		that.update();
+	});
+}
+function viewNoteDetail() {
+	var item = stateObject.currentNote;
+
+	if ( item ) {
+		that.isNoteDetailLoaded = 0;
+
+		that.detailTitle = item.title;
+		that.updatable = item.updatable;
+
+		that.shareUrl = location.protocol + "//" + location.host + "/share/#note/" + item.id;
+
+		that.psUrl = location.protocol + "//" + location.host + "/presentation/?note=" + item.id;
+
+		// markedProvider.setOptions({
+		// 	gfm: true,
+		// 	tables: true,
+		// 	smartLists: true
+		// });
+
+		// markedProvider.setRenderer({
+		// 	link: function(href, title, text) {
+		// 		return "<a href='" + href + "'" + (title ? " title='" + title + "'" : '') + " target='_blank'>" + text + "</a>";
+		// 	}
+		// });
+
+		that.detailBody = marked(item.body, function (err, content) {
+			//array
+				// - id
+				// - text
+				// - child - id / - text
+
+			var start = 0;
+			var end = 0;
+			var array = [];
+
+			var contentHTML = $("<div />").append(content);
+			var $child = $(contentHTML).children();
+
+			contentHTML.find("h1").each(function(i){
+				var $this = $(this);
+				var temp = {};
+				var parentId;
+
+				// 次のh1を探す
+				end = $this.nextAll("h1").eq("0").index();
+
+				// 最後のh1だったら
+				if ( end == -1 ) {
+					end = $child.length;
+				}
+
+				parentId = "h1-" + (i+1);
+
+				temp = {
+					id: parentId,
+					text: $this.text(),
+					child: []
+				}
+
+				$this.attr("id","h1-" + (i+1));
+
+				$child.slice(start,end).filter("h2").each(function(j){
+					var childId = "h2-" + i + "-" + j;
+					var $that = $(this);
+
+					temp.child.push({
+						id:  childId,
+						text: $that.text()
+					});
+
+					$that.attr("id",childId);
+				});
+
+				start = end;
+
+				array.push(temp);
+
+				that.update();
+			});
+
+			that.outline = array;
+
+			that.isNoteDetailLoaded = 1;
+
+			that.marked.innerHTML = contentHTML.html();
+			return contentHTML.html();
+		});
+
+		that.currentNote = item.id;
+		$("#scroll-container").scrollTop(0);
+
+		that.item = item;
+
+		that.update();
+	}
+}
+
+obs.on("RefreshNoteDetail", function(noteid) {
+	stateObject.currentNoteId = noteid;
+	getNoteDetail();
+});
+
+</script>
+</notedetail>

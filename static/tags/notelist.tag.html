@@ -1,0 +1,92 @@
+<notelist>
+<div class="mod-box-scroll">
+	<div class="mod-icon-spinner note-spinner" ng-show="spinnerView"></div>
+
+	<!-- <div class="mod-icon-empty note" ng-show="noteIsEmpty">
+		<p class="empty-txt">該当するノートがありません</p>
+	</div> -->
+
+	<ul class="mod-list-line mab0 note">
+		<li each={ feeds } ng-class="['is-show':!spinnerView, 'active':currentNoteId==item.id]">
+			<a href="#/note/{id}">
+				<p class="list-group-item-tags">{tags.join('')}</p>
+				<h4 class="list-group-item-heading"><span class="line-tag">{status}</span>{title}</h4>
+				<p class="list-group-item-text">Updated by <span class="text-author">{author.displayName}</span><span class="text-date">{modifiedDate}</span></p>
+			</a>
+		</li>
+	</ul>
+</div>
+
+<script>
+	var that = this;
+
+	obs.on("RefreshNoteList", function(tagname) {
+		stateObject.currentTagId = tagname;
+		viewNotes();
+	});
+
+	//記事の表示
+	function viewNotes() {
+		var items = [];
+		var filter = "";
+
+		//ノートが0件の際のアイコンを非表示
+		that.noteIsEmpty = 0;
+
+		//スピナーを表示
+		that.spinnerView = 1;
+
+		if ( stateObject.currentTagId == "all" ) {
+			stateObject.currentTagId = "";
+		}
+
+		var _params = {
+			sortBy: "modified_on",
+			limit: 100
+		};
+
+		api.listEntries(SETTING.BLOGID, _params, function(response) {
+			that.feeds = $.grep(response.items, function(value,index) {
+				for ( var i = 0; i < value.tags.length; i++ ) {
+					if ( value.tags[i].lastIndexOf(stateObject.currentTagId, 0) === 0 ) {
+						return true;
+					}
+				}
+			});
+
+			//スピナーを非表示
+			that.spinnerView = 0;
+
+			if ( that.feeds.length == 0 ) {
+				//ノートが0件の際のアイコンを表示
+				that.noteIsEmpty = 1;
+			}
+
+			that.update();
+		});
+	}
+
+	function getNoteDetail() {
+		if ( stateObject.currentNoteId == null ) {
+			that.isNoteDetailLoaded = 0;
+			return;
+		}
+
+		that.currentNoteId = stateObject.currentNoteId;
+		that.detailBody = "";
+		that.isNoteDetailLoaded = 0;
+
+		var _param = {
+			no_text_filter: 1
+		};
+
+		api.getEntry(SETTING.BLOGID, stateObject.currentNoteId, _param, function(response) {
+			stateObject.currentNote = response;
+
+			viewNoteDetail();
+
+			that.update();
+		});
+	}
+</script>
+</notelist>
