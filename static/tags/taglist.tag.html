@@ -1,22 +1,18 @@
 <taglist>
 <div class="content-tag">
 	<div class="tag-inner">
-		<div class="tag-info">
-			<p class="info-title">タグ</p>
-		</div>
-
 		<div class="tag-body">
 			<div class="mod-box-scroll">
-				<div class="mod-icon-spinner" ng-show="loadTagSp"></div>
+				<div class="mod-icon-spinner" if="{loadTagSp}"></div>
 				<ul class="mod-list-line">
-					<li><a href="#/tag/all">すべてのノート</a></li>
+					<li><a href="#/tag/all" class="{ active: currentTagId == 'all' }">すべてのノート</a></li>
 					<li each={ taglist }>
-						<a href="#/tag/{id}">
+						<a href="#/tag/{id}" class="{ active: id == currentTagId }">
 							{name}
 						</a>
 						<ul>
 							<li each={ child }>
-								<a href="#/tag/{id}">
+								<a href="#/tag/{id}" class="{ active: id == currentTagId }">
 									{name}
 								</a>
 							</li>
@@ -30,6 +26,8 @@
 
 <script>
 	var that = this;
+
+	that.loadTagSp = 1;
 
 	api.listTagsForSite(SETTING.BLOGID, function(response) {
 		var tags = [];
@@ -102,6 +100,11 @@
 
 		that.loadTagSp = 0;
 
+		that.update();
+	});
+
+	obs.on("tagChanged", function(name) {
+		that.currentTagId = name;
 		that.update();
 	});
 </script>

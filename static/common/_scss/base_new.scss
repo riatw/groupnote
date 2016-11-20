@@ -1,0 +1,378 @@
+@charset "UTF-8";
+
+@import "core";
+
+//単機能スタイル
+@import "core/helper";
+
+//モジュール
+@import "module/box";
+@import "module/form";
+@import "module/icon";
+@import "module/list";
+@import "module/table";
+@import "module/text";
+@import "module/button";
+
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:300,400,700);
+
+
+/*----------------------- support browser ------------------------
+	Internet Explorer 8　↑
+	Firefox　Latest
+	Google Crome　Latest
+*/
+
+/*---------------------------- layout ----------------------------*/
+
+html,
+body,
+#wrap,
+#l-content,
+#l-viewcol,
+.viewcol-tag,
+.viewcol-list,
+.viewcol-detail,
+{
+	height: 100%;
+	//overflow: hidden;
+}
+
+.navbar {
+	background: #F08300 !important;
+
+	.navbar-brand {
+		font-family: Ubuntu !important;
+	}
+
+	.btn,
+	input {
+		border: 1px solid #fff;
+	}
+}
+
+#l-guide {
+	height: 100%;
+	padding-top: 100px;
+
+	.guide-login {
+		padding: 30px;
+		background: #eee;
+
+		.login-title {
+			margin-bottom: 10px;
+			font-size: fz(14,16);
+			font-weight: bold;
+		}
+		.login-error {
+			color: #f00;
+		}
+		ul {
+			li {
+				margin: 10px 0 0 0;
+
+				&:first-child {
+					margin-top: 0;
+				}
+			}
+		}
+	}
+}
+
+#l-viewcol {
+	display: flex;
+	height: 100%;
+	padding-top: 50px;
+
+	.viewcol-tag {
+		width: 20%;
+	}
+
+	.viewcol-list {
+		width: 30%;
+		border-left: 1px solid #d5d5d5;
+	}
+
+	.viewcol-detail {
+		width: 50%;
+	}
+}
+
+#l-sharenote {
+	margin: 100px auto 0 auto;
+	width: 650px;
+
+	.sharenote-title {
+		font-size: fz(14,24);
+		margin: 0 0 30px 0;
+		padding: 20px;
+		background: #eee;
+		text-align: center;
+	}
+}
+
+.wysiwyg {
+	> :first-child {
+		margin-top: 0 !important;
+	}
+	> p:first-child:empty + * {
+		margin-top: 0 !important;
+	}
+
+	hr {
+		display: none;
+	}
+
+	h1 {
+		font-size: 180%;
+		font-weight: bold;
+		border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+		padding-bottom: 10px;
+		margin: 30px 0 10px;
+		padding-left: 0;
+
+		a {
+			color: #0a9b94;
+			&:hover {
+				color: #08837d;
+			}
+		}
+	}
+	h2 {
+		font-size: 160%;
+		margin: 30px 0 10px;
+		font-weight: bold;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+		padding-bottom: 10px;
+
+		a {
+			color: #0a9b94;
+			&:hover {
+				color: #08837d;
+			}
+		}
+	}
+	h3 {
+		margin: 30px 0 10px;
+		font-size: 130%;
+		font-weight: bold;
+	}
+	h4 {
+		margin: 30px 0 10px;
+		font-size: 120%;
+		font-weight: bold;
+	}
+	> {
+		ol, ul {
+			margin: 20px 0;
+		}
+	}
+	li {
+		margin: 10px 20px;
+		list-style-type: disc;
+
+		> p {
+			margin: 0;
+		}
+	}
+	li ul li {
+		list-style-type: circle;
+	}
+	p {
+		margin: 20px 0 0 0;
+
+		img {
+			margin-bottom: 0;
+		}
+	}
+	blockquote {
+		font-size: 100%;
+		color: rgba(60, 74, 96, 0.7);
+		border-left: 5px solid rgba(0, 0, 0, 0.1);
+		margin-bottom: 30px;
+		margin-left: 0;
+		margin-right: 0;
+		padding: 0 20px;
+		p {
+			margin: 10px 0 !important;
+		}
+	}
+	code {
+		white-space: pre-wrap;
+		background: rgba(0, 0, 0, 0.05);
+		border-radius: 4px;
+	}
+	pre {
+		border: none;
+		background: #f6f6f6;
+		padding: 20px;
+		border-radius: 6px;
+		margin-bottom: 30px;
+		code {
+			background: #f6f6f6;
+		}
+	}
+	table {
+		border: 1px solid rgba(0, 0, 0, 0.1);
+		width: 100%;
+		border-collapse: collapse;
+		border-spacing: 0;
+		margin: 20px 0 30px;
+		tr {
+			&:nth-child(odd) td {
+				background-color: #f9f9f9;
+			}
+			td, th {
+				padding: 8px;
+				line-height: 1.6;
+				vertical-align: top;
+				border: 1px solid rgba(0, 0, 0, 0.1);
+			}
+		}
+	}
+	strong {
+		font-weight: bold;
+	}
+	img {
+		max-width: 100%;
+		border: 1px solid #eee;
+	}
+	h1, h2, h3, h4 {
+		-webkit-font-smoothing: antialiased;
+	}
+	h1:hover .anchor, h2:hover .anchor, h3:hover .anchor {
+		display: block;
+	}
+	code {
+		color: #3c4a60;
+	}
+	iframe {
+		max-width: 100%;
+	}
+}
+
+
+// .wysiwyg {
+// 	> :first-child {
+// 		margin-top: 0 !important;
+// 	}
+
+// 	h1 {
+// 		font-size: 200%;
+// 		border-bottom: 3px solid rgba(0,0,0,0.1);
+// 		padding-bottom: 10px;
+// 		margin: 30px 0;
+// 		margin-bottom: 10px;
+// 		-webkit-font-smoothing: antialiased;
+// 	}
+// 	h2 {
+// 		margin: 40px -24px 20px -24px;
+// 		padding: 0 24px 8px 24px;
+// 		border-bottom: 1px solid #d5d5d5;
+// 		font-size: fz(14,18);
+// 		line-height: 1.35;
+// 		font-weight: bold;
+// 	}
+// 	h3 {
+// 		margin: 28px 0 12px 0;
+// 		padding: 0 0 8px 0;
+// 		border-bottom: 1px solid #d5d5d5;
+// 		font-size: fz(14,14);
+// 		line-height: 1.35;
+// 		font-weight: bold;
+// 	}
+// 	h4 {
+// 		font-size: fz(14,14);
+// 		font-weight: bold;
+// 		line-height: 1.35;
+// 		margin: 28px 0 8px 0;
+// 	}
+// 	p {
+// 		line-height: 1.75;
+// 	}
+// 	ul {
+
+// 		> li {
+// 			padding: 4px 0;
+// 			line-height: 1.5;
+
+// 			> ul {
+// 				> li {
+
+// 				}
+// 			}
+// 		}
+// 	}
+// 	pre {
+// 		padding: 12px;
+// 		@include border-radius(0);
+// 		border: 1px solid #d5d5d5;
+// 	}
+// 	table {
+// 		width: 100%;
+// 		vertical-align: middle;
+
+// 		caption {
+// 			font-weight: bold;
+// 			padding-bottom: 5px;
+// 		}
+
+// 		thead {
+// 			th {
+// 				padding: 8px 10px;
+// 				border: 1px solid #ccc;
+// 				background: #999;
+// 				color: #fff;
+// 				font-weight: bold;
+// 				line-height: 1.4;
+// 				text-align: center;
+// 				vertical-align: middle;
+
+// 				&:first-child {
+// 					//background: #EEBC93;
+// 				}
+// 			}
+// 		}
+// 		tbody {
+// 			th, td {
+// 				padding: 10px;
+// 				border: 1px solid #ccc;
+// 				vertical-align: middle;
+// 				line-height: 1.4;
+// 			}
+// 			th {
+// 				width: 20%;
+// 				background: #EEE;
+// 				font-weight: bold;
+// 				text-align: left;
+// 				vertical-align: middle;
+
+// 				span.indis {
+// 					font-size: fz(14,12);
+// 					vertical-align: middle;
+// 					margin-left: 10px;
+// 					color: #ed8835;
+// 				}
+// 			}
+// 			td {
+// 				vertical-align: middle;
+// 			}
+// 		}
+// 	}
+// 	blockquote {
+// 		margin: 1.5em 0;
+// 		padding: 30px;
+// 		background: #eee;
+// 	}
+// }
+
+.no-gutter > [class*='col-'] {
+    padding-right:0 !important;
+    padding-left:0 !important;
+    border-left: 1px solid #d5d5d5;
+
+    &:first-child {
+    	border-left: 0;
+    }
+}
+

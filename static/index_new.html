@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+		<title>Dashboard Template for Bootstrap</title>
+
+		<!-- Bootstrap core CSS -->
+		<link href="common/css/bootstrap/bootstrap.css" rel="stylesheet">
+		<link href="common/css/base_new.css" rel="stylesheet">
+	</head>
+
+	<body>
+
+		<div id="l-guide" class="container">
+			<div class="row">
+				<div ng-hide="currentUser">
+					<div class="col-md-8">
+						<div>
+							<h1>About Group Note</h1>
+
+							<p>
+								Group Note は、「情報を育てる」という視点で作られた、自律的なチームのための<br>ドキュメント共有サービスです。
+							</p>
+
+							<blockquote>Everything is not perfect from the beginning.<br>
+							We want to support the concept of information.<br>
+							<strong>最初から完璧なものなんてない。 Group Note は情報の一生を見守りたい。</strong>
+							</blockquote>
+
+							<h2 id="h2-1">Share - とりあえず不完全でも公開</h2>
+
+							<p>チームの誰かに情報を共有する時、完璧にまとめることをを目指しすぎて、後手に回ってしまうことはないでしょうか？<br>また、誰かから新しいことを教えてもらったとき、もっと早く言ってくれればよかったのに...と思ったことはないでしょうか？</p>
+
+							<blockquote>
+								あなたが今抱えている仕事や悩み、アイデアなどを是非教えてください
+							</blockquote>
+
+							<p>例え不完全でも早いタイミングで共有しておけば、他の仲間がもっとよいアイデアをくれるかもしれません。<br>「こんなこと書いていいの？」と思わなくても大丈夫、いますぐ始めましょう。</p>
+
+							<h2 id="h2-3">Archive - 情報が育ったらきちんと整理</h2>
+
+							<p>Group Noteではタグを何個でもつけることができます。<br>「テクニカル」、「デザイン」、などノートに関係するタグを沢山つけましょう。<br>後で見る人が目的の情報にたどり着くための手助けになります。</p>
+						</div>
+					</div>
+
+					<div class="col-md-4">
+						<div class="guide-login">
+							<form>
+								<div class="form-group">
+									<input type="text" placeholder="ユーザーID" class="form-control" ng-model="username">
+								</div>
+								<div class="form-group">
+									<input type="password" placeholder="パスワード" class="form-control" ng-model="password">
+								</div>
+								<div class="form-group" ng-show="login_error">
+									<p class="login-error">
+										ユーザID、またはパスワードが間違っています
+									</p>
+								</div>
+
+								<button type="submit" class="btn btn-lg btn-success" ng-click="logIn()">Login</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container-fluid" style="padding-top: 53px;">
+			<div class="row">
+				<div class="col-md-3">
+					<ul class="mod-list-line">
+						<li ng-class="{'active':tlCtl.currentTagId==='all'}"><a href="#/tag/all">すべてのノート</a></li>
+
+						<li ng-repeat="tag in tlCtl.taglist">
+							<a href="#/tag/{{tag.id}}">{{tag.name}}</a>
+							<ul>
+								<li ng-repeat="tag in tag.child">
+									<a href="#/tag/{{tag.id}}">{{tag.name}}</a>
+									<ul>
+										<li ng-repeat="tag in tag.child">
+											<a href="#/tag/{{tag.id}}">{{tag.name}}</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-md-9">
+					<ul class="mod-list-line mab0 note">
+						<li ng-repeat="item in feeds | filter: currentSearchKeyword" ng-class="{'is-show':!spinnerView, 'active':currentNoteId==item.id}">
+							<a ng-href="#/note/{{item.id}}">
+								<p class="list-group-item-tags">{{item.tags.join('')}}</p>
+								<h4 class="list-group-item-heading"><span class="line-tag">{{item.status}}</span>{{item.title}}</h4>
+								<p class="list-group-item-text">Updated by <span class="text-author">{{item.author.displayName}}</span><span class="text-date">{{item.modifiedDate | date:'yyyy-MM-dd H:M'}}</span></p>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<app></app>
+
+		<script type="text/javascript" src="common/lib/jquery.js"></script>
+		<script type="text/javascript" src="common/lib/data-api/v3/js/mt-data-api.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.js"></script>
+		<script type="text/javascript" src="common/js/setting.js"></script>
+		<script>
+			//api setting
+			var api = new MT.DataAPI({
+				baseUrl:  SETTING.CMSURL,
+				clientId: "collect"
+			});
+			var siteId = SETTING.BLOGID;
+
+			var renderer = new marked.Renderer();
+			renderer.link = function(href, title, text) {
+				return "<a href='" + href + "'" + (title ? " title='" + title + "'" : '') + " target='_blank'>" + text + "</a>";
+			};
+
+			marked.setOptions({
+				gfm: true,
+				tables: true,
+				smartLists: true,
+				renderer: renderer
+			});
+
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/riot/2.6.7/riot+compiler.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+		<script src="tags/app.tag.html" type="riot/tag"></script>
+		<script src="tags/login.tag.html" type="riot/tag"></script>
+		<script src="tags/logout.tag.html" type="riot/tag"></script>
+		<script src="tags/iflogin.tag.html" type="riot/tag"></script>
+		<script src="tags/taglist.tag.html" type="riot/tag"></script>
+		<script src="tags/notelist.tag.html" type="riot/tag"></script>
+		<script src="tags/notedetail.tag.html" type="riot/tag"></script>
+		<script src="tags/edit_note.tag.html" type="riot/tag"></script>
+		<script src="tags/filter.tag.html" type="riot/tag"></script>
+
+		<script>
+			riot.mount('*');
+
+			var stateObject = {
+				currentUser: "",
+				currentTagId : "all",
+				currentNote: null,
+				currentNoteId: null
+			};
+
+			var obs = riot.observable();
+
+			riot.route('/', function(name) {
+				riot.route('/tag/all')
+			});
+
+			riot.route('/tag/(.+)', function(name) {
+				obs.trigger("tagChanged", name);
+			});
+
+			riot.route('/note/(.+)', function(name) {
+				obs.trigger("noteChanged", name);
+			});
+
+			riot.route.start();
+		</script>
+	</body>
+</html>

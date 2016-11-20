@@ -1,29 +1,22 @@
 <notelist>
-<div class="mod-box-scroll">
-	<div class="mod-icon-spinner note-spinner" ng-show="spinnerView"></div>
+	<div class="mod-icon-spinner note-spinner" if="{spinnerView}"></div>
 
-	<!-- <div class="mod-icon-empty note" ng-show="noteIsEmpty">
+	<div class="mod-icon-empty note" if="{noteIsEmpty}">
 		<p class="empty-txt">該当するノートがありません</p>
-	</div> -->
+	</div>
 
 	<ul class="mod-list-line mab0 note">
-		<li each={ feeds } ng-class="['is-show':!spinnerView, 'active':currentNoteId==item.id]">
-			<a href="#/note/{id}">
-				<p class="list-group-item-tags">{tags.join('')}</p>
+		<li each={ feeds }>
+			<a href="#/note/{id}" class="{ active: id == currentNoteId }">
+				<p class="list-group-item-tags">{tags_raw}</p>
 				<h4 class="list-group-item-heading"><span class="line-tag">{status}</span>{title}</h4>
 				<p class="list-group-item-text">Updated by <span class="text-author">{author.displayName}</span><span class="text-date">{modifiedDate}</span></p>
 			</a>
 		</li>
 	</ul>
-</div>
 
 <script>
 	var that = this;
-
-	obs.on("RefreshNoteList", function(tagname) {
-		stateObject.currentTagId = tagname;
-		viewNotes();
-	});
 
 	//記事の表示
 	function viewNotes() {
@@ -47,46 +40,60 @@
 
 		api.listEntries(SETTING.BLOGID, _params, function(response) {
 			that.feeds = $.grep(response.items, function(value,index) {
+				value.tags_raw = value.tags.join(" ");
+
 				for ( var i = 0; i < value.tags.length; i++ ) {
 					if ( value.tags[i].lastIndexOf(stateObject.currentTagId, 0) === 0 ) {
 						return true;
 					}
 				}
 			});
-
-			//スピナーを非表示
-			that.spinnerView = 0;
+			that.feeds_cp = that.feeds;
 
 			if ( that.feeds.length == 0 ) {
 				//ノートが0件の際のアイコンを表示
 				that.noteIsEmpty = 1;
 			}
 
+			//スピナーを非表示
+			that.spinnerView = 0;
+
 			that.update();
 		});
 	}
 
-	function getNoteDetail() {
-		if ( stateObject.currentNoteId == null ) {
-			that.isNoteDetailLoaded = 0;
+	obs.on("login", function() {
+		viewNotes();
+	});
+
+	obs.on("filterChanged", function(q) {
+		console.log(q);
+		if ( q == null ) {
+			that.feeds = that.feeds_cp;
 			return;
 		}
-
-		that.currentNoteId = stateObject.currentNoteId;
-		that.detailBody = "";
-		that.isNoteDetailLoaded = 0;
-
-		var _param = {
-			no_text_filter: 1
-		};
-
-		api.getEntry(SETTING.BLOGID, stateObject.currentNoteId, _param, function(response) {
-			stateObject.currentNote = response;
-
-			viewNoteDetail();
-
-			that.update();
+		that.feeds = $.grep(that.feeds_cp, function(value,index) {
+			if ( value.title.indexOf(q) != -1 ) {
+				return true;
+			}
 		});
-	}
+		that.feeds = $.grep(that.feeds_cp, function(value,index) {
+			if ( value.body.indexOf(q) != -1 ) {
+				return true;
+			}
+		});
+
+		that.update();
+	});
+
+	obs.on("tagChanged", function(tagname) {
+		stateObject.currentTagId = tagname;
+		viewNotes();
+	});
+
+	obs.on("noteChanged", function(name) {
+		that.currentNoteId = name;
+		that.update();
+	});
 </script>
 </notelist>

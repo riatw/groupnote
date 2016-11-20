@@ -1,0 +1,11 @@
+<filter>
+<input type="text" name="q" placeholder="フィルタ" class="form-control" onkeyup="{search}">
+
+<script>
+var that = this;
+
+search(e) {
+	obs.trigger("filterChanged", that.q.value);
+}
+</script>
+</filter>

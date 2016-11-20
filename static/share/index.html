@@ -12,10 +12,9 @@
 	<link rel="stylesheet" href="../common/css/base.css">
 	<script type="text/javascript" src="../common/js/setting.js"></script>
 	<script src="../common/lib/data-api/v3/js/mt-data-api.js"></script>
-	<script type="text/javascript" src="../common/js/main.min.js"></script>
 </head>
 
-<body class="index" ng-app="mynote">
+<body class="index">
 	<!-- [ WRAP ] -->
 	<div id="wrap">
 		<div id="l-header" class="header-compact">
@@ -24,13 +23,51 @@
 			</h1>
 		</div>
 
-		<div id="l-sharenote" ng-controller="shareNoteController">
-			<h1 class="sharenote-title">{{title}}</h1>
-
-			<div class="sharenote-body wysiwyg" marked="detailBody">
-			</div>
-		</div>
+		<share-note></share-note>
 	</div>
 	<!-- [ WRAP ] -->
+
+	<script type="text/javascript" src="../common/lib/jquery.js"></script>
+	<script type="text/javascript" src="../common/lib/data-api/v3/js/mt-data-api.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.js"></script>
+	<script type="text/javascript" src="../common/js/setting.js"></script>
+	<script>
+		//api setting
+		var api = new MT.DataAPI({
+			baseUrl:  SETTING.CMSURL,
+			clientId: "collect"
+		});
+		var siteId = SETTING.BLOGID;
+
+		var renderer = new marked.Renderer();
+		renderer.link = function(href, title, text) {
+			return "<a href='" + href + "'" + (title ? " title='" + title + "'" : '') + " target='_blank'>" + text + "</a>";
+		};
+
+		marked.setOptions({
+			gfm: true,
+			tables: true,
+			smartLists: true,
+			renderer: renderer
+		});
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/riot/2.6.7/riot+compiler.min.js"></script>
+	<script src="../tags/share_note.tag.html" type="riot/tag"></script>
+
+	<script>
+		var stateObject = {
+			currentUser: "",
+			currentTagId : "all",
+			currentNote: null,
+			currentNoteId: null
+		};
+
+		riot.route('/note/(.+)', function(id) {
+			riot.mount('share-note', {id: id} );
+		});
+
+		riot.route.start();
+		riot.route.exec();
+	</script>
 </body>
 </html>

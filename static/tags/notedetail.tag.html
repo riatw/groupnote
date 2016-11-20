@@ -1,16 +1,22 @@
 <notedetail>
-<div class="content-note">
-	<div class="mod-icon-spinner note-spinner ng-hide" ng-hide="isNoteDetailLoaded"></div>
+<div class="m-box-note">
+	<div class="mod-icon-spinner note-spinner" if="{! isNoteDetailLoaded}"></div>
 
-	<div class="note-inner" ng-show="isNoteDetailLoaded">
+	<div class="note-inner" if="{isNoteDetailLoaded}">
 		<div class="note-info">
-			<h1 class="info-title">{detailTitle}</h1>
-
 			<ul class="info-btngroup">
-				<li ng-controller="addNoteModalController" ng-click="open(item)" ng-show="updatable"><button>編集</button></li>
+				<li><edit-note mode="edit"></edit-note></li>
+
+				<li class="shareurl" dropdown>
+					<a href="{shareUrl}" target="_blank" class="btn btn-secondary">共有</a>
+				</li>
+
+				<li class="shareurl" dropdown>
+					<a href="{psUrl}" target="_blank" class="btn btn-secondary">プレゼンモード</a>
+				</li>
 
 				<li class="dropdown" dropdown>
-					<button class="dropdown-toggle" id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">目次 <span class="caret"></button>
+					<button type="button" class="btn btn-secondary dropdown-toggle" id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">目次 <span class="caret"></button>
 
 					<ul class="dropdown-menu" aria-labelledby="dLabel" du-scroll-container="scroll-container">
 						<li each={ outline }>
@@ -24,31 +30,14 @@
 						</li>
 					</ul>
 				</li>
-
-				<li class="shareurl" dropdown>
-					<button class="dropdown-toggle" id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">共有</button>
-
-					<ul class="dropdown-menu" aria-labelledby="dLabel">
-						<li>
-							<a href="{shareUrl}" target="_blank">{shareUrl}</a>
-						</li>
-					</ul>
-				</li>
-
-				<li class="shareurl" dropdown>
-					<button class="dropdown-toggle" id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">プレゼンモード</button>
-
-					<ul class="dropdown-menu" aria-labelledby="dLabel">
-						<li>
-							<a href="{psUrl}" target="_blank">{psUrl}</a>
-						</li>
-					</ul>
-				</li>
 			</ul>
 		</div>
+
 		<div class="note-body">
 			<div class="mod-box-scroll scroll-no-border" id="scroll-container">
-				<div class="mod-box-wysiwyg" ng-show="isNoteDetailLoaded">
+				<h1 class="info-title">{detailTitle}</h1>
+
+				<div class="mod-box-wysiwyg" if="{isNoteDetailLoaded}">
 					<div class="wysiwyg-base">
 						<div id="marked" class="base-body wysiwyg"></div>
 					</div>
@@ -83,6 +72,7 @@ function getNoteDetail() {
 		that.update();
 	});
 }
+
 function viewNoteDetail() {
 	var item = stateObject.currentNote;
 
@@ -95,18 +85,6 @@ function viewNoteDetail() {
 		that.shareUrl = location.protocol + "//" + location.host + "/share/#note/" + item.id;
 
 		that.psUrl = location.protocol + "//" + location.host + "/presentation/?note=" + item.id;
-
-		// markedProvider.setOptions({
-		// 	gfm: true,
-		// 	tables: true,
-		// 	smartLists: true
-		// });
-
-		// markedProvider.setRenderer({
-		// 	link: function(href, title, text) {
-		// 		return "<a href='" + href + "'" + (title ? " title='" + title + "'" : '') + " target='_blank'>" + text + "</a>";
-		// 	}
-		// });
 
 		that.detailBody = marked(item.body, function (err, content) {
 			//array
@@ -178,12 +156,38 @@ function viewNoteDetail() {
 
 		that.update();
 	}
+
+	$("[du-smooth-scroll]").click(function() {
+		// 移動先となる要素を取得
+		var target = $(this.hash);
+		if (!target.length) return;
+
+		// 移動先となる値
+		var targetY = target.position().top + $('#scroll-container').scrollTop() - 20;
+
+		// スクロールアニメーション
+		$('#scroll-container').animate({scrollTop: targetY}, 500, 'swing');
+		// デフォルトの処理はキャンセル
+		return false;
+	});
 }
 
-obs.on("RefreshNoteDetail", function(noteid) {
+obs.on("login", function() {
+	getNoteDetail();
+});
+
+obs.on("noteChanged", function(noteid) {
 	stateObject.currentNoteId = noteid;
 	getNoteDetail();
 });
 
+obs.on("noteCreated", function(noteid) {
+	stateObject.currentNoteId = noteid;
+	getNoteDetail();
+});
+
+obs.on("noteUpdated", function() {
+	getNoteDetail();
+});
 </script>
 </notedetail>

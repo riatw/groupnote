@@ -1,0 +1,182 @@
+<edit-note>
+<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#{modal_id}" if="{ opts.mode == 'create' }" onclick="{open}">ノートを書く</a>
+<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#{modal_id}" if="{ opts.mode == 'edit' }" onclick="{open}">編集</a>
+
+<div class="modal " id="{modal_id}" tabindex="-1" role="dialog" aria-labelledby="areaLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="content-inner">
+				<div class="modal-body">
+					<div class="body-main">
+						<div class="m-box-editnote">
+							<div class="editnote-left">
+								<form class="m-box-form" onsubmit="{ok}">
+									<div class="form-group">
+										<label for="exampleInputEmail1">タイトル</label>
+										<input type="text" name="title" class="form-control" placeholder="ノートのタイトルを入力">
+									</div>
+									<div class="form-group">
+										<label for="exampleInputPassword1">本文</label>
+										<textarea name="body" class="form-control" rows="10" onkeyup="{preview}"></textarea>
+									</div>
+									<div class="form-group">
+										<label for="exampleInputEmail1">アイテム</label>
+										<input type="file" name="upload" multiple>
+									</div>
+									<div class="form-group">
+										<label for="exampleInputEmail1">タグ</label>
+										<input type="text" name="tag" class="form-control" placeholder="ノートのタグをカンマ区切りで入力">
+									</div>
+									<div class="form-group">
+										<label for="exampleInputEmail1">文章の状態</label>
+										<select name="status" class="form-control">
+											<option value="Draft" selected="{ status.value == 'Draft' }">Draft</option>
+											<option value="Publish" selected="{ status.value == 'Publish' }">Publish</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="exampleInputEmail1">投稿フォーマット</label>
+										<select name="format" class="form-control">
+											<option value="markdown" selected="{ status.value == 'markdown' }">markdown</option>
+											<option value="__default__" selected="{ status.value == '__default__' }">__default__</option></select>
+									</div>
+
+									<ul class="m-list-btngroup">
+										<button type="submit" class="m-button-common common-save">保存</button>
+										<button class="m-button-common common-delete" onclick="{delete}">削除</button>
+										<button class="m-button-common common-cancel" onclick="{cancel}">キャンセル</button>
+									</ul>
+								</form>
+							</div>
+
+							<div class="editnote-right">
+								<div class="mod-box-scroll">
+									<div class="mod-box-wysiwyg">
+										<div class="wysiwyg-base">
+											<div class="base-body wysiwyg" id="marked2">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	var that = this;
+
+	that.modal_id = 'modal-' + opts.mode;
+
+	that.on("mount", function() {
+		$("#" + that.modal_id).appendTo("body");
+	});
+
+	that.status = 'Draft',
+	that.format = 'markdown'
+
+	that.noteIsLoaded = 0;
+
+	//編集の場合
+	that.open = function() {
+		if ( opts.mode == "edit" ) {
+			var _param = {
+				no_text_filter: 1
+			};
+
+			api.getEntry(SETTING.BLOGID, stateObject.currentNoteId, _param, function(response) {
+				console.log(response);
+				that.title.value = response.title;
+				that.body.value = response.body;
+				that.tag.value = response.tags.join(",");
+				that.status.value = response.status;
+				that.format.value = response.format;
+				that.noteIsLoaded = 1;
+				that.preview();
+				that.update();
+			});
+		}
+	}
+
+	that.ok = function () {
+		var object = {};
+		var method;
+
+		object.title = that.title.value;
+		object.body = that.body.value;
+		object.tag =  that.tag.value.split(",");
+		object.status = that.status.value;
+		object.format = that.format.value;
+
+		if ( stateObject.currentNoteId ) {
+			object.id = stateObject.currentNoteId;
+
+			api.updateEntry(siteId, object.id, object, function(response) {
+				stateObject.currentNote = response;
+				stateObject.currentNoteId = response.id;
+
+				$('#' + that.modal_id).modal('hide');
+
+				obs.trigger("noteUpdated");
+			});
+		}
+		else {
+			api.createEntry(siteId, object, function(response) {
+				stateObject.currentNote = response;
+				stateObject.currentNoteId = response.id;
+
+				$('#' + that.modal_id).modal('hide');
+
+				obs.trigger("noteCreated");
+			});
+		}
+	}
+
+	that.delete = function () {
+		if( window.confirm('ノートを削除します。よろしいですか？') ){
+			api.deleteEntry(siteId, stateObject.currentNoteId, function(response) {
+				stateObject.currentNote = null;
+				stateObject.currentNoteId = null;
+
+				$('#' + that.modal_id).modal('hide');
+			});
+
+			obs.trigger("noteDeleted");
+		}
+	}
+
+	that.cancel = function () {
+		$('#' + that.modal_id).modal('hide');
+	}
+
+	that.preview = function() {
+		that.marked2.innerHTML = marked(that.body.value);
+		that.update();
+	};
+
+	// upload on file select or drop
+	that.upload = function (files) {
+		for ( var i=0; i < files.length; i++ ) {
+			api.uploadAsset(siteId, { file: files[i], path: "/files", site_id: SETTING.BLOGID, autoRenameIfExists: true }, function(response) {
+				var text;
+
+				if ( response.data.class == "image" ) {
+					text = "![" + response.config.data.file.name + "]("+ response.data.url +")";
+				}
+				else {
+					text = "[" + response.config.data.file.name + "]("+ response.data.url +")";
+				}
+
+				that.body = that.body + "\n" + text;
+				that.preview();
+				that.$apply();
+			});
+		}
+	};
+</script>
+
+</edit-note>

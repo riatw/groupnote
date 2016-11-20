@@ -1,38 +1,38 @@
 <app>
-<!-- [ WRAP ] -->
-<div id="wrap" ng-controller="loginController" ng-init="init()">
-	<div id="l-header">
-		<h1 class="header-logo">
-			<a href="#">Group Note</a>
-		</h1>
-
-		<div class="header-search">
-			<form ng-controller="searchNoteController" if="{status==='login'}">
-				<div class="form-group">
-					<input type="text" placeholder="フィルタ" class="form-control" ng-model="q" ng-keyup="search()">
-				</div>
-			</form>
-		</div>
-
-		<div class="header-login">
-			<ul if="{status==='login'}">
+	<nav class="navbar navbar-dark navbar-fixed-top bg-inverse">
+		<a class="navbar-brand" href="/">Group Note</a>
+		<div id="change_mode" class="collapse">
+			<ul>
 				<li>
-					<select name="" id=""></select>
+					<a href="">タグ</a>
 				</li>
-				<li ng-controller="addNoteModalController"><a ng-click="open()">ノートを書く</a></li>
-				<li><a ng-click="logOut()">ログアウト</a></li>
+				<li>
+					<a href="">あ</a>
+				</li>
 			</ul>
 		</div>
-	</div>
+		<div id="navbar">
+			<nav class="nav navbar-nav float-xs-right" if="{status==='login'}">
+				<edit-note mode="create"></edit-note>
+				<logout></logout>
+			</nav>
+			<form class="float-xs-left hidden-sm-down" if="{status==='login'}">
+				<filter></filter>
+			</form>
+		</div>
+	</nav>
 
-	<div id="l-content">
-		<login></login>
-		<iflogin></iflogin>
-	</div>
+	<login></login>
+	<iflogin></iflogin>
 </div>
 <!-- [ WRAP ] -->
 
 <script>
+
+this.on("mount", function() {
+	riot.route.exec();
+});
+
 this.status = "nologin";
 
 var that = this;
@@ -46,6 +46,12 @@ api.getToken(function(response) {
 	that.status = "login";
 	that.update();
 });
+
+obs.on("logout", function() {
+	that.status = "nologin";
+	that.update();
+});
+
 </script>
 
 </app>

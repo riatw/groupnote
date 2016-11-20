@@ -4,9 +4,10 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Group Note</title>
-	<meta name="viewport" content="width=1024">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<link rel="stylesheet" href="common/css/base.css">
+	<link href="common/css/bootstrap/bootstrap.css" rel="stylesheet">
+	<link rel="stylesheet" href="common/css/base_new.css">
 </head>
 
 <body class="index">
@@ -19,22 +20,40 @@
 	<script>
 		//api setting
 		var api = new MT.DataAPI({
-			baseUrl:  SETTING.CMSURL2,
+			baseUrl:  SETTING.CMSURL,
 			clientId: "collect"
 		});
 		var siteId = SETTING.BLOGID;
+
+		var renderer = new marked.Renderer();
+		renderer.link = function(href, title, text) {
+			return "<a href='" + href + "'" + (title ? " title='" + title + "'" : '') + " target='_blank'>" + text + "</a>";
+		};
+
+		marked.setOptions({
+			gfm: true,
+			tables: true,
+			smartLists: true,
+			renderer: renderer
+		});
+
 	</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/riot/2.6.7/riot+compiler.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 	<script src="tags/app.tag.html" type="riot/tag"></script>
 	<script src="tags/login.tag.html" type="riot/tag"></script>
+	<script src="tags/logout.tag.html" type="riot/tag"></script>
 	<script src="tags/iflogin.tag.html" type="riot/tag"></script>
 	<script src="tags/taglist.tag.html" type="riot/tag"></script>
 	<script src="tags/notelist.tag.html" type="riot/tag"></script>
 	<script src="tags/notedetail.tag.html" type="riot/tag"></script>
+	<script src="tags/edit_note.tag.html" type="riot/tag"></script>
+	<script src="tags/filter.tag.html" type="riot/tag"></script>
 
 	<script>
+		riot.mount('*');
+
 		var stateObject = {
 			currentUser: "",
 			currentTagId : "all",
@@ -42,19 +61,21 @@
 			currentNoteId: null
 		};
 
-		riot.mount('*');
+		var obs = riot.observable();
+
+		riot.route('/', function(name) {
+			riot.route('/tag/all')
+		});
 
 		riot.route('/tag/(.+)', function(name) {
-			obs.trigger("RefreshNoteList", name);
+			obs.trigger("tagChanged", name);
 		});
 
 		riot.route('/note/(.+)', function(name) {
-			obs.trigger("RefreshNoteDetail", name);
+			obs.trigger("noteChanged", name);
 		});
 
 		riot.route.start();
-
-		var obs = riot.observable();
 	</script>
 </body>
 </html>

@@ -1,31 +1,54 @@
 <iflogin>
-	<div id="l-viewcol" if="{status==='login'}">
-		<div class="viewcol-tag">
-			<taglist></taglist>
-		</div>
-
-		<div class="viewcol-list">
-			<notelist></notelist>
-		</div>
-
-		<div class="viewcol-detail">
-			<notedetail></notedetail>
+	<div class="container-fluid container-fixed" if="{status==='login'}">
+		<div class="row no-gutter">
+			<div class="col-md-2 { hidden-sm-down: sp_mode != 'taglist'}">
+				<div class="m-box-scroll">
+					<div class="scroll-inner">
+						<taglist></taglist>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 { hidden-sm-down: sp_mode != 'notelist'}">
+				<div class="m-box-scroll">
+					<div class="scroll-inner">
+						<notelist></notelist>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 { hidden-sm-down: sp_mode != 'notedetail'}">
+				<div class="m-box-scroll">
+					<div class="scroll-inner">
+						<notedetail></notedetail>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
 	<script>
-		this.status = "nologin";
-
 		var that = this;
 
-		api.getToken(function(response) {
-			if (response.error) {
-				// エラー処理
-				return;
-			}
-
+		obs.on("login", function() {
 			that.status = "login";
 			that.update();
 		});
+
+		obs.on("logout", function() {
+			that.status = "nologin";
+			that.update();
+		});
+
+		that.sp_mode = "taglist";
+
+		obs.on("tagChanged", function() {
+			that.sp_mode = "notelist";
+			that.update();
+		});
+
+		obs.on("noteChanged", function() {
+			that.sp_mode = "notedetail";
+			that.update();
+		});
+
 	</script>
 </iflogin>

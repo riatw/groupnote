@@ -1,0 +1,21 @@
+<share-note>
+<div id="l-sharenote">
+	<h1 class="sharenote-title">{title}</h1>
+
+	<div class="sharenote-body wysiwyg" id="marked">
+	</div>
+</div>
+
+<script>
+	var that = this;
+
+	api.getEntry(SETTING.BLOGID, opts.id, function(response) {
+		document.title = response.title;
+
+		that.title = response.title;
+		that.marked.innerHTML = marked(response.body);
+
+		that.update();
+	});
+</script>
+</share-note>

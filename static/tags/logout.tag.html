@@ -1,0 +1,16 @@
+<logout>
+<a href="#" class="btn btn-primary" onclick="{logout}">ログアウト</a>
+
+<script>
+	logout(e) {
+		api.revokeAuthentication(function(response) {
+			if ( response.error ) {
+				return;
+			}
+			stateObject.currentUser = null;
+			stateObject.currentNoteId = null;
+			obs.trigger("logout");
+		});
+	}
+</script>
+</logout>
