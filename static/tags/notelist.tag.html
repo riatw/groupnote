@@ -76,12 +76,7 @@
 			return;
 		}
 		that.feeds = $.grep(that.feeds_cp, function(value,index) {
-			if ( value.title.indexOf(q) != -1 ) {
-				return true;
-			}
-		});
-		that.feeds = $.grep(that.feeds_cp, function(value,index) {
-			if ( value.body.indexOf(q) != -1 ) {
+			if ( value.title.indexOf(q) != -1 || value.body.indexOf(q) != -1 ) {
 				return true;
 			}
 		});

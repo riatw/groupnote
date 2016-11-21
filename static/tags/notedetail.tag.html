@@ -181,7 +181,6 @@ obs.on("login", function() {
 });
 
 obs.on("noteChanged", function(noteid) {
-	console.log(noteid);
 	stateObject.currentNoteId = noteid;
 	getNoteDetail();
 });

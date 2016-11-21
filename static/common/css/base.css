@@ -1928,7 +1928,7 @@ img {
 .m-box-note .note-inner .note-info .info-btngroup {
 	position : absolute;
 	top : 5px;
-	right : 25px;
+	right : 15px;
 	margin : 0;
 	padding : 0;
 	list-style : none;
@@ -1937,7 +1937,7 @@ img {
 .m-box-note .note-inner .note-info .info-btngroup > li {
 	display : inline-block;
 	cursor : pointer;
-	margin-left : 10px;
+	margin-left : 0;
 }
 .m-box-note .note-inner .note-info .info-btngroup > li:first-child {
 	margin-left : 0;

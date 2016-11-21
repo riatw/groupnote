@@ -327,7 +327,7 @@
 			.info-btngroup {
 				position: absolute;
 				top: 5px;
-				right: 25px;
+				right: 15px;
 				margin: 0;
 				padding: 0;
 				list-style: none;
@@ -336,7 +336,7 @@
 				> li {
 					display: inline-block;
 					cursor: pointer;
-					margin-left: 10px;
+					margin-left: 0px;
 
 					&:first-child {
 						margin-left: 0;
