@@ -29,6 +29,7 @@
 
 	that.loadTagSp = 1;
 
+function loadTags() {
 	api.listTagsForSite(SETTING.BLOGID, function(response) {
 		var tags = [];
 
@@ -102,10 +103,29 @@
 
 		that.update();
 	});
+}
+loadTags();
 
-	obs.on("tagChanged", function(name) {
-		that.currentTagId = name;
-		that.update();
-	});
+obs.on("tagChanged", function(name) {
+	that.currentTagId = name;
+	that.update();
+});
+
+obs.on("noteChanged", function() {
+	loadTags();
+});
+
+obs.on("noteCreated", function() {
+	loadTags();
+});
+
+obs.on("noteUpdated", function() {
+	loadTags();
+});
+
+obs.on("noteDeleted", function() {
+	loadTags();
+});
+
 </script>
 </taglist>

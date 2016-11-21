@@ -1512,9 +1512,11 @@
 	width : 49%;
 }
 .m-box-editnote .editnote-right .mod-box-scroll {
-	height : 535px;
+	padding : 30px;
+	height : 575px;
 	overflow-y : auto;
 	border : 1px solid #d5d5d5;
+	box-sizing : border-box;
 }
 
 .m-box-note {
@@ -1739,10 +1741,10 @@
 	cursor : pointer;
 	transition-property : background;
 	transition-duration : 0.2s;
+	text-decoration : none !important;
 }
 .mod-list-line li a:hover {
 	background : #eee;
-	text-decoration : none;
 	transition-property : background;
 	transition-duration : 0.2s;
 }

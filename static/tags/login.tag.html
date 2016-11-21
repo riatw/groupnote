@@ -1,5 +1,5 @@
 <login>
-	<div id="l-guide" class="container" if="{status==='!login'}">
+	<div id="l-guide" class="container" if="{status=='nologin'}">
 		<div class="row">
 			<div ng-hide="currentUser">
 				<div class="col-md-8">
@@ -80,34 +80,17 @@ login(e) {
 		if (response.error) {
 			that.is_error = 1;
 			that.update();
+
 			// エラー処理
 			return;
 		}
 
 		that.is_error = 0;
 		that.status = "login";
+		that.update();
+		riot.route('/tag/all');
 		obs.trigger("login");
-		that.update();
 	});
-
-	return false;
-};
-
-logout(e) {
-	var that = this;
-
-	api.revokeAuthentication(function(response) {
-		if (response.error) {
-			// エラー処理
-			return;
-		}
-
-		that.status = "nologin";
-		that.username = "";
-		that.update();
-	});
-
-	return false;
 };
 
 obs.on("logout", function() {

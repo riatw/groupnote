@@ -63,9 +63,7 @@
 
 		var obs = riot.observable();
 
-		riot.route('/', function(name) {
-			riot.route('/tag/all')
-		});
+		// riot.route.base('#!');
 
 		riot.route('/tag/(.+)', function(name) {
 			obs.trigger("tagChanged", name);

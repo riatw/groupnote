@@ -2,14 +2,22 @@
 <a href="#" class="btn btn-primary" onclick="{logout}">ログアウト</a>
 
 <script>
+	var that = this;
+
 	logout(e) {
 		api.revokeAuthentication(function(response) {
 			if ( response.error ) {
 				return;
 			}
+
+			obs.trigger("logout");
+
 			stateObject.currentUser = null;
 			stateObject.currentNoteId = null;
-			obs.trigger("logout");
+
+			that.status = "nologin";
+			that.update();
+			riot.route('/');
 		});
 	}
 </script>

@@ -30,15 +30,16 @@
 									<div class="form-group">
 										<label for="exampleInputEmail1">文章の状態</label>
 										<select name="status" class="form-control">
-											<option value="Draft" selected="{ status.value == 'Draft' }">Draft</option>
-											<option value="Publish" selected="{ status.value == 'Publish' }">Publish</option>
+											<option value="Draft" selected="{ status.value == 'Draft' }">下書き</option>
+											<option value="Publish" selected="{ status.value == 'Publish' }">公開</option>
 										</select>
 									</div>
 									<div class="form-group">
 										<label for="exampleInputEmail1">投稿フォーマット</label>
 										<select name="format" class="form-control">
 											<option value="markdown" selected="{ status.value == 'markdown' }">markdown</option>
-											<option value="__default__" selected="{ status.value == '__default__' }">__default__</option></select>
+											<option value="__default__" selected="{ status.value == '__default__' }">改行を変換</option>
+										</select>
 									</div>
 
 									<ul class="m-list-btngroup">
@@ -50,11 +51,12 @@
 							</div>
 
 							<div class="editnote-right">
-								<div class="mod-box-scroll">
+								<div class="mod-box-scroll scroll-padding">
+									<h1 class="info-title">{title.value}</h1>
+
 									<div class="mod-box-wysiwyg">
 										<div class="wysiwyg-base">
-											<div class="base-body wysiwyg" id="marked2">
-											</div>
+											<div class="base-body wysiwyg" id="marked2"></div>
 										</div>
 									</div>
 								</div>
@@ -76,20 +78,24 @@
 		$("#" + that.modal_id).appendTo("body");
 	});
 
-	that.status = 'Draft',
-	that.format = 'markdown'
-
 	that.noteIsLoaded = 0;
 
 	//編集の場合
 	that.open = function() {
-		if ( opts.mode == "edit" ) {
+		if ( opts.mode == 'create' ) {
+			that.title.value = "";
+			that.body.value = "";
+			that.tag.value = "";
+			that.status.value = 'Draft';
+			that.format.value = 'markdown';
+			that.update();
+		}
+		else if ( opts.mode == "edit" ) {
 			var _param = {
 				no_text_filter: 1
 			};
 
 			api.getEntry(SETTING.BLOGID, stateObject.currentNoteId, _param, function(response) {
-				console.log(response);
 				that.title.value = response.title;
 				that.body.value = response.body;
 				that.tag.value = response.tags.join(",");
@@ -108,11 +114,29 @@
 
 		object.title = that.title.value;
 		object.body = that.body.value;
-		object.tag =  that.tag.value.split(",");
+
+		console.log(that.tag.value);
+
+		if ( that.tag.value != "" ) {
+			object.tags = that.tag.value.split(",");
+		}
+
 		object.status = that.status.value;
 		object.format = that.format.value;
 
-		if ( stateObject.currentNoteId ) {
+		console.log(that.format.value);
+
+		if ( opts.mode == 'create' ) {
+			api.createEntry(siteId, object, function(response) {
+				stateObject.currentNote = response;
+				stateObject.currentNoteId = response.id;
+
+				$('#' + that.modal_id).modal('hide');
+
+				obs.trigger("noteCreated");
+			});
+		}
+		else if ( opts.mode == "edit" ) {
 			object.id = stateObject.currentNoteId;
 
 			api.updateEntry(siteId, object.id, object, function(response) {
@@ -124,16 +148,6 @@
 				obs.trigger("noteUpdated");
 			});
 		}
-		else {
-			api.createEntry(siteId, object, function(response) {
-				stateObject.currentNote = response;
-				stateObject.currentNoteId = response.id;
-
-				$('#' + that.modal_id).modal('hide');
-
-				obs.trigger("noteCreated");
-			});
-		}
 	}
 
 	that.delete = function () {
@@ -142,10 +156,10 @@
 				stateObject.currentNote = null;
 				stateObject.currentNoteId = null;
 
+				obs.trigger("noteDeleted");
+
 				$('#' + that.modal_id).modal('hide');
 			});
-
-			obs.trigger("noteDeleted");
 		}
 	}
 

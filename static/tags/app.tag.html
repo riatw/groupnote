@@ -1,16 +1,6 @@
 <app>
 	<nav class="navbar navbar-dark navbar-fixed-top bg-inverse">
 		<a class="navbar-brand" href="/">Group Note</a>
-		<div id="change_mode" class="collapse">
-			<ul>
-				<li>
-					<a href="">タグ</a>
-				</li>
-				<li>
-					<a href="">あ</a>
-				</li>
-			</ul>
-		</div>
 		<div id="navbar">
 			<nav class="nav navbar-nav float-xs-right" if="{status==='login'}">
 				<edit-note mode="create"></edit-note>
@@ -40,9 +30,16 @@ var that = this;
 api.getToken(function(response) {
 	if (response.error) {
 		// エラー処理
+		riot.route('/');
 		return;
 	}
 
+	that.status = "login";
+	obs.trigger("login");
+	that.update();
+});
+
+obs.on("login", function() {
 	that.status = "login";
 	that.update();
 });

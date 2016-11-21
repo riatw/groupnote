@@ -1,5 +1,5 @@
 <notedetail>
-<div class="m-box-note">
+<div class="m-box-note" if="{isNoteDetailShow}">
 	<div class="mod-icon-spinner note-spinner" if="{! isNoteDetailLoaded}"></div>
 
 	<div class="note-inner" if="{isNoteDetailLoaded}">
@@ -49,6 +49,9 @@
 
 <script>
 var that = this;
+
+that.isNoteDetailShow = 0;
+that.update();
 
 function getNoteDetail() {
 	if ( stateObject.currentNoteId == null ) {
@@ -144,6 +147,7 @@ function viewNoteDetail() {
 			that.outline = array;
 
 			that.isNoteDetailLoaded = 1;
+			that.isNoteDetailShow = 1;
 
 			that.marked.innerHTML = contentHTML.html();
 			return contentHTML.html();
@@ -177,6 +181,7 @@ obs.on("login", function() {
 });
 
 obs.on("noteChanged", function(noteid) {
+	console.log(noteid);
 	stateObject.currentNoteId = noteid;
 	getNoteDetail();
 });
@@ -188,6 +193,11 @@ obs.on("noteCreated", function(noteid) {
 
 obs.on("noteUpdated", function() {
 	getNoteDetail();
+});
+
+obs.on("noteDeleted", function() {
+	that.isNoteDetailShow = 0;
+	that.update();
 });
 </script>
 </notedetail>

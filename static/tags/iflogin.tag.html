@@ -29,6 +29,7 @@
 		var that = this;
 
 		obs.on("login", function() {
+			console.log("login");
 			that.status = "login";
 			that.update();
 		});

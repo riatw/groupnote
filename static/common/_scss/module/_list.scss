@@ -58,10 +58,10 @@
 			cursor: pointer;
 			@include transition-property(background);
 			@include transition-duration(0.2s);
+			text-decoration: none !important;
 
 			&:hover {
 				background: #eee;
-				text-decoration: none;
 				@include transition-property(background);
 				@include transition-duration(0.2s);
 			}

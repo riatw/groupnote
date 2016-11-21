@@ -301,9 +301,11 @@
 		width: 49%;
 
 		.mod-box-scroll {
-			height: 535px;
+			padding: 30px;
+			height: 575px;
 			overflow-y: auto;
 			border: 1px solid #d5d5d5;
+			box-sizing: border-box;
 		}
 	}
 }

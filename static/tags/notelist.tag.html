@@ -35,12 +35,16 @@
 
 		var _params = {
 			sortBy: "modified_on",
-			limit: 100
+			limit: 1000
 		};
 
 		api.listEntries(SETTING.BLOGID, _params, function(response) {
 			that.feeds = $.grep(response.items, function(value,index) {
 				value.tags_raw = value.tags.join(" ");
+
+				if ( stateObject.currentTagId == "" ) {
+					return true;
+				}
 
 				for ( var i = 0; i < value.tags.length; i++ ) {
 					if ( value.tags[i].lastIndexOf(stateObject.currentTagId, 0) === 0 ) {
@@ -67,7 +71,6 @@
 	});
 
 	obs.on("filterChanged", function(q) {
-		console.log(q);
 		if ( q == null ) {
 			that.feeds = that.feeds_cp;
 			return;
@@ -93,6 +96,21 @@
 
 	obs.on("noteChanged", function(name) {
 		that.currentNoteId = name;
+		that.update();
+	});
+
+	obs.on("noteCreated", function() {
+		viewNotes();
+		that.update();
+	});
+
+	obs.on("noteUpdated", function() {
+		viewNotes();
+		that.update();
+	});
+
+	obs.on("noteDeleted", function() {
+		viewNotes();
 		that.update();
 	});
 </script>
