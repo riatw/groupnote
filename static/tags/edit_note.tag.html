@@ -13,7 +13,7 @@
 								<form class="m-box-form" onsubmit="{ok}">
 									<div class="form-group">
 										<label for="exampleInputEmail1">タイトル</label>
-										<input type="text" name="title" class="form-control" placeholder="ノートのタイトルを入力">
+										<input type="text" name="title" class="form-control" onkeyup="{preview}" placeholder="ノートのタイトルを入力">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">本文</label>
@@ -21,31 +21,35 @@
 									</div>
 									<div class="form-group">
 										<label for="exampleInputEmail1">アイテム</label>
-										<input type="file" name="upload" multiple>
+										<input type="file" name="upload" multiple onchange="{upload}">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputEmail1">タグ</label>
 										<input type="text" name="tag" class="form-control" placeholder="ノートのタグをカンマ区切りで入力">
 									</div>
-									<div class="form-group">
-										<label for="exampleInputEmail1">文章の状態</label>
-										<select name="status" class="form-control">
-											<option value="Draft" selected="{ status.value == 'Draft' }">下書き</option>
-											<option value="Publish" selected="{ status.value == 'Publish' }">公開</option>
-										</select>
+									<div class="form-group row">
+										<div class="col-md-6">
+											<label for="exampleInputEmail1">文章の状態</label>
+											<select name="status" class="form-control">
+												<option value="Draft" selected="{ status.value == 'Draft' }">下書き</option>
+												<option value="Publish" selected="{ status.value == 'Publish' }">公開</option>
+											</select>
+										</div>
+										<div class="col-md-6">
+											<label for="exampleInputEmail1">投稿フォーマット</label>
+											<select name="format" class="form-control">
+												<option value="markdown" selected="{ status.value == 'markdown' }">markdown</option>
+												<option value="__default__" selected="{ status.value == '__default__' }">改行を変換</option>
+											</select>
+										</div>
 									</div>
 									<div class="form-group">
-										<label for="exampleInputEmail1">投稿フォーマット</label>
-										<select name="format" class="form-control">
-											<option value="markdown" selected="{ status.value == 'markdown' }">markdown</option>
-											<option value="__default__" selected="{ status.value == '__default__' }">改行を変換</option>
-										</select>
 									</div>
 
 									<ul class="m-list-btngroup">
-										<button type="submit" class="m-button-common common-save">保存</button>
-										<button class="m-button-common common-delete" onclick="{delete}">削除</button>
-										<button class="m-button-common common-cancel" onclick="{cancel}">キャンセル</button>
+										<button type="submit" class="btn btn-primary">保存</button>
+										<button class="btn btn-danger" onclick="{delete}">削除</button>
+										<button class="btn common-cancel" onclick="{cancel}">キャンセル</button>
 									</ul>
 								</form>
 							</div>
@@ -172,22 +176,30 @@
 		that.update();
 	};
 
-	// upload on file select or drop
-	that.upload = function (files) {
+	that.upload = function (e) {
+		var files = e.target.files;
+
 		for ( var i=0; i < files.length; i++ ) {
-			api.uploadAsset(siteId, { file: files[i], path: "/files", site_id: SETTING.BLOGID, autoRenameIfExists: true }, function(response) {
+			api.uploadAsset(siteId, { file: files[i], path: "/files", site_id: siteId, autoRenameIfExists: true }, function(response) {
+
+				console.log(response);
+
+				if ( response.error ) {
+					return;
+				}
+
 				var text;
 
-				if ( response.data.class == "image" ) {
-					text = "![" + response.config.data.file.name + "]("+ response.data.url +")";
+				if ( response.class == "image" ) {
+					text = "![" + response.filename + "]("+ response.url +")";
 				}
 				else {
-					text = "[" + response.config.data.file.name + "]("+ response.data.url +")";
+					text = "[" + response.filename + "]("+ response.url +")";
 				}
 
-				that.body = that.body + "\n" + text;
+				that.body.value = that.body.value + "\n" + text;
 				that.preview();
-				that.$apply();
+				that.update();
 			});
 		}
 	};

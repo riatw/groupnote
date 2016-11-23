@@ -4096,12 +4096,10 @@ tbody.collapse.in {
 
 @media (min-width: 576px) {
 	.card-columns {
-		-webkit-column-count : 3;
-		   -moz-column-count : 3;
-		        column-count : 3;
-		-webkit-column-gap : 1.25rem;
-		   -moz-column-gap : 1.25rem;
-		        column-gap : 1.25rem;
+		-moz-column-count : 3;
+		     column-count : 3;
+		-moz-column-gap : 1.25rem;
+		     column-gap : 1.25rem;
 	}
 	.card-columns .card {
 		display : inline-block;
@@ -4423,15 +4421,6 @@ a.tag:focus, a.tag:hover {
 	color : #843534;
 }
 
-@-webkit-keyframes progress-bar-stripes {
-	from {
-		background-position : 1rem 0;
-	}
-	to {
-		background-position : 0 0;
-	}
-}
-
 @keyframes progress-bar-stripes {
 	from {
 		background-position : 1rem 0;
@@ -4546,8 +4535,7 @@ base::-moz-progress-bar, .progress[value] {
 }
 
 .progress-animated[value]::-webkit-progress-value {
-	-webkit-animation : progress-bar-stripes 2s linear infinite;
-	        animation : progress-bar-stripes 2s linear infinite;
+	animation : progress-bar-stripes 2s linear infinite;
 }
 
 .progress-animated[value]::-moz-progress-bar {
@@ -4556,8 +4544,7 @@ base::-moz-progress-bar, .progress[value] {
 
 @media screen and (min-width: 0\0) {
 	.progress-animated .progress-bar-striped {
-		-webkit-animation : progress-bar-stripes 2s linear infinite;
-		        animation : progress-bar-stripes 2s linear infinite;
+		animation : progress-bar-stripes 2s linear infinite;
 	}
 }
 
@@ -4921,16 +4908,13 @@ button.close {
 	outline : 0;
 }
 .modal.fade .modal-dialog {
-	transition : -webkit-transform 0.3s ease-out;
-	transition :         transform 0.3s ease-out;
-	-webkit-transform : translate(0, -25%);
-	    -ms-transform : translate(0, -25%);
-	        transform : translate(0, -25%);
+	transition : transform 0.3s ease-out;
+	-ms-transform : translate(0, -25%);
+	    transform : translate(0, -25%);
 }
 .modal.in .modal-dialog {
-	-webkit-transform : translate(0, 0);
-	    -ms-transform : translate(0, 0);
-	        transform : translate(0, 0);
+	-ms-transform : translate(0, 0);
+	    transform : translate(0, 0);
 }
 
 .modal-open .modal {
@@ -5287,27 +5271,22 @@ button.close {
 }
 @media all and (transform-3d), (-webkit-transform-3d) {
 	.carousel-inner > .carousel-item {
-		transition : -webkit-transform 0.6s ease-in-out;
-		transition :         transform 0.6s ease-in-out;
+		transition : transform 0.6s ease-in-out;
 		-webkit-backface-visibility : hidden;
 		        backface-visibility : hidden;
-		-webkit-perspective : 1000px;
-		        perspective : 1000px;
+		perspective : 1000px;
 	}
 	.carousel-inner > .carousel-item.next, .carousel-inner > .carousel-item.active.right {
 		left : 0;
-		-webkit-transform : translate3d(100%, 0, 0);
-		        transform : translate3d(100%, 0, 0);
+		transform : translate3d(100%, 0, 0);
 	}
 	.carousel-inner > .carousel-item.prev, .carousel-inner > .carousel-item.active.left {
 		left : 0;
-		-webkit-transform : translate3d(-100%, 0, 0);
-		        transform : translate3d(-100%, 0, 0);
+		transform : translate3d(-100%, 0, 0);
 	}
 	.carousel-inner > .carousel-item.next.left, .carousel-inner > .carousel-item.prev.right, .carousel-inner > .carousel-item.active {
 		left : 0;
-		-webkit-transform : translate3d(0, 0, 0);
-		        transform : translate3d(0, 0, 0);
+		transform : translate3d(0, 0, 0);
 	}
 }
 .carousel-inner > .active, .carousel-inner > .next, .carousel-inner > .prev {

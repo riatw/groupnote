@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link href="common/css/bootstrap/bootstrap.css" rel="stylesheet">
-	<link rel="stylesheet" href="common/css/base_new.css">
+	<link rel="stylesheet" href="common/css/base.css">
 </head>
 
 <body class="index">
@@ -17,6 +17,19 @@
 	<script type="text/javascript" src="common/lib/data-api/v3/js/mt-data-api.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.js"></script>
 	<script type="text/javascript" src="common/js/setting.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/riot/2.6.7/riot+compiler.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<script src="tags/app.tag.html" type="riot/tag"></script>
+	<script src="tags/login.tag.html" type="riot/tag"></script>
+	<script src="tags/logout.tag.html" type="riot/tag"></script>
+	<script src="tags/iflogin.tag.html" type="riot/tag"></script>
+	<script src="tags/taglist.tag.html" type="riot/tag"></script>
+	<script src="tags/notelist.tag.html" type="riot/tag"></script>
+	<script src="tags/notedetail.tag.html" type="riot/tag"></script>
+	<script src="tags/edit_note.tag.html" type="riot/tag"></script>
+	<script src="tags/filter.tag.html" type="riot/tag"></script>
+
 	<script>
 		//api setting
 		var api = new MT.DataAPI({
@@ -37,21 +50,6 @@
 			renderer: renderer
 		});
 
-	</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/riot/2.6.7/riot+compiler.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-	<script src="tags/app.tag.html" type="riot/tag"></script>
-	<script src="tags/login.tag.html" type="riot/tag"></script>
-	<script src="tags/logout.tag.html" type="riot/tag"></script>
-	<script src="tags/iflogin.tag.html" type="riot/tag"></script>
-	<script src="tags/taglist.tag.html" type="riot/tag"></script>
-	<script src="tags/notelist.tag.html" type="riot/tag"></script>
-	<script src="tags/notedetail.tag.html" type="riot/tag"></script>
-	<script src="tags/edit_note.tag.html" type="riot/tag"></script>
-	<script src="tags/filter.tag.html" type="riot/tag"></script>
-
-	<script>
 		riot.mount('*');
 
 		var stateObject = {
