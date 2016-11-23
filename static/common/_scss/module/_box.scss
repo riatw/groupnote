@@ -388,8 +388,10 @@
 									margin: 10px 0;
 									padding: 0 0 0 10px;
 									border-left: 3px solid #eee;
+								}
 
-									&.active {
+								&.active {
+									> a {
 										font-weight: bold;
 										border-left: 3px solid $siteMainColor;
 									}

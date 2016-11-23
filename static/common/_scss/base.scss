@@ -98,9 +98,6 @@ body,
 }
 
 .wysiwyg {
-	> :first-child {
-		margin-top: 0 !important;
-	}
 	> p:first-child:empty + * {
 		margin-top: 0 !important;
 	}

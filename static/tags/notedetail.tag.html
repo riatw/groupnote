@@ -18,13 +18,13 @@
 				<li class="dropdown" dropdown>
 					<button type="button" class="btn btn-secondary dropdown-toggle" id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">目次 <span class="caret"></button>
 
-					<ul class="dropdown-menu" aria-labelledby="dLabel" du-scroll-container="scroll-container">
-						<li each={ outline }>
-							<a href="#{id}" du-smooth-scroll du-scrollspy="id">{text}</a>
+					<ul id="du-smooth-scroll" class="nav dropdown-menu" aria-labelledby="dLabel">
+						<li class="nav-item" each={ outline }>
+							<a href="#{id}" class="nav-link">{text}</a>
 
 							<ul>
-								<li each={ child }>
-									<a href="#{id}" du-smooth-scroll du-scrollspy="id">{text}</a>
+								<li class="nav-item" each={ child }>
+									<a href="#{id}" class="nav-link">{text}</a>
 								</li>
 							</ul>
 						</li>
@@ -34,7 +34,7 @@
 		</div>
 
 		<div class="note-body">
-			<div class="mod-box-scroll scroll-no-border" id="scroll-container">
+			<div class="mod-box-scroll scroll-no-border" id="scroll-container" data-spy="scroll" data-target="#du-smooth-scroll" data-offset="0">
 				<h1 class="info-title">{detailTitle}</h1>
 
 				<div class="mod-box-wysiwyg" if="{isNoteDetailLoaded}">
@@ -161,19 +161,22 @@ function viewNoteDetail() {
 		that.update();
 	}
 
-	$("[du-smooth-scroll]").click(function() {
+	$("#du-smooth-scroll a").click(function() {
 		// 移動先となる要素を取得
 		var target = $(this.hash);
 		if (!target.length) return;
 
 		// 移動先となる値
-		var targetY = target.position().top + $('#scroll-container').scrollTop() - 20;
+		var targetY = target.position().top + $('#scroll-container').scrollTop() - 10;
 
 		// スクロールアニメーション
 		$('#scroll-container').animate({scrollTop: targetY}, 500, 'swing');
+
 		// デフォルトの処理はキャンセル
 		return false;
 	});
+
+	$('#scroll-container').scrollspy('refresh');
 }
 
 obs.on("login", function() {
