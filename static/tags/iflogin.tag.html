@@ -1,21 +1,21 @@
 <iflogin>
 	<div class="container-fluid container-fixed" if="{status==='login'}">
-		<div class="row no-gutter">
-			<div class="col-md-2 { hidden-sm-down: sp_mode != 'taglist'}">
+		<div class="row no-gutter { taglist: sp_mode == 'taglist'} { notelist: sp_mode == 'notelist'} { notedetail: sp_mode == 'notedetail'}">
+			<div class="col-md-2 col-sm-4 col-xs-4">
 				<div class="m-box-scroll">
 					<div class="scroll-inner">
 						<taglist></taglist>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-4 { hidden-sm-down: sp_mode != 'notelist'}">
+			<div class="col-md-4 col-sm-4 col-xs-4">
 				<div class="m-box-scroll">
 					<div class="scroll-inner">
 						<notelist></notelist>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-6 { hidden-sm-down: sp_mode != 'notedetail'}">
+			<div class="col-md-6 col-sm-4 col-xs-4">
 				<div class="m-box-scroll">
 					<div class="scroll-inner">
 						<notedetail></notedetail>
@@ -29,7 +29,6 @@
 		var that = this;
 
 		obs.on("login", function() {
-			console.log("login");
 			that.status = "login";
 			that.update();
 		});
@@ -40,6 +39,11 @@
 		});
 
 		that.sp_mode = "taglist";
+
+		obs.on("init", function() {
+			that.sp_mode = "taglist";
+			that.update();
+		});
 
 		obs.on("tagChanged", function() {
 			that.sp_mode = "notelist";

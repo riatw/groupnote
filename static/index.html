@@ -29,6 +29,7 @@
 	<script src="tags/notedetail.tag.html" type="riot/tag"></script>
 	<script src="tags/edit_note.tag.html" type="riot/tag"></script>
 	<script src="tags/filter.tag.html" type="riot/tag"></script>
+	<script src="tags/spback.tag.html" type="riot/tag"></script>
 
 	<script>
 		//api setting
@@ -62,6 +63,10 @@
 		var obs = riot.observable();
 
 		// riot.route.base('#!');
+
+		riot.route('/', function(name) {
+			obs.trigger("init", name);
+		});
 
 		riot.route('/tag/(.+)', function(name) {
 			obs.trigger("tagChanged", name);

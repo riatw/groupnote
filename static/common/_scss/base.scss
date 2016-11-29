@@ -235,6 +235,30 @@ body,
 	}
 }
 
+.container-fixed {
+	@media (max-width: 767px) {
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+	}
+}
+.no-gutter {
+	@media (max-width: 767px) {
+		width: 300%;
+		margin: 0;
+		transition: all 0.7s;
+
+		&.taglist {
+			transform: translateX(0);
+		}
+		&.notelist {
+			transform: translateX(-33.3%);
+		}
+		&.notedetail {
+			transform: translateX(-66.6%);
+		}
+	}
+}
 .no-gutter > [class*='col-'] {
     padding-right:0 !important;
     padding-left:0 !important;
@@ -243,5 +267,9 @@ body,
     &:first-child {
     	border-left: 0;
     }
+
+	@media (max-width: 767px) {
+		width: 33.3%;
+	}
 }
 
