@@ -184,6 +184,10 @@ obs.on("login", function() {
 });
 
 obs.on("noteChanged", function(noteid) {
+	that.detailBody = null;
+
+	that.update();
+
 	stateObject.currentNoteId = noteid;
 	getNoteDetail();
 });
@@ -201,5 +205,6 @@ obs.on("noteDeleted", function() {
 	that.isNoteDetailShow = 0;
 	that.update();
 });
+
 </script>
 </notedetail>

@@ -1,3 +1,4 @@
+@charset 'UTF-8';
 /*! normalize.css v4.2.0 | MIT License | github.com/necolas/normalize.css */
 html {
 	font-family : sans-serif;
@@ -207,7 +208,7 @@ html {
 }
 
 body {
-	font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+	font-family : -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, 'ヒラギノ角ゴ Pro', 'Hiragino Kaku Gothic Pro', Meiryo, sans-serif;
 	font-size : 14px;
 	font-size : 1rem;
 	line-height : 1.5;

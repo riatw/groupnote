@@ -1,117 +1,21 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="ja" class="no-js"> <!--<![endif]-->
+<html lang="ja">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>GROUP NOTE beta</title>
 	<meta name="viewport" content="width=1024">
 
+	<link rel="stylesheet" href="../common/css/bootstrap/bootstrap.css">
+	<link rel="stylesheet" href="../common/css/base.css">
+
 	<script type="text/javascript" src="../common/js/setting.js"></script>
 	<script src="../common/lib/data-api/v3/js/mt-data-api.js"></script>
-	<script src="https://gnab.github.io/remark/downloads/remark-latest.min.js"></script>
-
-	<script>
-	var entryId = location.search.replace("?note=","");
-
-	//api setting
-	var api = new MT.DataAPI({
-		baseUrl:  SETTING.CMSURL,
-		clientId: "gnote"
-	});
-
-	var siteId = SETTING.BLOGID;
-
-	api.storeTokenData({
-		accessToken: localStorage.getItem("accessToken"),
-		expiresIn: 3600,
-		sessionId: localStorage.getItem("sessionId")
-	});
-
-	api.getToken(function(response) {
-		api.getEntry(siteId, entryId, { no_text_filter: 1 }, function(response) {
-			if (response.error) {
-				// エラー処理
-				return;
-			}
-
-			// var body = response.body.replace(/^# /gm,"---\n# ").replace(/^## /gm,"---\n## ").replace(/^---\n---\n/gm,"---\nclass: center, middle\n");
-
-			var body = response.body.replace(/^# /gm,"---\n# ");
-
-			// 冒頭h1で始まる場合は改ページを省略
-			if ( body.match(/^---\n/) ) {
-				body = body.slice(4);
-			}
-
-			body = "class: center, middle\n# " + response.title + "\n---\n" + body;
-
-			var slideshow = remark.create({
-				source: body,
-				highlightStyle: 'monokai',
-				highlightLanguage: 'remark',
-				highlightLines: true,
-				navigation: {
-					scroll: false
-				}
-			});
-		});
-	});
-	</script>
-<style>
-body {
-font-family: Verdana, 'メイリオ', Meiryo, 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', '游ゴシック', YuGothic, 'ＭＳ Ｐゴシック', Helvetica, Arial, sans-serif;
-}
-.remark-slide-scaler {
-	-webkit-box-shadow: none;
-	box-shadow: none;
-	overflow: auto;
-}
-.remark-slide-content {
-background: #fafafa;
-color: #555;
-font-size: 24px;
-line-height: 2;
-border-top: 5px solid #f08300;
-box-sizing: border-box;
-}
-.remark-slide {
-	position: relative;
-}
-.remark-slide-content h1,
-.remark-slide-content h2,
-.remark-slide-content h3 {
-	color: #333;
-	line-height: 1.5 !important;
-}
-.remark-slide-content a {
-	color: #f08300;
-}
-.remark-slide-content h1 {
-	margin-bottom: 1.0em;
-	font-size: 40px;
-	line-height: 1;
-}
-.remark-slide-content h2 {
-	margin-bottom: 0.5em;
-	padding-left: 25px;
-	border-left: 10px solid #f08300;
-	font-size: 30px;
-}
-.remark-slide-content h3 {
-	margin-bottom: 0.5em;
-	font-size: 25px;
-}
-.remark-slide-content.center.middle h1 {
-	font-size: 55px !important;
-	line-height: 2 !important;
-}
-
-</style>
+	<script src="../common/lib/remark.js"></script>
+	<script src="../common/js/presentation.js"></script>
 </head>
 
-<body class="index">
+<body>
+
 </body>
 </html>

@@ -412,6 +412,12 @@
 			height: 100%;
 			box-sizing: border-box;
 
+			.info-title {
+				margin-top: 25px;
+				font-size: 34px;
+				font-weight: bold;
+			}
+
 			> div {
 				padding: 30px 30px 30px 30px;
 				height: 100%;

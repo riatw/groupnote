@@ -1,3 +1,4 @@
+@charset 'UTF-8';
 /*!
  * Bootstrap v4.0.0-alpha.5 (https://getbootstrap.com)
  * Copyright 2011-2016 The Bootstrap Authors
@@ -264,7 +265,7 @@ html {
 }
 
 body {
-	font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+	font-family : -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, 'ヒラギノ角ゴ Pro', 'Hiragino Kaku Gothic Pro', Meiryo, sans-serif;
 	font-size : 14px;
 	font-size : 1rem;
 	line-height : 1.5;
@@ -456,7 +457,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	margin-bottom : 0.5rem;
 	font-family : inherit;
 	font-weight : 500;
-	line-height : 1.1;
+	line-height : 1.5;
 	color : inherit;
 }
 
@@ -717,12 +718,10 @@ pre code {
 }
 
 .row {
-	display : -webkit-flex;
 	display : -ms-flexbox;
-	display :         flex;
-	-webkit-flex-wrap : wrap;
-	    -ms-flex-wrap : wrap;
-	        flex-wrap : wrap;
+	display : flex;
+	-ms-flex-wrap : wrap;
+	    flex-wrap : wrap;
 	margin-right : -15px;
 	margin-left : -15px;
 }
@@ -784,96 +783,82 @@ pre code {
 }
 
 .col-xs {
-	-webkit-flex-basis : 0;
 	-ms-flex-preferred-size : 0;
-	        flex-basis : 0;
-	-webkit-flex-grow : 1;
+	flex-basis : 0;
 	-ms-flex-positive : 1;
-	        flex-grow : 1;
+	flex-grow : 1;
 	max-width : 100%;
 }
 
 .col-xs-1 {
-	-webkit-flex : 0 0 8.33333%;
-	    -ms-flex : 0 0 8.33333%;
-	        flex : 0 0 8.33333%;
+	-ms-flex : 0 0 8.33333%;
+	    flex : 0 0 8.33333%;
 	max-width : 8.33333%;
 }
 
 .col-xs-2 {
-	-webkit-flex : 0 0 16.66667%;
-	    -ms-flex : 0 0 16.66667%;
-	        flex : 0 0 16.66667%;
+	-ms-flex : 0 0 16.66667%;
+	    flex : 0 0 16.66667%;
 	max-width : 16.66667%;
 }
 
 .col-xs-3 {
-	-webkit-flex : 0 0 25%;
-	    -ms-flex : 0 0 25%;
-	        flex : 0 0 25%;
+	-ms-flex : 0 0 25%;
+	    flex : 0 0 25%;
 	max-width : 25%;
 }
 
 .col-xs-4 {
-	-webkit-flex : 0 0 33.33333%;
-	    -ms-flex : 0 0 33.33333%;
-	        flex : 0 0 33.33333%;
+	-ms-flex : 0 0 33.33333%;
+	    flex : 0 0 33.33333%;
 	max-width : 33.33333%;
 }
 
 .col-xs-5 {
-	-webkit-flex : 0 0 41.66667%;
-	    -ms-flex : 0 0 41.66667%;
-	        flex : 0 0 41.66667%;
+	-ms-flex : 0 0 41.66667%;
+	    flex : 0 0 41.66667%;
 	max-width : 41.66667%;
 }
 
 .col-xs-6 {
-	-webkit-flex : 0 0 50%;
-	    -ms-flex : 0 0 50%;
-	        flex : 0 0 50%;
+	-ms-flex : 0 0 50%;
+	    flex : 0 0 50%;
 	max-width : 50%;
 }
 
 .col-xs-7 {
-	-webkit-flex : 0 0 58.33333%;
-	    -ms-flex : 0 0 58.33333%;
-	        flex : 0 0 58.33333%;
+	-ms-flex : 0 0 58.33333%;
+	    flex : 0 0 58.33333%;
 	max-width : 58.33333%;
 }
 
 .col-xs-8 {
-	-webkit-flex : 0 0 66.66667%;
-	    -ms-flex : 0 0 66.66667%;
-	        flex : 0 0 66.66667%;
+	-ms-flex : 0 0 66.66667%;
+	    flex : 0 0 66.66667%;
 	max-width : 66.66667%;
 }
 
 .col-xs-9 {
-	-webkit-flex : 0 0 75%;
-	    -ms-flex : 0 0 75%;
-	        flex : 0 0 75%;
+	-ms-flex : 0 0 75%;
+	    flex : 0 0 75%;
 	max-width : 75%;
 }
 
 .col-xs-10 {
-	-webkit-flex : 0 0 83.33333%;
-	    -ms-flex : 0 0 83.33333%;
-	        flex : 0 0 83.33333%;
+	-ms-flex : 0 0 83.33333%;
+	    flex : 0 0 83.33333%;
 	max-width : 83.33333%;
 }
 
 .col-xs-11 {
-	-webkit-flex : 0 0 91.66667%;
-	    -ms-flex : 0 0 91.66667%;
-	        flex : 0 0 91.66667%;
+	-ms-flex : 0 0 91.66667%;
+	    flex : 0 0 91.66667%;
 	max-width : 91.66667%;
 }
 
 .col-xs-12 {
-	-webkit-flex : 0 0 100%;
-	    -ms-flex : 0 0 100%;
-	        flex : 0 0 100%;
+	-ms-flex : 0 0 100%;
+	    flex : 0 0 100%;
 	max-width : 100%;
 }
 
@@ -1027,84 +1012,70 @@ pre code {
 
 @media (min-width: 576px) {
 	.col-sm {
-		-webkit-flex-basis : 0;
 		-ms-flex-preferred-size : 0;
-		        flex-basis : 0;
-		-webkit-flex-grow : 1;
+		flex-basis : 0;
 		-ms-flex-positive : 1;
-		        flex-grow : 1;
+		flex-grow : 1;
 		max-width : 100%;
 	}
 	.col-sm-1 {
-		-webkit-flex : 0 0 8.33333%;
-		    -ms-flex : 0 0 8.33333%;
-		        flex : 0 0 8.33333%;
+		-ms-flex : 0 0 8.33333%;
+		    flex : 0 0 8.33333%;
 		max-width : 8.33333%;
 	}
 	.col-sm-2 {
-		-webkit-flex : 0 0 16.66667%;
-		    -ms-flex : 0 0 16.66667%;
-		        flex : 0 0 16.66667%;
+		-ms-flex : 0 0 16.66667%;
+		    flex : 0 0 16.66667%;
 		max-width : 16.66667%;
 	}
 	.col-sm-3 {
-		-webkit-flex : 0 0 25%;
-		    -ms-flex : 0 0 25%;
-		        flex : 0 0 25%;
+		-ms-flex : 0 0 25%;
+		    flex : 0 0 25%;
 		max-width : 25%;
 	}
 	.col-sm-4 {
-		-webkit-flex : 0 0 33.33333%;
-		    -ms-flex : 0 0 33.33333%;
-		        flex : 0 0 33.33333%;
+		-ms-flex : 0 0 33.33333%;
+		    flex : 0 0 33.33333%;
 		max-width : 33.33333%;
 	}
 	.col-sm-5 {
-		-webkit-flex : 0 0 41.66667%;
-		    -ms-flex : 0 0 41.66667%;
-		        flex : 0 0 41.66667%;
+		-ms-flex : 0 0 41.66667%;
+		    flex : 0 0 41.66667%;
 		max-width : 41.66667%;
 	}
 	.col-sm-6 {
-		-webkit-flex : 0 0 50%;
-		    -ms-flex : 0 0 50%;
-		        flex : 0 0 50%;
+		-ms-flex : 0 0 50%;
+		    flex : 0 0 50%;
 		max-width : 50%;
 	}
 	.col-sm-7 {
-		-webkit-flex : 0 0 58.33333%;
-		    -ms-flex : 0 0 58.33333%;
-		        flex : 0 0 58.33333%;
+		-ms-flex : 0 0 58.33333%;
+		    flex : 0 0 58.33333%;
 		max-width : 58.33333%;
 	}
 	.col-sm-8 {
-		-webkit-flex : 0 0 66.66667%;
-		    -ms-flex : 0 0 66.66667%;
-		        flex : 0 0 66.66667%;
+		-ms-flex : 0 0 66.66667%;
+		    flex : 0 0 66.66667%;
 		max-width : 66.66667%;
 	}
 	.col-sm-9 {
-		-webkit-flex : 0 0 75%;
-		    -ms-flex : 0 0 75%;
-		        flex : 0 0 75%;
+		-ms-flex : 0 0 75%;
+		    flex : 0 0 75%;
 		max-width : 75%;
 	}
 	.col-sm-10 {
-		-webkit-flex : 0 0 83.33333%;
-		    -ms-flex : 0 0 83.33333%;
-		        flex : 0 0 83.33333%;
+		-ms-flex : 0 0 83.33333%;
+		    flex : 0 0 83.33333%;
 		max-width : 83.33333%;
 	}
 	.col-sm-11 {
-		-webkit-flex : 0 0 91.66667%;
-		    -ms-flex : 0 0 91.66667%;
-		        flex : 0 0 91.66667%;
+		-ms-flex : 0 0 91.66667%;
+		    flex : 0 0 91.66667%;
 		max-width : 91.66667%;
 	}
 	.col-sm-12 {
-		-webkit-flex : 0 0 100%;
-		    -ms-flex : 0 0 100%;
-		        flex : 0 0 100%;
+		-ms-flex : 0 0 100%;
+		    flex : 0 0 100%;
 		max-width : 100%;
 	}
 	.pull-sm-0 {
@@ -1225,84 +1196,70 @@ pre code {
 
 @media (min-width: 768px) {
 	.col-md {
-		-webkit-flex-basis : 0;
 		-ms-flex-preferred-size : 0;
-		        flex-basis : 0;
-		-webkit-flex-grow : 1;
+		flex-basis : 0;
 		-ms-flex-positive : 1;
-		        flex-grow : 1;
+		flex-grow : 1;
 		max-width : 100%;
 	}
 	.col-md-1 {
-		-webkit-flex : 0 0 8.33333%;
-		    -ms-flex : 0 0 8.33333%;
-		        flex : 0 0 8.33333%;
+		-ms-flex : 0 0 8.33333%;
+		    flex : 0 0 8.33333%;
 		max-width : 8.33333%;
 	}
 	.col-md-2 {
-		-webkit-flex : 0 0 16.66667%;
-		    -ms-flex : 0 0 16.66667%;
-		        flex : 0 0 16.66667%;
+		-ms-flex : 0 0 16.66667%;
+		    flex : 0 0 16.66667%;
 		max-width : 16.66667%;
 	}
 	.col-md-3 {
-		-webkit-flex : 0 0 25%;
-		    -ms-flex : 0 0 25%;
-		        flex : 0 0 25%;
+		-ms-flex : 0 0 25%;
+		    flex : 0 0 25%;
 		max-width : 25%;
 	}
 	.col-md-4 {
-		-webkit-flex : 0 0 33.33333%;
-		    -ms-flex : 0 0 33.33333%;
-		        flex : 0 0 33.33333%;
+		-ms-flex : 0 0 33.33333%;
+		    flex : 0 0 33.33333%;
 		max-width : 33.33333%;
 	}
 	.col-md-5 {
-		-webkit-flex : 0 0 41.66667%;
-		    -ms-flex : 0 0 41.66667%;
-		        flex : 0 0 41.66667%;
+		-ms-flex : 0 0 41.66667%;
+		    flex : 0 0 41.66667%;
 		max-width : 41.66667%;
 	}
 	.col-md-6 {
-		-webkit-flex : 0 0 50%;
-		    -ms-flex : 0 0 50%;
-		        flex : 0 0 50%;
+		-ms-flex : 0 0 50%;
+		    flex : 0 0 50%;
 		max-width : 50%;
 	}
 	.col-md-7 {
-		-webkit-flex : 0 0 58.33333%;
-		    -ms-flex : 0 0 58.33333%;
-		        flex : 0 0 58.33333%;
+		-ms-flex : 0 0 58.33333%;
+		    flex : 0 0 58.33333%;
 		max-width : 58.33333%;
 	}
 	.col-md-8 {
-		-webkit-flex : 0 0 66.66667%;
-		    -ms-flex : 0 0 66.66667%;
-		        flex : 0 0 66.66667%;
+		-ms-flex : 0 0 66.66667%;
+		    flex : 0 0 66.66667%;
 		max-width : 66.66667%;
 	}
 	.col-md-9 {
-		-webkit-flex : 0 0 75%;
-		    -ms-flex : 0 0 75%;
-		        flex : 0 0 75%;
+		-ms-flex : 0 0 75%;
+		    flex : 0 0 75%;
 		max-width : 75%;
 	}
 	.col-md-10 {
-		-webkit-flex : 0 0 83.33333%;
-		    -ms-flex : 0 0 83.33333%;
-		        flex : 0 0 83.33333%;
+		-ms-flex : 0 0 83.33333%;
+		    flex : 0 0 83.33333%;
 		max-width : 83.33333%;
 	}
 	.col-md-11 {
-		-webkit-flex : 0 0 91.66667%;
-		    -ms-flex : 0 0 91.66667%;
-		        flex : 0 0 91.66667%;
+		-ms-flex : 0 0 91.66667%;
+		    flex : 0 0 91.66667%;
 		max-width : 91.66667%;
 	}
 	.col-md-12 {
-		-webkit-flex : 0 0 100%;
-		    -ms-flex : 0 0 100%;
-		        flex : 0 0 100%;
+		-ms-flex : 0 0 100%;
+		    flex : 0 0 100%;
 		max-width : 100%;
 	}
 	.pull-md-0 {
@@ -1423,84 +1380,70 @@ pre code {
 
 @media (min-width: 992px) {
 	.col-lg {
-		-webkit-flex-basis : 0;
 		-ms-flex-preferred-size : 0;
-		        flex-basis : 0;
-		-webkit-flex-grow : 1;
+		flex-basis : 0;
 		-ms-flex-positive : 1;
-		        flex-grow : 1;
+		flex-grow : 1;
 		max-width : 100%;
 	}
 	.col-lg-1 {
-		-webkit-flex : 0 0 8.33333%;
-		    -ms-flex : 0 0 8.33333%;
-		        flex : 0 0 8.33333%;
+		-ms-flex : 0 0 8.33333%;
+		    flex : 0 0 8.33333%;
 		max-width : 8.33333%;
 	}
 	.col-lg-2 {
-		-webkit-flex : 0 0 16.66667%;
-		    -ms-flex : 0 0 16.66667%;
-		        flex : 0 0 16.66667%;
+		-ms-flex : 0 0 16.66667%;
+		    flex : 0 0 16.66667%;
 		max-width : 16.66667%;
 	}
 	.col-lg-3 {
-		-webkit-flex : 0 0 25%;
-		    -ms-flex : 0 0 25%;
-		        flex : 0 0 25%;
+		-ms-flex : 0 0 25%;
+		    flex : 0 0 25%;
 		max-width : 25%;
 	}
 	.col-lg-4 {
-		-webkit-flex : 0 0 33.33333%;
-		    -ms-flex : 0 0 33.33333%;
-		        flex : 0 0 33.33333%;
+		-ms-flex : 0 0 33.33333%;
+		    flex : 0 0 33.33333%;
 		max-width : 33.33333%;
 	}
 	.col-lg-5 {
-		-webkit-flex : 0 0 41.66667%;
-		    -ms-flex : 0 0 41.66667%;
-		        flex : 0 0 41.66667%;
+		-ms-flex : 0 0 41.66667%;
+		    flex : 0 0 41.66667%;
 		max-width : 41.66667%;
 	}
 	.col-lg-6 {
-		-webkit-flex : 0 0 50%;
-		    -ms-flex : 0 0 50%;
-		        flex : 0 0 50%;
+		-ms-flex : 0 0 50%;
+		    flex : 0 0 50%;
 		max-width : 50%;
 	}
 	.col-lg-7 {
-		-webkit-flex : 0 0 58.33333%;
-		    -ms-flex : 0 0 58.33333%;
-		        flex : 0 0 58.33333%;
+		-ms-flex : 0 0 58.33333%;
+		    flex : 0 0 58.33333%;
 		max-width : 58.33333%;
 	}
 	.col-lg-8 {
-		-webkit-flex : 0 0 66.66667%;
-		    -ms-flex : 0 0 66.66667%;
-		        flex : 0 0 66.66667%;
+		-ms-flex : 0 0 66.66667%;
+		    flex : 0 0 66.66667%;
 		max-width : 66.66667%;
 	}
 	.col-lg-9 {
-		-webkit-flex : 0 0 75%;
-		    -ms-flex : 0 0 75%;
-		        flex : 0 0 75%;
+		-ms-flex : 0 0 75%;
+		    flex : 0 0 75%;
 		max-width : 75%;
 	}
 	.col-lg-10 {
-		-webkit-flex : 0 0 83.33333%;
-		    -ms-flex : 0 0 83.33333%;
-		        flex : 0 0 83.33333%;
+		-ms-flex : 0 0 83.33333%;
+		    flex : 0 0 83.33333%;
 		max-width : 83.33333%;
 	}
 	.col-lg-11 {
-		-webkit-flex : 0 0 91.66667%;
-		    -ms-flex : 0 0 91.66667%;
-		        flex : 0 0 91.66667%;
+		-ms-flex : 0 0 91.66667%;
+		    flex : 0 0 91.66667%;
 		max-width : 91.66667%;
 	}
 	.col-lg-12 {
-		-webkit-flex : 0 0 100%;
-		    -ms-flex : 0 0 100%;
-		        flex : 0 0 100%;
+		-ms-flex : 0 0 100%;
+		    flex : 0 0 100%;
 		max-width : 100%;
 	}
 	.pull-lg-0 {
@@ -1621,84 +1564,70 @@ pre code {
 
 @media (min-width: 1200px) {
 	.col-xl {
-		-webkit-flex-basis : 0;
 		-ms-flex-preferred-size : 0;
-		        flex-basis : 0;
-		-webkit-flex-grow : 1;
+		flex-basis : 0;
 		-ms-flex-positive : 1;
-		        flex-grow : 1;
+		flex-grow : 1;
 		max-width : 100%;
 	}
 	.col-xl-1 {
-		-webkit-flex : 0 0 8.33333%;
-		    -ms-flex : 0 0 8.33333%;
-		        flex : 0 0 8.33333%;
+		-ms-flex : 0 0 8.33333%;
+		    flex : 0 0 8.33333%;
 		max-width : 8.33333%;
 	}
 	.col-xl-2 {
-		-webkit-flex : 0 0 16.66667%;
-		    -ms-flex : 0 0 16.66667%;
-		        flex : 0 0 16.66667%;
+		-ms-flex : 0 0 16.66667%;
+		    flex : 0 0 16.66667%;
 		max-width : 16.66667%;
 	}
 	.col-xl-3 {
-		-webkit-flex : 0 0 25%;
-		    -ms-flex : 0 0 25%;
-		        flex : 0 0 25%;
+		-ms-flex : 0 0 25%;
+		    flex : 0 0 25%;
 		max-width : 25%;
 	}
 	.col-xl-4 {
-		-webkit-flex : 0 0 33.33333%;
-		    -ms-flex : 0 0 33.33333%;
-		        flex : 0 0 33.33333%;
+		-ms-flex : 0 0 33.33333%;
+		    flex : 0 0 33.33333%;
 		max-width : 33.33333%;
 	}
 	.col-xl-5 {
-		-webkit-flex : 0 0 41.66667%;
-		    -ms-flex : 0 0 41.66667%;
-		        flex : 0 0 41.66667%;
+		-ms-flex : 0 0 41.66667%;
+		    flex : 0 0 41.66667%;
 		max-width : 41.66667%;
 	}
 	.col-xl-6 {
-		-webkit-flex : 0 0 50%;
-		    -ms-flex : 0 0 50%;
-		        flex : 0 0 50%;
+		-ms-flex : 0 0 50%;
+		    flex : 0 0 50%;
 		max-width : 50%;
 	}
 	.col-xl-7 {
-		-webkit-flex : 0 0 58.33333%;
-		    -ms-flex : 0 0 58.33333%;
-		        flex : 0 0 58.33333%;
+		-ms-flex : 0 0 58.33333%;
+		    flex : 0 0 58.33333%;
 		max-width : 58.33333%;
 	}
 	.col-xl-8 {
-		-webkit-flex : 0 0 66.66667%;
-		    -ms-flex : 0 0 66.66667%;
-		        flex : 0 0 66.66667%;
+		-ms-flex : 0 0 66.66667%;
+		    flex : 0 0 66.66667%;
 		max-width : 66.66667%;
 	}
 	.col-xl-9 {
-		-webkit-flex : 0 0 75%;
-		    -ms-flex : 0 0 75%;
-		        flex : 0 0 75%;
+		-ms-flex : 0 0 75%;
+		    flex : 0 0 75%;
 		max-width : 75%;
 	}
 	.col-xl-10 {
-		-webkit-flex : 0 0 83.33333%;
-		    -ms-flex : 0 0 83.33333%;
-		        flex : 0 0 83.33333%;
+		-ms-flex : 0 0 83.33333%;
+		    flex : 0 0 83.33333%;
 		max-width : 83.33333%;
 	}
 	.col-xl-11 {
-		-webkit-flex : 0 0 91.66667%;
-		    -ms-flex : 0 0 91.66667%;
-		        flex : 0 0 91.66667%;
+		-ms-flex : 0 0 91.66667%;
+		    flex : 0 0 91.66667%;
 		max-width : 91.66667%;
 	}
 	.col-xl-12 {
-		-webkit-flex : 0 0 100%;
-		    -ms-flex : 0 0 100%;
-		        flex : 0 0 100%;
+		-ms-flex : 0 0 100%;
+		    flex : 0 0 100%;
 		max-width : 100%;
 	}
 	.pull-xl-0 {
@@ -3159,16 +3088,14 @@ tbody.collapse.in {
 .input-group {
 	position : relative;
 	width : 100%;
-	display : -webkit-flex;
 	display : -ms-flexbox;
-	display :         flex;
+	display : flex;
 }
 .input-group .form-control {
 	position : relative;
 	z-index : 2;
-	-webkit-flex : 1;
-	    -ms-flex : 1;
-	        flex : 1;
+	-ms-flex : 1;
+	    flex : 1;
 	margin-bottom : 0;
 }
 .input-group .form-control:focus, .input-group .form-control:active, .input-group .form-control:hover {
@@ -4187,20 +4114,17 @@ tbody.collapse.in {
 
 @media (min-width: 576px) {
 	.card-deck {
-		display : -webkit-flex;
 		display : -ms-flexbox;
-		display :         flex;
-		-webkit-flex-flow : row wrap;
-		    -ms-flex-flow : row wrap;
-		        flex-flow : row wrap;
+		display : flex;
+		-ms-flex-flow : row wrap;
+		    flex-flow : row wrap;
 		margin-right : -0.625rem;
 		margin-bottom : 0.75rem;
 		margin-left : -0.625rem;
 	}
 	.card-deck .card {
-		-webkit-flex : 1 0 0;
-		    -ms-flex : 1 0 0;
-		        flex : 1 0 0;
+		-ms-flex : 1 0 0;
+		    flex : 1 0 0;
 		margin-right : 0.625rem;
 		margin-bottom : 0;
 		margin-left : 0.625rem;
@@ -4209,17 +4133,14 @@ tbody.collapse.in {
 
 @media (min-width: 576px) {
 	.card-group {
-		display : -webkit-flex;
 		display : -ms-flexbox;
-		display :         flex;
-		-webkit-flex-flow : row wrap;
-		    -ms-flex-flow : row wrap;
-		        flex-flow : row wrap;
+		display : flex;
+		-ms-flex-flow : row wrap;
+		    flex-flow : row wrap;
 	}
 	.card-group .card {
-		-webkit-flex : 1 0 0;
-		    -ms-flex : 1 0 0;
-		        flex : 1 0 0;
+		-ms-flex : 1 0 0;
+		    flex : 1 0 0;
 	}
 	.card-group .card + .card {
 		margin-left : 0;
@@ -4255,12 +4176,10 @@ tbody.collapse.in {
 
 @media (min-width: 576px) {
 	.card-columns {
-		-webkit-column-count : 3;
-		   -moz-column-count : 3;
-		        column-count : 3;
-		-webkit-column-gap : 1.25rem;
-		   -moz-column-gap : 1.25rem;
-		        column-gap : 1.25rem;
+		-moz-column-count : 3;
+		     column-count : 3;
+		-moz-column-gap : 1.25rem;
+		     column-gap : 1.25rem;
 	}
 	.card-columns .card {
 		display : inline-block;
@@ -4582,15 +4501,6 @@ a.tag:focus, a.tag:hover {
 	color : #843534;
 }
 
-@-webkit-keyframes progress-bar-stripes {
-	from {
-		background-position : 1rem 0;
-	}
-	to {
-		background-position : 0 0;
-	}
-}
-
 @keyframes progress-bar-stripes {
 	from {
 		background-position : 1rem 0;
@@ -4705,8 +4615,7 @@ base::-moz-progress-bar, .progress[value] {
 }
 
 .progress-animated[value]::-webkit-progress-value {
-	-webkit-animation : progress-bar-stripes 2s linear infinite;
-	        animation : progress-bar-stripes 2s linear infinite;
+	animation : progress-bar-stripes 2s linear infinite;
 }
 
 .progress-animated[value]::-moz-progress-bar {
@@ -4715,8 +4624,7 @@ base::-moz-progress-bar, .progress[value] {
 
 @media screen and (min-width: 0\0) {
 	.progress-animated .progress-bar-striped {
-		-webkit-animation : progress-bar-stripes 2s linear infinite;
-		        animation : progress-bar-stripes 2s linear infinite;
+		animation : progress-bar-stripes 2s linear infinite;
 	}
 }
 
@@ -4793,27 +4701,24 @@ base::-moz-progress-bar, .progress[value] {
 }
 
 .media {
-	display : -webkit-flex;
 	display : -ms-flexbox;
-	display :         flex;
+	display : flex;
 }
 
 .media-body {
-	-webkit-flex : 1;
-	    -ms-flex : 1;
-	        flex : 1;
+	-ms-flex : 1;
+	    flex : 1;
 }
 
 .media-middle {
-	-webkit-align-self : center;
 	-ms-flex-item-align : center;
-	        align-self : center;
+	-ms-grid-row-align : center;
+	align-self : center;
 }
 
 .media-bottom {
-	-webkit-align-self : flex-end;
 	-ms-flex-item-align : end;
-	        align-self : flex-end;
+	align-self : flex-end;
 }
 
 .media-object {
@@ -5083,16 +4988,13 @@ button.close {
 	outline : 0;
 }
 .modal.fade .modal-dialog {
-	transition : -webkit-transform 0.3s ease-out;
-	transition :         transform 0.3s ease-out;
-	-webkit-transform : translate(0, -25%);
-	    -ms-transform : translate(0, -25%);
-	        transform : translate(0, -25%);
+	transition : transform 0.3s ease-out;
+	-ms-transform : translate(0, -25%);
+	    transform : translate(0, -25%);
 }
 .modal.in .modal-dialog {
-	-webkit-transform : translate(0, 0);
-	    -ms-transform : translate(0, 0);
-	        transform : translate(0, 0);
+	-ms-transform : translate(0, 0);
+	    transform : translate(0, 0);
 }
 
 .modal-open .modal {
@@ -5196,7 +5098,7 @@ button.close {
 	position : absolute;
 	z-index : 1070;
 	display : block;
-	font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+	font-family : -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, 'ヒラギノ角ゴ Pro', 'Hiragino Kaku Gothic Pro', Meiryo, sans-serif;
 	font-style : normal;
 	font-weight : normal;
 	letter-spacing : normal;
@@ -5293,7 +5195,7 @@ button.close {
 	display : block;
 	max-width : 276px;
 	padding : 1px;
-	font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+	font-family : -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, 'ヒラギノ角ゴ Pro', 'Hiragino Kaku Gothic Pro', Meiryo, sans-serif;
 	font-style : normal;
 	font-weight : normal;
 	letter-spacing : normal;
@@ -5449,27 +5351,22 @@ button.close {
 }
 @media all and (transform-3d), (-webkit-transform-3d) {
 	.carousel-inner > .carousel-item {
-		transition : -webkit-transform 0.6s ease-in-out;
-		transition :         transform 0.6s ease-in-out;
+		transition : transform 0.6s ease-in-out;
 		-webkit-backface-visibility : hidden;
 		        backface-visibility : hidden;
-		-webkit-perspective : 1000px;
-		        perspective : 1000px;
+		perspective : 1000px;
 	}
 	.carousel-inner > .carousel-item.next, .carousel-inner > .carousel-item.active.right {
 		left : 0;
-		-webkit-transform : translate3d(100%, 0, 0);
-		        transform : translate3d(100%, 0, 0);
+		transform : translate3d(100%, 0, 0);
 	}
 	.carousel-inner > .carousel-item.prev, .carousel-inner > .carousel-item.active.left {
 		left : 0;
-		-webkit-transform : translate3d(-100%, 0, 0);
-		        transform : translate3d(-100%, 0, 0);
+		transform : translate3d(-100%, 0, 0);
 	}
 	.carousel-inner > .carousel-item.next.left, .carousel-inner > .carousel-item.prev.right, .carousel-inner > .carousel-item.active {
 		left : 0;
-		-webkit-transform : translate3d(0, 0, 0);
-		        transform : translate3d(0, 0, 0);
+		transform : translate3d(0, 0, 0);
 	}
 }
 .carousel-inner > .active, .carousel-inner > .next, .carousel-inner > .prev {
@@ -5756,414 +5653,349 @@ a.bg-inverse:focus, a.bg-inverse:hover {
 }
 
 .flex-xs-first {
-	-webkit-order : -1;
 	-ms-flex-order : -1;
-	        order : -1;
+	order : -1;
 }
 
 .flex-xs-last {
-	-webkit-order : 1;
 	-ms-flex-order : 1;
-	        order : 1;
+	order : 1;
 }
 
 .flex-xs-unordered {
-	-webkit-order : 0;
 	-ms-flex-order : 0;
-	        order : 0;
+	order : 0;
 }
 
 .flex-items-xs-top {
-	-webkit-align-items : flex-start;
 	-ms-flex-align : start;
-	        align-items : flex-start;
+	align-items : flex-start;
 }
 
 .flex-items-xs-middle {
-	-webkit-align-items : center;
 	-ms-flex-align : center;
-	        align-items : center;
+	align-items : center;
 }
 
 .flex-items-xs-bottom {
-	-webkit-align-items : flex-end;
 	-ms-flex-align : end;
-	        align-items : flex-end;
+	align-items : flex-end;
 }
 
 .flex-xs-top {
-	-webkit-align-self : flex-start;
 	-ms-flex-item-align : start;
-	        align-self : flex-start;
+	align-self : flex-start;
 }
 
 .flex-xs-middle {
-	-webkit-align-self : center;
 	-ms-flex-item-align : center;
-	        align-self : center;
+	-ms-grid-row-align : center;
+	align-self : center;
 }
 
 .flex-xs-bottom {
-	-webkit-align-self : flex-end;
 	-ms-flex-item-align : end;
-	        align-self : flex-end;
+	align-self : flex-end;
 }
 
 .flex-items-xs-left {
-	-webkit-justify-content : flex-start;
 	-ms-flex-pack : start;
-	        justify-content : flex-start;
+	justify-content : flex-start;
 }
 
 .flex-items-xs-center {
-	-webkit-justify-content : center;
 	-ms-flex-pack : center;
-	        justify-content : center;
+	justify-content : center;
 }
 
 .flex-items-xs-right {
-	-webkit-justify-content : flex-end;
 	-ms-flex-pack : end;
-	        justify-content : flex-end;
+	justify-content : flex-end;
 }
 
 .flex-items-xs-around {
-	-webkit-justify-content : space-around;
 	-ms-flex-pack : distribute;
-	        justify-content : space-around;
+	justify-content : space-around;
 }
 
 .flex-items-xs-between {
-	-webkit-justify-content : space-between;
 	-ms-flex-pack : justify;
-	        justify-content : space-between;
+	justify-content : space-between;
 }
 
 @media (min-width: 576px) {
 	.flex-sm-first {
-		-webkit-order : -1;
 		-ms-flex-order : -1;
-		        order : -1;
+		order : -1;
 	}
 	.flex-sm-last {
-		-webkit-order : 1;
 		-ms-flex-order : 1;
-		        order : 1;
+		order : 1;
 	}
 	.flex-sm-unordered {
-		-webkit-order : 0;
 		-ms-flex-order : 0;
-		        order : 0;
+		order : 0;
 	}
 }
 
 @media (min-width: 576px) {
 	.flex-items-sm-top {
-		-webkit-align-items : flex-start;
 		-ms-flex-align : start;
-		        align-items : flex-start;
+		align-items : flex-start;
 	}
 	.flex-items-sm-middle {
-		-webkit-align-items : center;
 		-ms-flex-align : center;
-		        align-items : center;
+		align-items : center;
 	}
 	.flex-items-sm-bottom {
-		-webkit-align-items : flex-end;
 		-ms-flex-align : end;
-		        align-items : flex-end;
+		align-items : flex-end;
 	}
 }
 
 @media (min-width: 576px) {
 	.flex-sm-top {
-		-webkit-align-self : flex-start;
 		-ms-flex-item-align : start;
-		        align-self : flex-start;
+		align-self : flex-start;
 	}
 	.flex-sm-middle {
-		-webkit-align-self : center;
 		-ms-flex-item-align : center;
-		        align-self : center;
+		-ms-grid-row-align : center;
+		align-self : center;
 	}
 	.flex-sm-bottom {
-		-webkit-align-self : flex-end;
 		-ms-flex-item-align : end;
-		        align-self : flex-end;
+		align-self : flex-end;
 	}
 }
 
 @media (min-width: 576px) {
 	.flex-items-sm-left {
-		-webkit-justify-content : flex-start;
 		-ms-flex-pack : start;
-		        justify-content : flex-start;
+		justify-content : flex-start;
 	}
 	.flex-items-sm-center {
-		-webkit-justify-content : center;
 		-ms-flex-pack : center;
-		        justify-content : center;
+		justify-content : center;
 	}
 	.flex-items-sm-right {
-		-webkit-justify-content : flex-end;
 		-ms-flex-pack : end;
-		        justify-content : flex-end;
+		justify-content : flex-end;
 	}
 	.flex-items-sm-around {
-		-webkit-justify-content : space-around;
 		-ms-flex-pack : distribute;
-		        justify-content : space-around;
+		justify-content : space-around;
 	}
 	.flex-items-sm-between {
-		-webkit-justify-content : space-between;
 		-ms-flex-pack : justify;
-		        justify-content : space-between;
+		justify-content : space-between;
 	}
 }
 
 @media (min-width: 768px) {
 	.flex-md-first {
-		-webkit-order : -1;
 		-ms-flex-order : -1;
-		        order : -1;
+		order : -1;
 	}
 	.flex-md-last {
-		-webkit-order : 1;
 		-ms-flex-order : 1;
-		        order : 1;
+		order : 1;
 	}
 	.flex-md-unordered {
-		-webkit-order : 0;
 		-ms-flex-order : 0;
-		        order : 0;
+		order : 0;
 	}
 }
 
 @media (min-width: 768px) {
 	.flex-items-md-top {
-		-webkit-align-items : flex-start;
 		-ms-flex-align : start;
-		        align-items : flex-start;
+		align-items : flex-start;
 	}
 	.flex-items-md-middle {
-		-webkit-align-items : center;
 		-ms-flex-align : center;
-		        align-items : center;
+		align-items : center;
 	}
 	.flex-items-md-bottom {
-		-webkit-align-items : flex-end;
 		-ms-flex-align : end;
-		        align-items : flex-end;
+		align-items : flex-end;
 	}
 }
 
 @media (min-width: 768px) {
 	.flex-md-top {
-		-webkit-align-self : flex-start;
 		-ms-flex-item-align : start;
-		        align-self : flex-start;
+		align-self : flex-start;
 	}
 	.flex-md-middle {
-		-webkit-align-self : center;
 		-ms-flex-item-align : center;
-		        align-self : center;
+		-ms-grid-row-align : center;
+		align-self : center;
 	}
 	.flex-md-bottom {
-		-webkit-align-self : flex-end;
 		-ms-flex-item-align : end;
-		        align-self : flex-end;
+		align-self : flex-end;
 	}
 }
 
 @media (min-width: 768px) {
 	.flex-items-md-left {
-		-webkit-justify-content : flex-start;
 		-ms-flex-pack : start;
-		        justify-content : flex-start;
+		justify-content : flex-start;
 	}
 	.flex-items-md-center {
-		-webkit-justify-content : center;
 		-ms-flex-pack : center;
-		        justify-content : center;
+		justify-content : center;
 	}
 	.flex-items-md-right {
-		-webkit-justify-content : flex-end;
 		-ms-flex-pack : end;
-		        justify-content : flex-end;
+		justify-content : flex-end;
 	}
 	.flex-items-md-around {
-		-webkit-justify-content : space-around;
 		-ms-flex-pack : distribute;
-		        justify-content : space-around;
+		justify-content : space-around;
 	}
 	.flex-items-md-between {
-		-webkit-justify-content : space-between;
 		-ms-flex-pack : justify;
-		        justify-content : space-between;
+		justify-content : space-between;
 	}
 }
 
 @media (min-width: 992px) {
 	.flex-lg-first {
-		-webkit-order : -1;
 		-ms-flex-order : -1;
-		        order : -1;
+		order : -1;
 	}
 	.flex-lg-last {
-		-webkit-order : 1;
 		-ms-flex-order : 1;
-		        order : 1;
+		order : 1;
 	}
 	.flex-lg-unordered {
-		-webkit-order : 0;
 		-ms-flex-order : 0;
-		        order : 0;
+		order : 0;
 	}
 }
 
 @media (min-width: 992px) {
 	.flex-items-lg-top {
-		-webkit-align-items : flex-start;
 		-ms-flex-align : start;
-		        align-items : flex-start;
+		align-items : flex-start;
 	}
 	.flex-items-lg-middle {
-		-webkit-align-items : center;
 		-ms-flex-align : center;
-		        align-items : center;
+		align-items : center;
 	}
 	.flex-items-lg-bottom {
-		-webkit-align-items : flex-end;
 		-ms-flex-align : end;
-		        align-items : flex-end;
+		align-items : flex-end;
 	}
 }
 
 @media (min-width: 992px) {
 	.flex-lg-top {
-		-webkit-align-self : flex-start;
 		-ms-flex-item-align : start;
-		        align-self : flex-start;
+		align-self : flex-start;
 	}
 	.flex-lg-middle {
-		-webkit-align-self : center;
 		-ms-flex-item-align : center;
-		        align-self : center;
+		-ms-grid-row-align : center;
+		align-self : center;
 	}
 	.flex-lg-bottom {
-		-webkit-align-self : flex-end;
 		-ms-flex-item-align : end;
-		        align-self : flex-end;
+		align-self : flex-end;
 	}
 }
 
 @media (min-width: 992px) {
 	.flex-items-lg-left {
-		-webkit-justify-content : flex-start;
 		-ms-flex-pack : start;
-		        justify-content : flex-start;
+		justify-content : flex-start;
 	}
 	.flex-items-lg-center {
-		-webkit-justify-content : center;
 		-ms-flex-pack : center;
-		        justify-content : center;
+		justify-content : center;
 	}
 	.flex-items-lg-right {
-		-webkit-justify-content : flex-end;
 		-ms-flex-pack : end;
-		        justify-content : flex-end;
+		justify-content : flex-end;
 	}
 	.flex-items-lg-around {
-		-webkit-justify-content : space-around;
 		-ms-flex-pack : distribute;
-		        justify-content : space-around;
+		justify-content : space-around;
 	}
 	.flex-items-lg-between {
-		-webkit-justify-content : space-between;
 		-ms-flex-pack : justify;
-		        justify-content : space-between;
+		justify-content : space-between;
 	}
 }
 
 @media (min-width: 1200px) {
 	.flex-xl-first {
-		-webkit-order : -1;
 		-ms-flex-order : -1;
-		        order : -1;
+		order : -1;
 	}
 	.flex-xl-last {
-		-webkit-order : 1;
 		-ms-flex-order : 1;
-		        order : 1;
+		order : 1;
 	}
 	.flex-xl-unordered {
-		-webkit-order : 0;
 		-ms-flex-order : 0;
-		        order : 0;
+		order : 0;
 	}
 }
 
 @media (min-width: 1200px) {
 	.flex-items-xl-top {
-		-webkit-align-items : flex-start;
 		-ms-flex-align : start;
-		        align-items : flex-start;
+		align-items : flex-start;
 	}
 	.flex-items-xl-middle {
-		-webkit-align-items : center;
 		-ms-flex-align : center;
-		        align-items : center;
+		align-items : center;
 	}
 	.flex-items-xl-bottom {
-		-webkit-align-items : flex-end;
 		-ms-flex-align : end;
-		        align-items : flex-end;
+		align-items : flex-end;
 	}
 }
 
 @media (min-width: 1200px) {
 	.flex-xl-top {
-		-webkit-align-self : flex-start;
 		-ms-flex-item-align : start;
-		        align-self : flex-start;
+		align-self : flex-start;
 	}
 	.flex-xl-middle {
-		-webkit-align-self : center;
 		-ms-flex-item-align : center;
-		        align-self : center;
+		-ms-grid-row-align : center;
+		align-self : center;
 	}
 	.flex-xl-bottom {
-		-webkit-align-self : flex-end;
 		-ms-flex-item-align : end;
-		        align-self : flex-end;
+		align-self : flex-end;
 	}
 }
 
 @media (min-width: 1200px) {
 	.flex-items-xl-left {
-		-webkit-justify-content : flex-start;
 		-ms-flex-pack : start;
-		        justify-content : flex-start;
+		justify-content : flex-start;
 	}
 	.flex-items-xl-center {
-		-webkit-justify-content : center;
 		-ms-flex-pack : center;
-		        justify-content : center;
+		justify-content : center;
 	}
 	.flex-items-xl-right {
-		-webkit-justify-content : flex-end;
 		-ms-flex-pack : end;
-		        justify-content : flex-end;
+		justify-content : flex-end;
 	}
 	.flex-items-xl-around {
-		-webkit-justify-content : space-around;
 		-ms-flex-pack : distribute;
-		        justify-content : space-around;
+		justify-content : space-around;
 	}
 	.flex-items-xl-between {
-		-webkit-justify-content : space-between;
 		-ms-flex-pack : justify;
-		        justify-content : space-between;
+		justify-content : space-between;
 	}
 }
 

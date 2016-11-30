@@ -2,20 +2,12 @@
 
 @import "core";
 
-//単機能スタイル
-@import "core/helper";
-
 //モジュール
 @import "module/box";
-@import "module/form";
 @import "module/icon";
 @import "module/list";
-@import "module/table";
-@import "module/text";
-@import "module/button";
 
 @import url(http://fonts.googleapis.com/css?family=Ubuntu:300,400,700);
-
 
 /*----------------------- support browser ------------------------
 	Internet Explorer 8　↑
@@ -85,15 +77,16 @@ body,
 }
 
 #l-sharenote {
-	margin: 100px auto 0 auto;
-	width: 650px;
+	margin: 30px auto 0 auto;
+	max-width: 700px;
 
 	.sharenote-title {
-		font-size: fz(14,24);
-		margin: 0 0 30px 0;
-		padding: 20px;
-		background: #eee;
-		text-align: center;
+		font-size: fz(16,34);
+		font-weight: bold;
+		margin: 0 0 35px 0;
+		padding-bottom: 30px;
+		line-height: 1.5;
+		border-bottom: 5px solid #f08300;
 	}
 }
 
@@ -273,3 +266,47 @@ body,
 	}
 }
 
+.remark-slide-scaler {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	overflow: auto;
+}
+.remark-slide-content {
+	background: #fafafa;
+	color: #555;
+	font-size: 24px;
+	line-height: 2;
+	border-top: 5px solid #f08300;
+	box-sizing: border-box;
+}
+.remark-slide {
+	position: relative;
+}
+.remark-slide-content h1,
+.remark-slide-content h2,
+.remark-slide-content h3 {
+	color: #333;
+	line-height: 1.5 !important;
+}
+.remark-slide-content a {
+	color: #f08300;
+}
+.remark-slide-content h1 {
+	margin-bottom: 1.0em;
+	font-size: 40px;
+	line-height: 1;
+}
+.remark-slide-content h2 {
+	margin-bottom: 0.5em;
+	padding-left: 25px;
+	border-left: 10px solid #f08300;
+	font-size: 30px;
+}
+.remark-slide-content h3 {
+	margin-bottom: 0.5em;
+	font-size: 25px;
+}
+.remark-slide-content.center.middle h1 {
+	font-size: 55px !important;
+	line-height: 2 !important;
+}

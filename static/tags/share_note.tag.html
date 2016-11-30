@@ -7,15 +7,47 @@
 </div>
 
 <script>
+	//api setting
+	var api = new MT.DataAPI({
+		baseUrl:  SETTING.CMSURL,
+		clientId: "mynote"
+	});
+	var siteId = SETTING.BLOGID;
+
+	var renderer = new marked.Renderer();
+	renderer.link = function(href, title, text) {
+		return "<a href='" + href + "'" + (title ? " title='" + title + "'" : '') + " target='_blank'>" + text + "</a>";
+	};
+
+	marked.setOptions({
+		gfm: true,
+		tables: true,
+		smartLists: true,
+		renderer: renderer
+	});
+
+	var stateObject = {
+		currentUser: "",
+		currentTagId : "all",
+		currentNote: null,
+		currentNoteId: null
+	};
+
 	var that = this;
 
-	api.getEntry(SETTING.BLOGID, opts.id, function(response) {
-		document.title = response.title;
+	obs.on("shareNoteLoaded", function(id) {
+		api.getEntry(SETTING.BLOGID, id, function(response) {
+			document.title = response.title;
 
-		that.title = response.title;
-		that.marked.innerHTML = marked(response.body);
+			that.title = response.title;
+			that.marked.innerHTML = marked(response.body);
 
-		that.update();
+			that.update();
+		});
+	});
+
+	this.on("mount", function() {
+		riot.route.exec();
 	});
 </script>
 </share-note>

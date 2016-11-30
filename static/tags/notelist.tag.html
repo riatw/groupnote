@@ -85,6 +85,13 @@
 	});
 
 	obs.on("tagChanged", function(tagname) {
+		that.feeds = null;
+
+		//スピナーを表示
+		that.spinnerView = 1;
+
+		that.update();
+
 		stateObject.currentTagId = tagname;
 		viewNotes();
 	});
