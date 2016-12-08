@@ -3,16 +3,10 @@ var entryId = location.search.replace("?note=","");
 //api setting
 var api = new MT.DataAPI({
 	baseUrl:  SETTING.CMSURL,
-	clientId: "gnote"
+	clientId: "collect"
 });
 
 var siteId = SETTING.BLOGID;
-
-api.storeTokenData({
-	accessToken: localStorage.getItem("accessToken"),
-	expiresIn: 3600,
-	sessionId: localStorage.getItem("sessionId")
-});
 
 api.getToken(function(response) {
 	api.getEntry(siteId, entryId, { no_text_filter: 1 }, function(response) {
@@ -21,16 +15,22 @@ api.getToken(function(response) {
 			return;
 		}
 
-		// var body = response.body.replace(/^# /gm,"---\n# ").replace(/^## /gm,"---\n## ").replace(/^---\n---\n/gm,"---\nclass: center, middle\n");
+		var body = response.body
+		.replace(/^# (.*)/gm,"---\nclass: center, middle\n# $1 \n---\n")
+		.replace(/^## /gm,"---\n## ")
+		.replace(/^---\n\n---\n/gm,"---\n")
+		.replace(/^---\n\n\n---\n/gm,"---\n");
 
-		var body = response.body.replace(/^# /gm,"---\n# ");
+		// var body = response.body.replace(/^# /gm,"---\n# ");
 
 		// 冒頭h1で始まる場合は改ページを省略
 		if ( body.match(/^---\n/) ) {
 			body = body.slice(4);
 		}
 
-		body = "class: center, middle\n# " + response.title + "\n---\n" + body;
+		body = "class: center, middle, topslide\n# " + response.title + "\n---\n" + body;
+
+		console.log(body);
 
 		var slideshow = remark.create({
 			source: body,
