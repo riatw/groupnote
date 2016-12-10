@@ -10,12 +10,14 @@ var siteId = SETTING.BLOGID;
 
 api.getToken(function(response) {
 	api.getEntry(siteId, entryId, { no_text_filter: 1 }, function(response) {
+		console.log(response);
+
 		if (response.error) {
 			// エラー処理
 			return;
 		}
 
-		var body = response.body
+		var body = response.body_raw
 		.replace(/^# (.*)/gm,"---\nclass: center, middle\n# $1 \n---\n")
 		.replace(/^## /gm,"---\n## ")
 		.replace(/^---\n\n---\n/gm,"---\n")
