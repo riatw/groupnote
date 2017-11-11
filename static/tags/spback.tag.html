@@ -3,9 +3,28 @@
 
 <script>
 	var that = this;
+	var state = ["taglist", "notelist", "notedetail"];
+	var currentState;
+
+	obs.on("tagChanged", function() {
+		currentState = "notelist";
+		obs.trigger("spModeChanged", currentState);
+	});
+
+	obs.on("noteChanged", function() {
+		currentState = "notedetail";
+		obs.trigger("spModeChanged", currentState);
+	});
 
 	spback(e) {
-		history.back();
+		var newIndex = state.indexOf(currentState) - 1;
+
+		if ( newIndex == -1 ) {
+			return;
+		}
+
+		currentState = state[newIndex];
+		obs.trigger("spModeChanged", currentState);
 	}
 </script>
 </spback>

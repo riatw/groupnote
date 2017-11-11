@@ -25,7 +25,9 @@
 									</div>
 									<div class="form-group">
 										<label for="exampleInputEmail1">タグ</label>
-										<input type="text" name="tag" class="form-control" placeholder="ノートのタグをカンマ区切りで入力">
+										<select class="js-example-tags form-control select2-hidden-accessible" name="tag" multiple="multiple" aria-hidden="true" style="width: 100%">
+											<option each={ taglist }>{name}</option>
+										</select>
 									</div>
 									<div class="form-group row">
 										<div class="col-md-6">
@@ -86,6 +88,14 @@
 
 	//編集の場合
 	that.open = function() {
+		that.taglist = stateObject.taglist;
+
+		$("[name='tag']").select2({
+			tags: true,
+			placeholder: "Select Tags",
+			tokenSeparators: [',', ' ']
+		});
+
 		if ( opts.mode == 'create' ) {
 			that.title.value = "";
 			that.body.value = "";
@@ -102,10 +112,12 @@
 			api.getEntry(SETTING.BLOGID, stateObject.currentNoteId, _param, function(response) {
 				that.title.value = response.title;
 				that.body.value = response.body;
-				that.tag.value = response.tags.join(",");
+				$(that.tag).val(response.tags);
 				that.status.value = response.status;
 				that.format.value = response.format;
 				that.noteIsLoaded = 1;
+
+		$("[name='tag']").select2();
 				that.preview();
 				that.update();
 			});
@@ -119,16 +131,12 @@
 		object.title = that.title.value;
 		object.body = that.body.value;
 
-		console.log(that.tag.value);
-
 		if ( that.tag.value != "" ) {
-			object.tags = that.tag.value.split(",");
+			object.tags = $(that.tag).val();
 		}
 
 		object.status = that.status.value;
 		object.format = that.format.value;
-
-		console.log(that.format.value);
 
 		if ( opts.mode == 'create' ) {
 			api.createEntry(siteId, object, function(response) {

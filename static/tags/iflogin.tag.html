@@ -45,15 +45,9 @@
 			that.update();
 		});
 
-		obs.on("tagChanged", function() {
-			that.sp_mode = "notelist";
+		obs.on("spModeChanged", function(mode) {
+			that.sp_mode = mode;
 			that.update();
 		});
-
-		obs.on("noteChanged", function() {
-			that.sp_mode = "notedetail";
-			that.update();
-		});
-
 	</script>
 </iflogin>

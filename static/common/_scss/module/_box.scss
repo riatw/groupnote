@@ -291,14 +291,23 @@
 }
 
 .m-box-editnote {
-	display: flex;
-	justify-content: space-between;
+	@media (min-width: 767px) {
+		display: flex;
+		justify-content: space-between;
+	}
 
 	.editnote-left {
-		width: 49%;
+		@media (min-width: 767px) {
+			width: 49%;
+		}
 	}
 	.editnote-right {
-		width: 49%;
+		display: none;
+
+		@media (min-width: 767px) {
+			display: block;
+			width: 49%;
+		}
 
 		.mod-box-scroll {
 			padding: 30px;

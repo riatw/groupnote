@@ -101,21 +101,32 @@ function viewNoteDetail() {
 
 			var contentHTML = $("<div />").append(content);
 			var $child = $(contentHTML).children();
+			var headlineList = ["h1","h2","h3","h4","h5","h6"];
+			var firstHeadLine;
+			var secondHeadLine;
 
-			contentHTML.find("h1").each(function(i){
+			for ( var i = 0; i < headlineList.length; i++ ) {
+				var isFound = contentHTML.find(headlineList[i]).length;
+				if ( isFound > 0 ) {
+					firstHeadLine = headlineList[i];
+					break;
+				}
+			}
+
+			contentHTML.find(firstHeadLine).each(function(i){
 				var $this = $(this);
 				var temp = {};
 				var parentId;
 
 				// 次のh1を探す
-				end = $this.nextAll("h1").eq("0").index();
+				end = $this.nextAll(firstHeadLine).eq("0").index();
 
 				// 最後のh1だったら
 				if ( end == -1 ) {
 					end = $child.length;
 				}
 
-				parentId = "h1-" + (i+1);
+				parentId = "first-" + (i+1);
 
 				temp = {
 					id: parentId,
@@ -123,10 +134,12 @@ function viewNoteDetail() {
 					child: []
 				}
 
-				$this.attr("id","h1-" + (i+1));
+				$this.attr("id","first-" + (i+1));
 
-				$child.slice(start,end).filter("h2").each(function(j){
-					var childId = "h2-" + i + "-" + j;
+				secondHeadLine = headlineList[ headlineList.indexOf(firstHeadLine) + 1 ];
+
+				$child.slice(start,end).filter(secondHeadLine).each(function(j){
+					var childId = "second-" + i + "-" + j;
 					var $that = $(this);
 
 					temp.child.push({
